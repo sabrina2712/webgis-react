@@ -1,57 +1,58 @@
-import React from 'react'
-
-// Start Openlayers imports
-import 'ol/ol.css';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-
-/*
-import Grid from '@material-ui/core/Grid'
-import Feature from 'ol/Feature';
-import { Circle as CircleStyle, Fill, Stroke, Style, Icon, RegularShape } from 'ol/style';
+import React, { useEffect, useRef } from "react";
+import "ol/ol.css";
+import Map from "ol/Map";
+import View from "ol/View";
+import TileLayer from "ol/layer/Tile";
+import { fromLonLat } from "ol/proj";
+import OSM from "ol/source/OSM";
 import Overlay from 'ol/Overlay';
-import { toLonLat } from 'ol/proj';
-import { fromLonLat, get } from "ol/proj"
-import { transform } from 'ol/proj';
-import {toStringHDMS} from 'ol/coordinate';
-import Pixel from 'ol/pixel';
-import data from "./data.json";
 import GeoJSON from 'ol/format/GeoJSON';
+import { Vector as VectorSource } from 'ol/source';
+import data from "./data.json";
+import Feature from 'ol/Feature';
+import { transform } from 'ol/proj';
 import { Circle, Point } from 'ol/geom';
-*/
+import { Circle as CircleStyle, Fill, Stroke, Style, Icon, RegularShape } from 'ol/style';
+import { Vector as VectorLayer } from 'ol/layer';
+import outputData from "./output.json"
 
 
-
-// End Openlayers imports
 class MyMap extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {info: ""};
+  }
+  componentDidMount(){
+    const geojsonObj = {
+      "type": "FeatureCollection",
+      "features": []
+  }
   
-  //other functions eliminated for brevity
+  var vectorSource = new VectorSource({
+      features: (new GeoJSON()).readFeatures(geojsonObj)
+  });
+  
+outputData.forEach((el) => {
+  console.log(el)
+})
 
-  componentDidMount() {
-  var map = new Map({
-      layers: [
-        new TileLayer({
+
+
+
+
+
+var map = new Map({
+  layers: [
+      new TileLayer({
           source: new OSM()
-        })
-      ],
-      target: 'map',
-      view: new View({
-        center: [0, 0],
-        zoom: 2
-      })
-    });
+      }),
+  ],
+  target: 'map',
+  view: new View({
+      center: fromLonLat([34.84, 36.85]),
+      zoom: 11
+  })
+});
 
   }
-
-
-  render () {
-    return (
-    <div id="map"> </div>
-    );
-  }
- 
 }
-
-export default MyMap;

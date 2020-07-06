@@ -1,5 +1,6 @@
 {
   "name": "webgis-react",
+  "homepage": "http://webgisdemo.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
