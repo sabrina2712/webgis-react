@@ -15,6 +15,7 @@ import { transform } from 'ol/proj';
 import {toStringHDMS} from 'ol/coordinate';
 import Pixel from 'ol/pixel';
 import data from "./data.json"
+import outputData from "./output.json"
 
 
 
@@ -37,8 +38,44 @@ var vectorSource = new VectorSource({
     features: (new GeoJSON()).readFeatures(geojsonObj)
 });
 
+// for specific conductivity
+
+outputData.forEach((el) => {
+  var x = el.geometry.coordinates[0]
+   var y = el.geometry.coordinates[1]
+
+   var iconFeature = new Feature({
+        geometry: new Point(transform([x, y], 'EPSG:4326', 'EPSG:3857')),
+        name: 'Marker ',
+        "properties": { SPC: parseFloat(el.properties.Specific_capacity)}
+        
+        
+    });
+ 
+    vectorSource.addFeature(iconFeature);
+
+})
+
+function getStyleSpfCon(feature) {
+    return new Style({
+        image: new CircleStyle({
+            radius: feature.get("properties").SPC/2,
+            fill: new Fill({
+                color: 'rgba(0, 0, 255, 1)'
+            }),
+            stroke: new Stroke({ color: 'rgba(0, 0,255, 1)', width: 1 })
+        })
+    });
+}
+
+var vectorLayerForSpfCon = new VectorLayer({
+    fKey: "SPC",
+    source: vectorSource,
+    style: getStyleSpfCon
+});
 
 
+// for DTW, WEll g´head, well depth
 
 data.forEach((el) => {
     var x = el.Longitude
@@ -91,6 +128,7 @@ function getStyleDepth(feature) {
         })
     })
         }
+// getting all the layers
 
 var vectorLayerForDTW = new VectorLayer({
     fKey: "DTW",
@@ -110,13 +148,14 @@ var vectorLayerForWllDepth = new VectorLayer({
 });
 
 
+// pop up ovberlay
 var info = document.getElementById('info');
 
 const overLayer = new Overlay({
     element: info
 })
 
-
+// on click or onchange handlers
 document.getElementById("button").onclick = () => {
 map.removeLayer(vectorLayerForDTW)
    map.removeLayer(vectorLayerForWellHead)
@@ -151,11 +190,21 @@ if(event.target.checked === true){
 }
 }
 
+document.getElementById("SpeCon").onchange = (event) => {
+    overLayer.setPosition(undefined)
+  if(event.target.checked === true)
+  { map.addLayer(vectorLayerForSpfCon)}else {
+    map.removeLayer(vectorLayerForSpfCon)
+  }
+ }
+
+ // creating map
 var map = new Map({
     layers: [
         new TileLayer({
             source: new OSM()
         }),
+ 
     ],
     target: 'map',
     view: new View({
@@ -164,8 +213,10 @@ var map = new Map({
     })
 });
 
-
+// adding overlay
 map.addOverlay(overLayer)
+
+// onclick on map and show pop up
 
 map.on('click', function(evt) {
    
@@ -197,6 +248,8 @@ map.on('click', function(evt) {
               <label for="Wellhead"> Well Head</label>
               <input type="checkbox" id="wellDepth"></input>
               <label for="welldepth"> Well Depth</label>
+              <input type="checkbox" id="SpeCon"></input>
+              <label for="SpeCon">Specific Conductivity</label>
         </div>
     }
   }
