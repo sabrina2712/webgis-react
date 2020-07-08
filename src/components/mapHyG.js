@@ -64,15 +64,12 @@ class MyMap extends React.Component {
                 image: new CircleStyle({
                     radius: feature.get("properties").SPC / 2,
                     fill: new Fill({
-<<<<<<< HEAD
+
                         color: 'rgba(247, 202, 24, 0.8)'
                     }),
                     stroke: new Stroke({ color: 'rgba(247, 202, 24, 0.8)', width: 1 })
-=======
-                        color: 'rgba(0, 0, 255, 1)'
-                    }),
-                    stroke: new Stroke({ color: 'rgba(0, 0,255, 1)', width: 1 })
->>>>>>> 2e1ee01e7c63b3e6e59b36762cb20a38d79415c3
+
+                        
                 })
             });
         }
@@ -165,7 +162,7 @@ class MyMap extends React.Component {
         })
 
         // on click or onchange handlers
-<<<<<<< HEAD
+
    
 
         document.getElementById("dtw").onchange = (event) => {
@@ -173,25 +170,16 @@ class MyMap extends React.Component {
             if (event.target.checked === true) { map.addLayer(vectorLayerForDTW) } else {
                 map.removeLayer(vectorLayerForDTW)
             }
-=======
-        document.getElementById("button").onclick = () => {
-            map.removeLayer(vectorLayerForDTW)
-            map.removeLayer(vectorLayerForWellHead)
-            map.removeLayer(vectorLayerForWllDepth)
-            map.addLayer(vectorLayerForDTW);
->>>>>>> 2e1ee01e7c63b3e6e59b36762cb20a38d79415c3
-        }
 
         document.getElementById("Wellhead").onchange = (event) => {
             overLayer.setPosition(undefined)
             if (event.target.checked === true) {
                 map.addLayer(vectorLayerForWellHead);
             } else {
-                map.removeLayer(vectorLayerForWellHead)
+                map.removeLayer(vectorLayerForWellHead)}
             }
         }
 
-<<<<<<< HEAD
         document.getElementById("wellDepth").onchange = (event) => {
             overLayer.setPosition(undefined)
             if (event.target.checked === true) {
@@ -208,7 +196,6 @@ class MyMap extends React.Component {
             }
         }
 
-=======
         document.getElementById("dtw").onchange = (event) => {
             overLayer.setPosition(undefined)
             if (event.target.checked === true) { map.addLayer(vectorLayerForDTW) } else {
@@ -255,7 +242,6 @@ class MyMap extends React.Component {
                 zoom: 11
             })
         });
->>>>>>> 2e1ee01e7c63b3e6e59b36762cb20a38d79415c3
 
         // adding overlay
         map.addOverlay(overLayer)
@@ -292,7 +278,6 @@ class MyMap extends React.Component {
             console.log(feature, fKey)
             info = <div>{fKey}: {feature.values_.properties[fKey]}</div>;
         }
-<<<<<<< HEAD
        
        
        
@@ -308,13 +293,11 @@ class MyMap extends React.Component {
     <div className="sidebar">
            <span>Click here:</span>
            <div id="info">{info}</div>
-=======
         return <div>
 
             <div id="info">{info}</div>
             <div className="map" id="map" />
             <button id="button">Add Circle</button>
->>>>>>> 2e1ee01e7c63b3e6e59b36762cb20a38d79415c3
             <input type="checkbox" id="dtw" ></input>
             <label for="dtw" checked> DTW</label>
             <input type="checkbox" id="Wellhead" name="Wellhead"></input>
@@ -323,7 +306,6 @@ class MyMap extends React.Component {
             <label for="welldepth"> Well Depth</label>
             <input type="checkbox" id="SpeCon"></input>
             <label for="SpeCon">Specific Conductivity</label>
-<<<<<<< HEAD
             </div>
     </Col>
  </Container>
@@ -336,10 +318,8 @@ class MyMap extends React.Component {
 
 
 
-=======
         </div>
     }
 }
->>>>>>> 2e1ee01e7c63b3e6e59b36762cb20a38d79415c3
 
 export default MyMap;
