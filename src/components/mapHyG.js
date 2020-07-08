@@ -18,7 +18,10 @@ import Pixel from 'ol/pixel';
 import data from "./data.json"
 import outputData from "./output.json"
 import { render } from "@testing-library/react";
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'reactstrap';
+import {Navbar, Nav, NavItem, Button, Glyphicon} from 'react-bootstrap';
+import "./map.css"
+
 
 
 
@@ -278,34 +281,46 @@ class MyMap extends React.Component {
             console.log(feature, fKey)
             info = <div>{fKey}: {feature.values_.properties[fKey]}</div>;
         }
+      
        
         return( 
             <>
-              <Container>
-                <Row>
-                     <Col sm={9}>
-                         <div className="map" id="map"> </div>
-                     </Col>
-                      <Col sm={3}>
-                        
+            <Container>
+           <Row>
+   
+           <Col sm={9}>
+           <div className="map" id="map" />
+           </Col>
+       <Col sm={3}>
+       <div id="sidebar">
+              <span>Click here:</span>
+            
+               <div id="info">{info}</div>
+        
+
+               <div class="custom-control custom-checkbox">
+              
+               <input type="checkbox" class="custom-control-input" id="dtw"></input>
+              
+               <label class="custom-control-label"for="dtw" > DTW</label>
+               <input type="checkbox" class="custom-control-input" id="Wellhead"></input>
+        <label class="custom-control-label" for="Wellhead"> Well Head</label>
+
+       <input type="checkbox" class="custom-control-input" id="wellDepth"></input>
+        <label class="custom-control-label" for="wellDepth"> Well Depth</label>
+       
+         <label class="custom-control-label" for="SpeCon">Specific Conductivity</label>
+        <input type="checkbox" class="custom-control-input" id="SpeCon"></input>
+      
+
      
-                         <div id="info">{info}</div>
-                         <div className="map" id="map" >
-                                <span>Click Here:</span>
-                                 <input type="checkbox" id="dtw" ></input>
-                                 <label for="dtw" checked> DTW</label>
-                                 <input type="checkbox" id="Wellhead" name="Wellhead"></input>
-                                 <label for="Wellhead"> Well Head</label>
-                                 <input type="checkbox" id="wellDepth"></input>
-                                 <label for="welldepth"> Well Depth</label>
-                                 <input type="checkbox" id="SpeCon"></input>
-                                 <label for="SpeCon">Specific Conductivity</label>
-                         </div>
-                     </Col>
-                 </Row>
-         </Container>
-      </>)
- }
+        </div>
+        </div>
+       </Col>
+       </Row>
+    </Container>
+    </>)
+        }
 }
 
 
