@@ -1,4 +1,4 @@
-  
+
 import React from "react";
 import 'ol/ol.css';
 import Feature from 'ol/Feature';
@@ -19,18 +19,63 @@ import data from "./data.json"
 import outputData from "./output.json"
 import { render } from "@testing-library/react";
 import { Container, Row, Col } from 'reactstrap';
-import {Navbar, Nav, NavItem, Button, Glyphicon} from 'react-bootstrap';
+
+
+
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MailIcon from '@material-ui/icons/Mail';
+import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import FolderIcon from '@material-ui/icons/Folder';
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+
 import "./map.css"
 
 
-
+const drawerWidth = 240;
 
 
 class MyMap extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { info: "" };
+        this.infoRef = React.createRef();
+        this.state = {
+            info: "", isDrawerOpen: false, features: {
+                DTW: false, WD: false, WH: false, HC: false,
+            }
+        };
     }
+
+    toogleFeature = (f) => {
+        this.setState((state) => {
+            const features = state.features;
+            features[f] = !features[f];
+            return { features: features };
+        })
+    }
+
+    toggleDrawer = () => {
+        this.setState((state) => {
+            return { isDrawerOpen: !state.isDrawerOpen }
+
+        })
+
+    }
+
 
     componentDidMount() {
 
@@ -72,7 +117,7 @@ class MyMap extends React.Component {
                     }),
                     stroke: new Stroke({ color: 'rgba(247, 202, 24, 0.8)', width: 1 })
 
-                        
+
                 })
             });
         }
@@ -158,78 +203,13 @@ class MyMap extends React.Component {
 
 
         // pop up ovberlay
-        var info = document.getElementById('info');
-
+        // var info = document.getElementById('info');
+        console.log(this.infoRef.current);
         const overLayer = new Overlay({
-            element: info
+            element: this.infoRef.current
         })
 
         // on click or onchange handlers
-
-   
-
-        document.getElementById("dtw").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) { map.addLayer(vectorLayerForDTW) } else {
-                map.removeLayer(vectorLayerForDTW)
-            }
-
-        document.getElementById("Wellhead").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) {
-                map.addLayer(vectorLayerForWellHead);
-            } else {
-                map.removeLayer(vectorLayerForWellHead)}
-            }
-        }
-
-        document.getElementById("wellDepth").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) {
-                map.addLayer(vectorLayerForWllDepth);
-            } else {
-                map.removeLayer(vectorLayerForWllDepth)
-            }
-        }
-
-        document.getElementById("SpeCon").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) { map.addLayer(vectorLayerForSpfCon) } else {
-                map.removeLayer(vectorLayerForSpfCon)
-            }
-        }
-
-        document.getElementById("dtw").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) { map.addLayer(vectorLayerForDTW) } else {
-                map.removeLayer(vectorLayerForDTW)
-            }
-        }
-
-        document.getElementById("Wellhead").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) {
-                map.addLayer(vectorLayerForWellHead);
-            } else {
-                map.removeLayer(vectorLayerForWellHead)
-            }
-        }
-
-        document.getElementById("wellDepth").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) {
-                map.addLayer(vectorLayerForWllDepth);
-            } else {
-                map.removeLayer(vectorLayerForWllDepth)
-            }
-        }
-
-        document.getElementById("SpeCon").onchange = (event) => {
-            overLayer.setPosition(undefined)
-            if (event.target.checked === true) { map.addLayer(vectorLayerForSpfCon) } else {
-                map.removeLayer(vectorLayerForSpfCon)
-            }
-        }
 
         // creating map
         var map = new Map({
@@ -267,12 +247,21 @@ class MyMap extends React.Component {
 
         });
 
+        this.setState({
+            map: map,
+            layers: {
+                "DTW": vectorLayerForDTW,
+                "WH": vectorLayerForWellHead,
+                "WD": vectorLayerForWllDepth,
+                "HC": vectorLayerForSpfCon
+            }
+        });
+
+
     }
 
 
     render() {
-        let info = null;
-
         const lastPair = this.state.pair;
         if (lastPair) {
             const feature = lastPair[0];
@@ -281,46 +270,90 @@ class MyMap extends React.Component {
             console.log(feature, fKey)
             info = <div>{fKey}: {feature.values_.properties[fKey]}</div>;
         }
-      
-       
-        return( 
-            <>
-            <Container>
-           <Row>
-   
-           <Col sm={9}>
-           <div className="map" id="map" />
-           </Col>
-       <Col sm={3}>
-       <div id="sidebar">
-              <span>Click here:</span>
-            
-               <div id="info">{info}</div>
-        
 
-               <div class="custom-control custom-checkbox">
-              
-               <input type="checkbox" class="custom-control-input" id="dtw"></input>
-              
-               <label class="custom-control-label"for="dtw" > DTW</label>
-               <input type="checkbox" class="custom-control-input" id="Wellhead"></input>
-        <label class="custom-control-label" for="Wellhead"> Well Head</label>
-
-       <input type="checkbox" class="custom-control-input" id="wellDepth"></input>
-        <label class="custom-control-label" for="wellDepth"> Well Depth</label>
-       
-         <label class="custom-control-label" for="SpeCon">Specific Conductivity</label>
-        <input type="checkbox" class="custom-control-input" id="SpeCon"></input>
-      
-
-     
-        </div>
-        </div>
-       </Col>
-       </Row>
-    </Container>
-    </>)
+        if (this.state.map) {
+            const map = this.state.map;
+            ["DTW", "WH", "WD", "HC"].forEach((f) => {
+                map.removeLayer(this.state.layers[f]);
+                if (this.state.features[f] === true) {
+                    map.addLayer(this.state.layers[f])
+                }
+            })
         }
+
+
+        const drawerContent = <List className="myDrawer">
+            <ListItem button key="k1">
+                <ListItemIcon>
+                    <Checkbox checked={this.state.features.DTW}
+                        onChange={() => {
+                            this.toogleFeature("DTW");
+                        }}
+                    />
+                </ListItemIcon>
+                <ListItemText primary="DTW" />
+            </ListItem>
+            <ListItem button key="k2">
+                <ListItemIcon>
+                    <Checkbox checked={this.state.features.WD}
+                        onChange={() => {
+                            this.toogleFeature("WD");
+                        }}
+                    />
+                </ListItemIcon>
+                <ListItemText primary="Well Depth" />
+            </ListItem>
+            <ListItem button key="k3">
+                <ListItemIcon>
+                    <Checkbox checked={this.state.features.WH}
+                        onChange={() => {
+                            this.toogleFeature("WH");
+                        }}
+                    />
+                </ListItemIcon>
+                <ListItemText primary="Well Head" />
+            </ListItem>
+            <ListItem button key="k4">
+                <ListItemIcon>
+                    <Checkbox checked={this.state.features.HC}
+                        onChange={() => {
+                            this.toogleFeature("HC");
+                        }}
+                    />
+                </ListItemIcon>
+                <ListItemText primary="Hydraulic Conductivity" />
+            </ListItem>
+        </List>;
+
+        return (
+            <>
+
+                <Hidden xsDown >
+                    <Drawer anchor="right" open={true} variant="persistent" >
+                        {drawerContent}
+                    </Drawer>
+                </Hidden>
+                <Hidden smUp>
+                    <Drawer anchor="bottom" open={this.state.isDrawerOpen} variant="persistent">
+                        {drawerContent}
+                    </Drawer>
+                </Hidden>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Hidden smUp>
+                            <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.toggleDrawer}>
+                                <MenuIcon />
+                            </IconButton>
+                        </Hidden>
+                        <Typography variant="h6">
+                            GeoJSON Demo with OpenLayers
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <div id="map"></div>
+                <div id="info" ref={this.infoRef}></div>
+            </>)
+    }
 }
 
 

@@ -6,7 +6,9 @@
   z-index: 1;
 }
  
-
+.myDrawer {
+  width: 240px;
+}
 #info {
   position: absolute;
   padding: 5px;
