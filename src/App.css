@@ -11,9 +11,9 @@
 }
 #info {
   position: absolute;
-  padding: 5px;
+  padding: 7px;
   border: 1px solid rgb(148, 145, 145);
-  width: 80px;
+  width: 120px;
   z-index: 100;
   font-size: 0.6em;
   color:white;

@@ -235,14 +235,18 @@ class MyMap extends React.Component {
             overLayer.setPosition(undefined)
 
             let pixel = evt.pixel;
-            var lastPair = map.forEachFeatureAtPixel(pixel, function (feature, layer) {
+            let pairs = [];
+            map.forEachFeatureAtPixel(pixel, function (feature, layer) {
                 let coordinateClicked = evt.coordinate;
                 overLayer.setPosition(coordinateClicked)
-                return [feature, layer.values_.fKey];
+                pairs.push({
+                    key: layer.values_.fKey,
+                    value: feature.values_.properties[layer.values_.fKey]
+                });
             });
 
             this.setState(() => {
-                return { pair: lastPair };
+                return { pairs: pairs };
             });
 
         });
@@ -257,19 +261,12 @@ class MyMap extends React.Component {
             }
         });
 
-
     }
 
 
     render() {
-        const lastPair = this.state.pair;
-        if (lastPair) {
-            const feature = lastPair[0];
-            const fKey = lastPair[1];
-
-            console.log(feature, fKey)
-            info = <div>{fKey}: {feature.values_.properties[fKey]}</div>;
-        }
+        let pairs = this.state.pairs;
+        if (!pairs) pairs = [];
 
         if (this.state.map) {
             const map = this.state.map;
@@ -351,7 +348,17 @@ class MyMap extends React.Component {
                     </Toolbar>
                 </AppBar>
                 <div id="map"></div>
-                <div id="info" ref={this.infoRef}></div>
+                <div id="info" ref={this.infoRef}>
+                    <>
+                        {
+                            pairs.map((el) => {
+                                const key = el.key;
+                                const value = el.value;
+                                return <div>{key}: {value}</div>
+                            })
+                        }
+                    </>
+                </div>
             </>)
     }
 }
