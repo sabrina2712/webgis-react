@@ -19,6 +19,8 @@ import data from "./data.json"
 import outputData from "./output.json"
 import { render } from "@testing-library/react";
 import { Container, Row, Col } from 'reactstrap';
+import reactCSS from 'reactcss'
+import { SketchPicker } from 'react-color'
 
 
 
@@ -44,6 +46,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import "./map.css"
+import { Card } from "@material-ui/core";
 
 
 const drawerWidth = 240;
@@ -54,11 +57,45 @@ class MyMap extends React.Component {
         super(props);
         this.infoRef = React.createRef();
         this.state = {
+            colorPickerVisibility: {
+                DTW: false, WD: false, WH: false, HC: false
+            },
             info: "", isDrawerOpen: false, features: {
-                DTW: false, WD: false, WH: false, HC: false,
+                DTW: false, WD: false, WH: false, HC: false
+            },
+            colors: {
+                DTW: "red", WD: "green", WH: "blue", HC: "yellow"
             }
         };
+
     }
+
+    abbr = (t) => {
+        if (t === "WellDepth") return "WD";
+        if (t === "Wellhead") return "WH";
+
+        if (t === "SPC") return "HC";
+
+
+        return t;
+
+    }
+    toggleColorPicker = (f) => {
+        this.setState((state) => {
+            const colorPickerVisibility = state.colorPickerVisibility;
+            colorPickerVisibility[f] = !colorPickerVisibility[f];
+            return { colorPickerVisibility: colorPickerVisibility };
+        })
+    };
+
+    changeFeatureColor = (f, color) => {
+        this.setState((state) => {
+            const colors = state.colors;
+            colors[f] = color;
+            console.log(colors);
+            return { colors: colors };
+        })
+    };
 
     toogleFeature = (f) => {
         this.setState((state) => {
@@ -107,13 +144,15 @@ class MyMap extends React.Component {
 
         })
 
+        const colors = this.state.colors;
+
         function getStyleSpfCon(feature) {
             return new Style({
                 image: new CircleStyle({
                     radius: feature.get("properties").SPC / 2,
                     fill: new Fill({
 
-                        color: 'rgba(247, 202, 24, 0.8)'
+                        color: colors.HC
                     }),
                     stroke: new Stroke({ color: 'rgba(247, 202, 24, 0.8)', width: 1 })
 
@@ -149,7 +188,7 @@ class MyMap extends React.Component {
                 image: new CircleStyle({
                     radius: feature.get("properties").DTW,
                     fill: new Fill({
-                        color: 'rgba(0, 0, 255, 0.3)'
+                        color: colors.DTW
                     }),
                     stroke: new Stroke({ color: 'rgba(0, 0,255, 0.3)', width: 1 })
                 })
@@ -160,7 +199,7 @@ class MyMap extends React.Component {
             return new Style({
                 image: new CircleStyle({
                     fill: new Fill({
-                        color: 'rgba(255,0, 0,  0.3)'
+                        color: colors.WH
                     }),
                     radius: feature.get("properties").Wellhead * 5,
 
@@ -172,7 +211,7 @@ class MyMap extends React.Component {
             return new Style({
                 image: new RegularShape({
                     fill: new Fill({
-                        color: 'rgba(0,255, 0,  1)'
+                        color: colors.WD
                     }),
                     stroke: new Stroke({ color: 'rgba(0, 255,0, 1)', width: 1 }),
                     points: 3,
@@ -239,6 +278,7 @@ class MyMap extends React.Component {
             map.forEachFeatureAtPixel(pixel, function (feature, layer) {
                 let coordinateClicked = evt.coordinate;
                 overLayer.setPosition(coordinateClicked)
+                console.log(layer.values_.fKey);
                 pairs.push({
                     key: layer.values_.fKey,
                     value: feature.values_.properties[layer.values_.fKey]
@@ -265,6 +305,11 @@ class MyMap extends React.Component {
 
 
     render() {
+        if (this.state.layers) {
+            Object.values(this.state.layers).forEach((layer) => {
+                layer.getSource().changed();
+            });
+        }
         let pairs = this.state.pairs;
         if (!pairs) pairs = [];
 
@@ -278,64 +323,102 @@ class MyMap extends React.Component {
             })
         }
 
+        const getStyle = (f) => {
+            return {
+                width: '36px',
+                height: '14px',
+                borderRadius: '2px',
+                backgroundColor: this.state.colors[f]
+            }
+        }
 
-        const drawerContent = <List className="myDrawer">
-            <ListItem button key="k1">
-                <ListItemIcon>
-                    <Checkbox checked={this.state.features.DTW}
-                        onChange={() => {
-                            this.toogleFeature("DTW");
-                        }}
-                    />
-                </ListItemIcon>
-                <ListItemText primary="DTW" />
-            </ListItem>
-            <ListItem button key="k2">
-                <ListItemIcon>
-                    <Checkbox checked={this.state.features.WD}
-                        onChange={() => {
-                            this.toogleFeature("WD");
-                        }}
-                    />
-                </ListItemIcon>
-                <ListItemText primary="Well Depth" />
-            </ListItem>
-            <ListItem button key="k3">
-                <ListItemIcon>
-                    <Checkbox checked={this.state.features.WH}
-                        onChange={() => {
-                            this.toogleFeature("WH");
-                        }}
-                    />
-                </ListItemIcon>
-                <ListItemText primary="Well Head" />
-            </ListItem>
-            <ListItem button key="k4">
-                <ListItemIcon>
-                    <Checkbox checked={this.state.features.HC}
-                        onChange={() => {
-                            this.toogleFeature("HC");
-                        }}
-                    />
-                </ListItemIcon>
-                <ListItemText primary="Hydraulic Conductivity" />
-            </ListItem>
-        </List>;
+        const drawerContent =
+            <>
+                <AppBar position="static" style={{ background: '#2E3B55' }}>
+                    <Toolbar>
+
+                        <Typography variant="h6" >
+                            Features
+                    </Typography>
+
+                    </Toolbar>
+                </AppBar>
+                <List className="myDrawer" >
+                    <ListItem button key="k1">
+                        <ListItemIcon>
+                            <Checkbox checked={this.state.features.DTW}
+                                color="primary"
+                                onChange={() => {
+                                    this.toogleFeature("DTW");
+                                }}
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="DTW" />
+                        <ListItemSecondaryAction>
+                            <div onClick={() => {
+                                this.toggleColorPicker("DTW");
+                            }}>
+                                <div style={getStyle("DTW")} />
+                            </div>
+                        </ListItemSecondaryAction>
+                    </ListItem>
+                    {this.state.colorPickerVisibility.DTW ? <ListItem>
+                        <div style={{
+
+
+                        }}>
+                            <SketchPicker color={this.state.colors.DTW} onChange={(color) => { this.changeFeatureColor("DTW", color.hex) }} />
+                        </div>
+                    </ListItem> : null}
+                    <ListItem button key="k2">
+                        <ListItemIcon>
+                            <Checkbox checked={this.state.features.WD}
+                                color="primary"
+                                onChange={() => {
+                                    this.toogleFeature("WD");
+                                }}
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="Well Depth" />
+                    </ListItem>
+                    <ListItem button key="k3">
+                        <ListItemIcon>
+                            <Checkbox checked={this.state.features.WH}
+                                color="primary"
+                                onChange={() => {
+                                    this.toogleFeature("WH");
+                                }}
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="Well Head" />
+                    </ListItem>
+                    <ListItem button key="k4">
+                        <ListItemIcon>
+                            <Checkbox checked={this.state.features.HC}
+                                color="primary"
+                                onChange={() => {
+                                    this.toogleFeature("HC");
+                                }}
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="Hydraulic Conductivity" />
+                    </ListItem>
+                </List>
+            </>;
 
         return (
-            <>
-
+            <div style={{ position: "relative" }}>
                 <Hidden xsDown >
-                    <Drawer anchor="right" open={true} variant="persistent" >
+                    <div className="controlPanel">
                         {drawerContent}
-                    </Drawer>
+                    </div>
                 </Hidden>
                 <Hidden smUp>
-                    <Drawer anchor="bottom" open={this.state.isDrawerOpen} variant="persistent">
+                    <Drawer anchor="right" open={this.state.isDrawerOpen} variant="persistent">
                         {drawerContent}
                     </Drawer>
                 </Hidden>
-                <AppBar position="static">
+                <AppBar position="static" style={{ background: '#2E3B55' }}>
                     <Toolbar>
                         <Hidden smUp>
                             <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.toggleDrawer}>
@@ -343,7 +426,7 @@ class MyMap extends React.Component {
                             </IconButton>
                         </Hidden>
                         <Typography variant="h6">
-                            GeoJSON Demo with OpenLayers
+                            WebGIS Demo
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -354,12 +437,23 @@ class MyMap extends React.Component {
                             pairs.map((el) => {
                                 const key = el.key;
                                 const value = el.value;
-                                return <div>{key}: {value}</div>
+                                return <>
+                                    <div >
+                                        <div style={{
+                                            borderWidth: "1px",
+                                            borderColor: "white",
+                                            borderStyle: "solid",
+                                            borderRadius: "5px", float: "left", height: "10px", width: "10px", marginRight: "8px", marginTop: "2px", backgroundColor: this.state.colors[this.abbr(key)]
+                                        }}>  </div>
+                                        {key}: {value}
+                                    </div>
+                                    <br />
+                                </>
                             })
                         }
                     </>
                 </div>
-            </>)
+            </div>)
     }
 }
 
