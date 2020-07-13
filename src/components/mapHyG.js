@@ -17,6 +17,7 @@ import { toStringHDMS } from 'ol/coordinate';
 import Pixel from 'ol/pixel';
 import data from "./data.json"
 import outputData from "./output.json"
+import  dataTar from "./dataTar.json"
 import { render } from "@testing-library/react";
 import { Container, Row, Col } from 'reactstrap';
 import reactCSS from 'reactcss'
@@ -58,14 +59,27 @@ class MyMap extends React.Component {
         this.infoRef = React.createRef();
         this.state = {
             colorPickerVisibility: {
-                DTW: false, WD: false, WH: false, HC: false
+                DTW: false, WD: false, WH: false, HC: false, PP: false, DD: false
             },
             info: "", isDrawerOpen: false, features: {
-                DTW: false, WD: false, WH: false, HC: false
+                DTW: false, WD: false, WH: false, HC: false, PP: false, DD: false
             },
             colors: {
-                DTW: "red", WD: "green", WH: "blue", HC: "yellow"
-            }
+                DTW: 'rgba(0, 0,255, 0.3)', WD: 'rgba(0, 128, 0, 0.9)', WH: 'rgba(255,0, 0, 0.3)',
+                 HC:  'rgba(247, 202, 24, 0.8)',PP: 'rgba(30,144,255, 0.7)',
+                  DD: 'rgba(220,20,60,0.7)'
+            },
+           locations:{
+                "TAR" : fromLonLat([34.84, 36.85]),
+                "rome" : fromLonLat([12.5, 41.9]),
+                 "bern" : fromLonLat([7.4458, 46.95])
+           },
+           view : new View({
+            center: fromLonLat[51.368339, 37.980256],
+            zoom: 11
+        })
+           
+            
         };
 
     }
@@ -73,11 +87,21 @@ class MyMap extends React.Component {
     abbr = (t) => {
         if (t === "WellDepth") return "WD";
         if (t === "Wellhead") return "WH";
-
+        if (t === "DD") return "DD";
+        if (t === "pump") return "PP";
         if (t === "SPC") return "HC";
+            return t;
 
+    }
 
-        return t;
+    getLocation =(lo)=>{
+        this.setState((state)=>{
+            const selectedLocation = state.locations[lo];
+                state.view.animate({
+                  center: selectedLocation,
+                  duration: 2000
+                });
+        })
 
     }
     toggleColorPicker = (f) => {
@@ -125,6 +149,71 @@ class MyMap extends React.Component {
         var vectorSource = new VectorSource({
             features: (new GeoJSON()).readFeatures(geojsonObj)
         });
+
+
+        // for pumping rate and drawdown
+        dataTar.forEach((el) => {
+            var x = el.geometry.coordinates[0]
+            var y = el.geometry.coordinates[1]
+           
+            var iconFeature = new Feature({
+            geometry: new Point(transform([x, y], 'EPSG:4326', 'EPSG:3857')),
+            name: 'Marker ',
+            "properties": { pump: parseFloat(el.properties.Pumping_m3), DD:parseFloat(el.properties.Drawdown_m)  }
+            });
+        vectorSource.addFeature(iconFeature);
+
+        })
+
+        function getStylePump(feature) {
+        return new Style({
+            image: new CircleStyle({
+            radius: feature.get("properties").pump*200,
+            fill: new Fill({
+
+                color: colors.PP
+        }),
+            stroke: new Stroke({ color: 'rgba(30,144,255, 0.7)', width: 1 })
+
+            
+        })
+    });
+}
+
+
+        // style for Drawdown
+
+            function getStyleDrwaDown(feature) {
+            return new Style({
+                image: new CircleStyle({
+                    radius: feature.get("properties").DD/2,
+                    fill: new Fill({
+
+                        color: colors.DD
+                        }),
+                stroke: new Stroke({ color: 'rgba(220,20,60,0.7)', width: 1 })
+                })
+            })
+        }
+
+        // layer for Drawdown  
+
+            var vectorLayerForDD = new VectorLayer({
+                fKey: "DD",
+                source: vectorSource,
+                style:  getStyleDrwaDown
+        })
+
+
+// layer for pump
+    
+                var vectorLayerForPump = new VectorLayer({
+                fKey: "pump",
+                source: vectorSource,
+                style: getStylePump
+            })
+
+
 
         // for specific conductivity
 
@@ -213,7 +302,7 @@ class MyMap extends React.Component {
                     fill: new Fill({
                         color: colors.WD
                     }),
-                    stroke: new Stroke({ color: 'rgba(0, 255,0, 1)', width: 1 }),
+                    stroke: new Stroke({ color:  'rgba(0, 128, 0, 0.9)', width: 1 }),
                     points: 3,
                     radius: feature.get("properties").WellDepth / 10,
                     rotation: Math.PI / 4,
@@ -251,6 +340,7 @@ class MyMap extends React.Component {
         // on click or onchange handlers
 
         // creating map
+        
         var map = new Map({
             layers: [
                 new TileLayer({
@@ -259,10 +349,7 @@ class MyMap extends React.Component {
 
             ],
             target: 'map',
-            view: new View({
-                center: fromLonLat([34.84, 36.85]),
-                zoom: 11
-            })
+            view:  this.state.view
         });
 
         // adding overlay
@@ -278,7 +365,7 @@ class MyMap extends React.Component {
             map.forEachFeatureAtPixel(pixel, function (feature, layer) {
                 let coordinateClicked = evt.coordinate;
                 overLayer.setPosition(coordinateClicked)
-                console.log(layer.values_.fKey);
+               
                 pairs.push({
                     key: layer.values_.fKey,
                     value: feature.values_.properties[layer.values_.fKey]
@@ -297,7 +384,9 @@ class MyMap extends React.Component {
                 "DTW": vectorLayerForDTW,
                 "WH": vectorLayerForWellHead,
                 "WD": vectorLayerForWllDepth,
-                "HC": vectorLayerForSpfCon
+                "HC": vectorLayerForSpfCon,
+                "DD": vectorLayerForDD,
+                "PP": vectorLayerForPump
             }
         });
 
@@ -315,7 +404,7 @@ class MyMap extends React.Component {
 
         if (this.state.map) {
             const map = this.state.map;
-            ["DTW", "WH", "WD", "HC"].forEach((f) => {
+            ["DTW", "WH", "WD", "HC", "DD","PP"].forEach((f) => {
                 map.removeLayer(this.state.layers[f]);
                 if (this.state.features[f] === true) {
                     map.addLayer(this.state.layers[f])
@@ -332,6 +421,33 @@ class MyMap extends React.Component {
             }
         }
 
+        const drawerLocationContent = 
+            <>
+            <AppBar position="static" style={{ background: '#2E3B55' }}>
+                    <Toolbar>
+                        <Typography variant="h6" >
+                            Study Areas
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <List className="myDrawer" >
+                <ListItem button key="k1">
+                        <ListItemIcon>
+                            <Checkbox 
+                                color="primary"
+                                onChange={this.getLocation}
+                                
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="TAR" />
+                    </ListItem>
+
+
+                </List>
+
+            </>
+
+        
         const drawerContent =
             <>
                 <AppBar position="static" style={{ background: '#2E3B55' }}>
@@ -345,6 +461,8 @@ class MyMap extends React.Component {
                 </AppBar>
                 <List className="myDrawer" >
                     <ListItem button key="k1">
+                       
+                        
                         <ListItemIcon>
                             <Checkbox checked={this.state.features.DTW}
                                 color="primary"
@@ -353,14 +471,18 @@ class MyMap extends React.Component {
                                 }}
                             />
                         </ListItemIcon>
+
+                    
                         <ListItemText primary="DTW" />
-                        <ListItemSecondaryAction>
+                       
+                        {/* <ListItemSecondaryAction>
                             <div onClick={() => {
                                 this.toggleColorPicker("DTW");
                             }}>
                                 <div style={getStyle("DTW")} />
                             </div>
-                        </ListItemSecondaryAction>
+                        </ListItemSecondaryAction> */}
+                   
                     </ListItem>
                     {this.state.colorPickerVisibility.DTW ? <ListItem>
                         <div style={{
@@ -403,6 +525,28 @@ class MyMap extends React.Component {
                         </ListItemIcon>
                         <ListItemText primary="Hydraulic Conductivity" />
                     </ListItem>
+                    <ListItem button key="k5">
+                        <ListItemIcon>
+                            <Checkbox checked={this.state.features.DD}
+                                color="primary"
+                                onChange={() => {
+                                    this.toogleFeature("DD");
+                                }}
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="DD" />
+                    </ListItem>
+                    <ListItem button key="k6">
+                        <ListItemIcon>
+                            <Checkbox checked={this.state.features.PP}
+                                color="primary"
+                                onChange={() => {
+                                    this.toogleFeature("PP");
+                                }}
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="pump" />
+                    </ListItem>
                 </List>
             </>;
 
@@ -412,6 +556,10 @@ class MyMap extends React.Component {
                     <div className="controlPanel">
                         {drawerContent}
                     </div>
+                    <div className="currLocation">
+                        {drawerLocationContent}
+                    </div>
+
                 </Hidden>
                 <Hidden smUp>
                     <Drawer anchor="right" open={this.state.isDrawerOpen} variant="persistent">
