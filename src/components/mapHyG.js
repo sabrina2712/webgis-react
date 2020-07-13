@@ -70,20 +70,17 @@ class MyMap extends React.Component {
                   DD: 'rgba(220,20,60,0.7)'
             },
            locations:{
-                "TAR" : fromLonLat([34.84, 36.85]),
-                "rome" : fromLonLat([12.5, 41.9]),
-                 "bern" : fromLonLat([7.4458, 46.95])
+                "TAR" : ([36.85, 34.84, ]),
+                "rome" : ([ 41.9, 12.5]),
+                 "bern" :([ 46.95, 7.4458])
            },
-           view : new View({
-            center: fromLonLat[51.368339, 37.980256],
-            zoom: 11
-        })
-           
-            
-        };
+           map: this.map
+           };
 
     }
 
+
+   
     abbr = (t) => {
         if (t === "WellDepth") return "WD";
         if (t === "Wellhead") return "WH";
@@ -93,17 +90,20 @@ class MyMap extends React.Component {
             return t;
 
     }
+   
+    goToLocation =(evt)=>{
+        console.log(evt)
+        let lo =this.state.locations[evt];
+       let mapM = this.state.map
+       this.setState(()=>{
+           var center = mapM.view.values.center
+          console.log(center)
+       })
 
-    getLocation =(lo)=>{
-        this.setState((state)=>{
-            const selectedLocation = state.locations[lo];
-                state.view.animate({
-                  center: selectedLocation,
-                  duration: 2000
-                });
-        })
+       
+      }
+   
 
-    }
     toggleColorPicker = (f) => {
         this.setState((state) => {
             const colorPickerVisibility = state.colorPickerVisibility;
@@ -137,7 +137,7 @@ class MyMap extends React.Component {
 
     }
 
-
+  
     componentDidMount() {
 
 
@@ -332,7 +332,7 @@ class MyMap extends React.Component {
 
         // pop up ovberlay
         // var info = document.getElementById('info');
-        console.log(this.infoRef.current);
+     
         const overLayer = new Overlay({
             element: this.infoRef.current
         })
@@ -349,12 +349,17 @@ class MyMap extends React.Component {
 
             ],
             target: 'map',
-            view:  this.state.view
-        });
+            view:new View({
+                center: [0, 0],
+                zoom: 11
+              })
+            })
 
+            var view = map.getView();
+            console.log(view)
         // adding overlay
         map.addOverlay(overLayer)
-
+       
         // onclick on map and show pop up
 
         map.on('click', (evt) => {
@@ -434,12 +439,20 @@ class MyMap extends React.Component {
                 <ListItem button key="k1">
                         <ListItemIcon>
                             <Checkbox 
-                                color="primary"
-                                onChange={this.getLocation}
-                                
+                            	color="primary"
+                                onChange={this.goToLocation("TAR")}
                             />
                         </ListItemIcon>
                         <ListItemText primary="TAR" />
+                    </ListItem>
+                    <ListItem button key="k1">
+                        <ListItemIcon>
+                            <Checkbox 
+                            	color="primary"
+                                onChange={this.goToLocation("rome")}
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary="Rome" />
                     </ListItem>
 
 
