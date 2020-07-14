@@ -61,7 +61,7 @@ class MyMap extends React.Component {
             colorPickerVisibility: {
                 DTW: false, WD: false, WH: false, HC: false, PP: false, DD: false
             },
-            info: "", isDrawerOpen: false, features: {
+            info: "", isDrawerOpen: false, mapClick: false, features: {
                 DTW: false, WD: false, WH: false, HC: false, PP: false, DD: false
             },
             colors: {
@@ -70,17 +70,14 @@ class MyMap extends React.Component {
                   DD: 'rgba(220,20,60,0.7)'
             },
            locations:{
-                "TAR" : ([36.85, 34.84, ]),
-                "rome" : ([ 41.9, 12.5]),
-                 "bern" :([ 46.95, 7.4458])
+                "TAR" : ([34.767511,36.842215 ]),
+                "Rome" : ([ 12.496366, 41.902782]),
+                
            },
            map: this.map
            };
 
     }
-
-
-   
     abbr = (t) => {
         if (t === "WellDepth") return "WD";
         if (t === "Wellhead") return "WH";
@@ -92,16 +89,39 @@ class MyMap extends React.Component {
     }
    
     goToLocation =(evt)=>{
-        console.log(evt)
-        let lo =this.state.locations[evt];
-       let mapM = this.state.map
-       this.setState(()=>{
-           var center = mapM.view.values.center
-          console.log(center)
-       })
+       let selectedArea = evt.target.name;
+        let coor =this.state.locations[evt.target.name];
+        console.log(selectedArea)
+        let view =this.state.map.getView()
 
+        if(selectedArea === "TAR"){
+            
+            this.state.map.setView(new View({
+                center:fromLonLat([0, 0]),
+                zoom: 2
+         }));
+        }
+        if(selectedArea === "Rome"){
+          
+            this.state.map.setView(new View({
+                center:fromLonLat([0, 0]),
+                zoom: 2
+         }));
+      
+        }
+       if (evt.target.checked === true){
+        let view =  this.state.map.getView()
+        view.animate({
+          center:fromLonLat(coor),
+              zoom: 11,
+          duration: 2000
+        });      
        
-      }
+       }else {
+
+       }
+     
+        }
    
 
     toggleColorPicker = (f) => {
@@ -133,6 +153,13 @@ class MyMap extends React.Component {
         this.setState((state) => {
             return { isDrawerOpen: !state.isDrawerOpen }
 
+        })
+
+    }
+
+    mapOnClick =()=>{
+        this.setState((state)=>{
+            return {mapClick: !state.mapClick}
         })
 
     }
@@ -351,7 +378,7 @@ class MyMap extends React.Component {
             target: 'map',
             view:new View({
                 center: [0, 0],
-                zoom: 11
+                zoom: 2
               })
             })
 
@@ -439,17 +466,19 @@ class MyMap extends React.Component {
                 <ListItem button key="k1">
                         <ListItemIcon>
                             <Checkbox 
-                            	color="primary"
-                                onChange={this.goToLocation("TAR")}
+                                color="primary"
+                                name ="TAR"
+                                onChange={this.goToLocation}
                             />
                         </ListItemIcon>
                         <ListItemText primary="TAR" />
                     </ListItem>
-                    <ListItem button key="k1">
+                    <ListItem button key="k2">
                         <ListItemIcon>
                             <Checkbox 
-                            	color="primary"
-                                onChange={this.goToLocation("rome")}
+                                color="primary"
+                                name ="Rome"
+                                onChange={this.goToLocation}
                             />
                         </ListItemIcon>
                         <ListItemText primary="Rome" />
@@ -575,9 +604,14 @@ class MyMap extends React.Component {
 
                 </Hidden>
                 <Hidden smUp>
-                    <Drawer anchor="right" open={this.state.isDrawerOpen} variant="persistent">
+                    <Drawer anchor="right" open={this.state.isDrawerOpen} variant="persistent" onClick={this.mapOnClick}>
                         {drawerContent}
+                        {drawerLocationContent}
                     </Drawer>
+
+                
+
+                    
                 </Hidden>
                 <AppBar position="static" style={{ background: '#2E3B55' }}>
                     <Toolbar>
@@ -591,7 +625,7 @@ class MyMap extends React.Component {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <div id="map"></div>
+                <div id="map" onClick={this.toggleDrawer}></div>
                 <div id="info" ref={this.infoRef}>
                     <>
                         {
