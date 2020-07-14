@@ -48,6 +48,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import "./map.css"
 import { Card } from "@material-ui/core";
+import { none } from "ol/centerconstraint";
 
 
 const drawerWidth = 240;
@@ -61,7 +62,7 @@ class MyMap extends React.Component {
             colorPickerVisibility: {
                 DTW: false, WD: false, WH: false, HC: false, PP: false, DD: false
             },
-            info: "", isDrawerOpen: false, mapClick: false, features: {
+            info: "", isDrawerOpen: false, mapClick: false, selectedlocation: "none" , features: {
                 DTW: false, WD: false, WH: false, HC: false, PP: false, DD: false
             },
             colors: {
@@ -94,21 +95,8 @@ class MyMap extends React.Component {
         console.log(selectedArea)
         let view =this.state.map.getView()
 
-        if(selectedArea === "TAR"){
-            
-            this.state.map.setView(new View({
-                center:fromLonLat([0, 0]),
-                zoom: 2
-         }));
-        }
-        if(selectedArea === "Rome"){
-          
-            this.state.map.setView(new View({
-                center:fromLonLat([0, 0]),
-                zoom: 2
-         }));
-      
-        }
+        this.toggleLocation()
+        
        if (evt.target.checked === true){
         let view =  this.state.map.getView()
         view.animate({
@@ -118,10 +106,30 @@ class MyMap extends React.Component {
         });      
        
        }else {
+        view.animate({
+            center:fromLonLat([0,0]),
+                zoom: 2,
+            duration: 2000
+          }); 
 
        }
-     
+       
+      
         }
+
+        toggleLocation = (location) => {
+            this.setState((state)=>{
+            const currentLocation = state.selectedLocation;
+            let mapViewCenter= this.state.map.getView().getCenter()
+
+        
+            if(location === currentLocation) {
+            return {selectedlocation: none} // toggling
+            } else {
+            return {selectedLocatin: location}
+            }
+            });
+            }
    
 
     toggleColorPicker = (f) => {
@@ -444,6 +452,7 @@ class MyMap extends React.Component {
             })
         }
 
+       
         const getStyle = (f) => {
             return {
                 width: '36px',
@@ -465,10 +474,11 @@ class MyMap extends React.Component {
                 <List className="myDrawer" >
                 <ListItem button key="k1">
                         <ListItemIcon>
-                            <Checkbox 
-                                color="primary"
-                                name ="TAR"
-                                onChange={this.goToLocation}
+                            <Checkbox checked={this.state.selectedlocation === 'TAR'}
+                            id= "cb1"
+                            color="primary"
+                            name ="TAR"
+                            onChange={this.goToLocation}
                             />
                         </ListItemIcon>
                         <ListItemText primary="TAR" />
@@ -476,6 +486,8 @@ class MyMap extends React.Component {
                     <ListItem button key="k2">
                         <ListItemIcon>
                             <Checkbox 
+                            checked={this.state.selectedlocation === 'TAR'}
+                            id= "cb2"
                                 color="primary"
                                 name ="Rome"
                                 onChange={this.goToLocation}
@@ -657,3 +669,6 @@ class MyMap extends React.Component {
 
 
 export default MyMap;
+
+
+
