@@ -439,42 +439,6 @@ class MyMap extends React.Component {
                 }
             }
 
-            const drawerLocationContent = 
-                <>
-                <AppBar position="static" style={{ background: '#2E3B55' }}>
-                        <Toolbar>
-                            <Typography variant="h6" >
-                                Study Areas
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                    <List className="myDrawer" >
-                    <ListItem button key="k1">
-                            <ListItemIcon>
-                                <Checkbox checked={this.state.selectedlocation === 'TAR'}
-                                id= "cb1"
-                                color="primary"
-                                name ="TAR"
-                                onChange={this.goToLocation}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="TAR" />
-                        </ListItem>
-                        <ListItem button key="k2">
-                            <ListItemIcon>
-                                <Checkbox 
-                                checked={this.state.selectedlocation === 'TAR'}
-                                id= "cb2"
-                                    color="primary"
-                                    name ="Rome"
-                                    onChange={this.goToLocation}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="Rome" />
-                        </ListItem>
-                    </List>
-                </>
-
             const drawerContent =
                 <>
                     <AppBar position="static" style={{ background: '#2E3B55' }}>
@@ -575,14 +539,12 @@ class MyMap extends React.Component {
                     <div className="controlPanel">
                         {drawerContent}
                     </div>
-                    <div className="currLocation">
-                        {drawerLocationContent}
-                    </div>
+                   
                 </Hidden>
                 <Hidden smUp>
                     <Drawer anchor="right" open={this.state.isDrawerOpen} variant="persistent" onClick={this.mapOnClick}>
                         {drawerContent}
-                        {drawerLocationContent}
+                      
                     </Drawer>
                 </Hidden>
                 <AppBar position="static" style={{ background: '#2E3B55' }}>
@@ -596,7 +558,7 @@ class MyMap extends React.Component {
                             WebGIS Demo
                         </Typography>
                        
-                        <FadeMenu/>
+                        <FadeMenu map ={this.state.map}/>
                        
                     </Toolbar>
                 </AppBar>

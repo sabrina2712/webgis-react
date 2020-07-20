@@ -22,10 +22,10 @@ export default function FadeMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [locations,setLocations] = React.useState({"TAR" : [34.767511,36.842215 ],
     "Rome" : [ 12.496366, 41.902782]});
-
+    const [selectedArea, setSelectedArea] = React.useState({
+        selectedArea: null
+    })
    
-
-    
     const open = Boolean(anchorEl);
   
     const handleClick = (event) => {
@@ -38,32 +38,32 @@ export default function FadeMenu(props) {
    const map = props.map
     
 
-  const goToLocation =(evt)=>{
+  const goToLocation =(location)=>{
  
-    let selectedArea = evt.target.name;
+    let selectedArea = location;
   
-        let coor =locations[evt.target.name];
-        console.log(selectedArea)
-        let view = map.getView()
-        console.log( map)
-        
-    if (evt.target === true){
-        const map = props.map
-        let view =  map.getView()
-            view.animate({
-                center:fromLonLat(coor),
-                zoom: 11,
-                duration: 2000
-            });      
-    
-    }else {
+        let coor =locations[selectedArea];
+        console.log(coor)
+        handleClose()
+        if(coor){
+            const map = props.map
+            let view =  map.getView()
+                view.animate({
+                    center:fromLonLat(coor),
+                    zoom: 11,
+                    duration: 300
+                });      
+
+        }else {
+            const map = props.map
+            let view =  map.getView()
             view.animate({
                 center:fromLonLat([0,0]),
                 zoom: 2,
-                duration: 2000
+                duration: 300
             }); 
-
-    }}
+        }
+    }
 
 
 
@@ -73,6 +73,7 @@ export default function FadeMenu(props) {
         <Button aria-controls="fade-menu" 
                 aria-haspopup="true" 
                 onClick={handleClick}
+                style ={{color: "white"}}
         >       Study Area
         </Button>
         <Menu
@@ -83,28 +84,33 @@ export default function FadeMenu(props) {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-            <MenuItem onClick={handleClose}>
+            <MenuItem  onClick={()=>{
+                    goToLocation("TAR")
+            }}>
            
                             <ListItemIcon>
                                 <Checkbox 
+                             
                                 id= "cb1"
                                 color="primary"
                                 name ="TAR"
-                                onClick={goToLocation}
+                               
                                 />
                             </ListItemIcon>
                             <ListItemText primary="TAR" />
                       
                 
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={()=>{
+                    goToLocation("Rome")
+            }}>
                     <ListItemIcon>
                                 <Checkbox 
                                
                                 id= "cb2"
                                     color="primary"
                                     name ="Rome"
-                                    onClick={goToLocation}
+                                   
                                 />
                             </ListItemIcon>
                             <ListItemText primary="Rome" />
