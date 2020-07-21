@@ -27,36 +27,28 @@ export default function FadeMenu(props) {
         })
         const open = Boolean(anchorEl);
         const map = props.map
-  
         const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         };
         const handleClose = () => {
         setAnchorEl(null);
         };
-        
-        
         const goToLocation =(location)=>{
             console.log(location)
-           
-        const  selectedArea = location
-        console.log(selectedArea)
-        let coor =locations[selectedArea];
+           const  selectedArea = location
+            console.log(selectedArea)
+            let coor =locations[selectedArea];
        
         handleClose()
-        
         if(coor){
             let view =  map.getView()
             view.animate({
                 center:fromLonLat(coor),
                 zoom: 11,
                 duration: 300
-                });      
-
-        }
-            
+                });    
+            }
         if (selectedArea === location){
-           
                 const map = props.map
                 let view =  map.getView()
                 view.animate({
@@ -64,11 +56,8 @@ export default function FadeMenu(props) {
                     zoom: 2,
                     duration: 300
                     }); 
-                
-        }
-       
-        
-    }
+                }
+             }
        
     return (
         <div>
@@ -76,7 +65,8 @@ export default function FadeMenu(props) {
                 aria-haspopup="true" 
                 onClick={handleClick}
                 style ={{color: "white"}}
-        >       Study Area
+        >       Study 
+                Area
         </Button>
         <Menu
                 id="fade-menu"

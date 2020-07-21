@@ -86,35 +86,70 @@ class MyMap extends React.Component {
             if (t === "SPC") return "HC";
                 return t;
         }
-   
-        goToLocation =(evt)=>{
-        let selectedArea = evt.target.name;
-            let coor =this.state.locations[evt.target.name];
-            console.log(selectedArea)
-            let view =this.state.map.getView()
+        
+            /*
 
-            this.toggleLocation()
+       goToLocation =(location)=>{
+           
+        const  selectedArea = this.location
+        console.log(selectedArea)
+        let coor =this.state.locations[this.selectedArea];
+       
+       
+        
+        if(coor){
+            let view =  this.state.map.getView()
+            view.animate({
+                center:fromLonLat(coor),
+                zoom: 11,
+                duration: 300
+                });      
+
+        }
             
-        if (evt.target.checked === true){
+        if (selectedArea === location){
+           
+              
+                let view =  this.state.map.getView()
+                view.animate({
+                    center:fromLonLat([0,0]),
+                    zoom: 2,
+                    duration: 300
+                    }); 
+                
+        }}
+            */
+
+        handleClose = () => {
+              let isDrawerOpen = this.state.isDrawerOpen;
+           this.setState({isDrawerOpen : false})
+            };
+            
+        goToLocation =(location)=>{
+        let selectedArea = location;
+            let coor =this.state.locations[location];
+            let view =this.state.map.getView();
+
+        if (coor){
             let view =  this.state.map.getView()
             view.animate({
             center:fromLonLat(coor),
                 zoom: 11,
-            duration: 2000
+            duration: 300
             });      
-        }else {
+        }
+        if(selectedArea === location) {
             view.animate({
                 center:fromLonLat([0,0]),
                     zoom: 2,
-                duration: 2000
+                duration: 300
                 }); 
             }
         }
-
         toggleLocation = (location) => {
             this.setState((state)=>{
             const currentLocation = state.selectedLocation;
-            let mapViewCenter= this.state.map.getView().getCenter()
+           console.log(currentLocation)
             if(location === currentLocation) {
                 return {selectedlocation: none} // toggling
                     } else {
@@ -390,12 +425,53 @@ class MyMap extends React.Component {
             }
             const getStyle = (f) => {
                 return {
-                    width: '36px',
+                    width: '26px',
                     height: '14px',
                     borderRadius: '2px',
-                    backgroundColor: this.state.colors[f]
+                    backgroundColor: this.state.colors[f],
+                    margin : "75px"
                 }
             }
+
+            const drawerStudyArea =
+            <>
+            <AppBar position="static" style={{ background: '#2E3B55' }}>
+                        <Toolbar>
+                        <Typography variant="h6" >
+                            Study Area
+                        </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <List className="myDrawer" >
+                        <ListItem button key="k1"
+                       >
+                            <ListItemIcon>
+                                <Checkbox 
+                                    color="primary"
+                                    onClick={()=>{
+                                        this.goToLocation("TAR")
+                                             }}
+                                    
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary="TAR" />
+                           </ListItem>
+                        <ListItem button key="k2"
+                         >
+                            <ListItemIcon>
+                                <Checkbox 
+                                    color="primary"
+                                    onClick={()=>{
+                                        this.goToLocation("Rome")
+                                             }}
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary="Rome" />
+                           </ListItem>
+                        </List>
+                    
+
+            </>
 
             const drawerContent =
             <>
@@ -443,6 +519,13 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="Well Depth" />
+                            <ListItemSecondaryAction>
+                                <div onClick={() => {
+                                    this.toggleColorPicker("WD");
+                                }}>
+                                    <div style={getStyle("WD")} />
+                                </div>
+                            </ListItemSecondaryAction> 
                         </ListItem>
                         <ListItem button key="k3">
                             <ListItemIcon>
@@ -496,12 +579,14 @@ class MyMap extends React.Component {
                 <Hidden xsDown >
                     <div className="controlPanel">
                         {drawerContent}
+                       
                     </div>
                    
                 </Hidden>
                 <Hidden smUp>
                     <Drawer anchor="right" open={this.state.isDrawerOpen} variant="persistent" onClick={this.mapOnClick}>
                         {drawerContent}
+                        {drawerStudyArea}
                       
                     </Drawer>
                 </Hidden>

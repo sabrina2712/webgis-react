@@ -11,11 +11,12 @@
   position: absolute;
   background: #868686c9;
   z-index: 1000;
-  right: 10px;
+  right: 8px;
   top: 65px;
   border-radius: 16px;
-  padding: 16px;
+  padding: 8px;
   color: white;
+  
 }
 
 .currLocation {
@@ -37,7 +38,7 @@
   position: absolute;
   padding: 7px;
   border: 1px solid rgb(148, 145, 145);
-  width: 120px;
+  width: 150px;
   z-index: 100;
   font-size: 0.6em;
   color:white;
@@ -47,8 +48,9 @@
 }
 #sidebar{
 background-color: lightblue;
-padding: 10px;
+padding: 5px;
 margin-top: 20px;
+margin-right: 5px;
 }
 
 
