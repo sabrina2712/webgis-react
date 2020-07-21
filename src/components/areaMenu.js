@@ -19,55 +19,57 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export default function FadeMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [locations,setLocations] = React.useState({"TAR" : [34.767511,36.842215 ],
-    "Rome" : [ 12.496366, 41.902782]});
-    const [selectedArea, setSelectedArea] = React.useState({
-        selectedArea: null
-    })
-   
-    const open = Boolean(anchorEl);
+        const [anchorEl, setAnchorEl] = React.useState(null);
+        const [locations,setLocations] = React.useState({"TAR" : [34.767511,36.842215 ],
+            "Rome" : [ 12.496366, 41.902782]});
+        const [selectedArea, setSelectedArea] = React.useState({
+            selectedArea: null
+        })
+        const open = Boolean(anchorEl);
+        const map = props.map
   
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-   const map = props.map
-    
-
-  const goToLocation =(location)=>{
- 
-    let selectedArea = location;
-  
+        const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+        };
+        const handleClose = () => {
+        setAnchorEl(null);
+        };
+        
+        
+        const goToLocation =(location)=>{
+            console.log(location)
+           
+        const  selectedArea = location
+        console.log(selectedArea)
         let coor =locations[selectedArea];
-        console.log(coor)
+       
         handleClose()
+        
         if(coor){
-            const map = props.map
-            let view =  map.getView()
-                view.animate({
-                    center:fromLonLat(coor),
-                    zoom: 11,
-                    duration: 300
-                });      
-
-        }else {
-            const map = props.map
             let view =  map.getView()
             view.animate({
-                center:fromLonLat([0,0]),
-                zoom: 2,
+                center:fromLonLat(coor),
+                zoom: 11,
                 duration: 300
-            }); 
+                });      
+
         }
+            
+        if (selectedArea === location){
+           
+                const map = props.map
+                let view =  map.getView()
+                view.animate({
+                    center:fromLonLat([0,0]),
+                    zoom: 2,
+                    duration: 300
+                    }); 
+                
+        }
+       
+        
     }
-
-
-
- 
+       
     return (
         <div>
         <Button aria-controls="fade-menu" 
@@ -85,38 +87,31 @@ export default function FadeMenu(props) {
                 TransitionComponent={Fade}
             >
             <MenuItem  onClick={()=>{
-                    goToLocation("TAR")
-            }}>
-           
-                            <ListItemIcon>
-                                <Checkbox 
-                             
-                                id= "cb1"
-                                color="primary"
-                                name ="TAR"
-                               
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="TAR" />
-                      
-                
+                goToLocation("TAR")
+                }}>
+                <ListItemIcon>
+                    <Checkbox 
+                        id= "cb1"
+                        color="primary"
+                        name ="TAR"
+                    />
+                </ListItemIcon>
+            <ListItemText primary="TAR" />
             </MenuItem>
             <MenuItem onClick={()=>{
-                    goToLocation("Rome")
-            }}>
-                    <ListItemIcon>
-                                <Checkbox 
-                               
-                                id= "cb2"
-                                    color="primary"
-                                    name ="Rome"
-                                   
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="Rome" />
-                            </MenuItem>
+                goToLocation("Rome")
+                }}>
+                <ListItemIcon>
+                    <Checkbox 
+                        id= "cb2"
+                        color="primary"
+                        name ="Rome"
+                    />
+                </ListItemIcon>
+            <ListItemText primary="Rome" />
+            </MenuItem>
         </Menu>
         </div>
-  );
-}
+        );
+    }
 

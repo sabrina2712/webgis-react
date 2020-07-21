@@ -73,13 +73,11 @@ class MyMap extends React.Component {
             locations:{
                     "TAR" : ([34.767511,36.842215 ]),
                     "Rome" : ([ 12.496366, 41.902782]),
-                    
-            },
-            map: this.map,
-            view: this.view
-            };
-
-        }
+                    },
+                map: this.map,
+                view: this.view
+                    };
+                }
         abbr = (t) => {
             if (t === "WellDepth") return "WD";
             if (t === "Wellhead") return "WH";
@@ -87,7 +85,6 @@ class MyMap extends React.Component {
             if (t === "pump") return "PP";
             if (t === "SPC") return "HC";
                 return t;
-
         }
    
         goToLocation =(evt)=>{
@@ -105,34 +102,26 @@ class MyMap extends React.Component {
                 zoom: 11,
             duration: 2000
             });      
-        
         }else {
             view.animate({
                 center:fromLonLat([0,0]),
                     zoom: 2,
                 duration: 2000
-            }); 
-
-        }
-        
-        
+                }); 
             }
+        }
 
         toggleLocation = (location) => {
             this.setState((state)=>{
             const currentLocation = state.selectedLocation;
             let mapViewCenter= this.state.map.getView().getCenter()
-
-        
             if(location === currentLocation) {
-            return {selectedlocation: none} // toggling
-            } else {
-            return {selectedLocatin: location}
+                return {selectedlocation: none} // toggling
+                    } else {
+                return {selectedLocatin: location}
+                    }
+                 });
             }
-            });
-            }
-   
-
         toggleColorPicker = (f) => {
             this.setState((state) => {
                 const colorPickerVisibility = state.colorPickerVisibility;
@@ -140,7 +129,6 @@ class MyMap extends React.Component {
                 return { colorPickerVisibility: colorPickerVisibility };
             })
         };
-
         changeFeatureColor = (f, color) => {
             this.setState((state) => {
                 const colors = state.colors;
@@ -149,7 +137,6 @@ class MyMap extends React.Component {
                 return { colors: colors };
             })
         };
-
         toogleFeature = (f) => {
             this.setState((state) => {
                 const features = state.features;
@@ -157,21 +144,16 @@ class MyMap extends React.Component {
                 return { features: features };
             })
         }
-
         toggleDrawer = () => {
             this.setState((state) => {
                 return { isDrawerOpen: !state.isDrawerOpen }
-
             })
         }
-
         mapOnClick =()=>{
             this.setState((state)=>{
                 return {mapClick: !state.mapClick}
             })
         }
-
-  
         componentDidMount() {
             const geojsonObj = {
                 "type": "FeatureCollection",
@@ -180,8 +162,6 @@ class MyMap extends React.Component {
             var vectorSource = new VectorSource({
             features: (new GeoJSON()).readFeatures(geojsonObj)
             });
-
-
             // for pumping rate and drawdown
             dataTar.forEach((el) => {
                 var x = el.geometry.coordinates[0]
@@ -194,7 +174,6 @@ class MyMap extends React.Component {
                 vectorSource.addFeature(iconFeature);
 
             })
-
             function getStylePump(feature) {
                 return new Style({
                     image: new CircleStyle({
@@ -206,10 +185,7 @@ class MyMap extends React.Component {
                     })
                 });
             }
-
-
             // style for Drawdown
-
             function getStyleDrwaDown(feature) {
                 return new Style({
                     image: new CircleStyle({
@@ -221,18 +197,13 @@ class MyMap extends React.Component {
                     })
                 })
             }
-
             // layer for Drawdown  
-
             var vectorLayerForDD = new VectorLayer({
                 fKey: "DD",
                 source: vectorSource,
                 style:  getStyleDrwaDown
             })
-
-
-             // layer for pump
-    
+            // layer for pump
             var vectorLayerForPump = new VectorLayer({
                 fKey: "pump",
                 source: vectorSource,
@@ -240,7 +211,6 @@ class MyMap extends React.Component {
             })
             
             // for specific conductivity
-
             outputData.forEach((el) => {
                 var x = el.geometry.coordinates[0]
                 var y = el.geometry.coordinates[1]
@@ -250,32 +220,25 @@ class MyMap extends React.Component {
                 name: 'Marker ',
                 "properties": { SPC: parseFloat(el.properties.Specific_capacity) }
                 });
-                
             vectorSource.addFeature(iconFeature);
             })
-
             const colors = this.state.colors;
-
             function getStyleSpfCon(feature) {
                 return new Style({
                     image: new CircleStyle({
                         radius: feature.get("properties").SPC / 2,
                         fill: new Fill({
-                            color: colors.HC
+                        color: colors.HC
                         }),
-                        
                         stroke: new Stroke({ color: 'rgba(247, 202, 24, 0.8)', width: 1 })
                     })
                 });
             }
-
             var vectorLayerForSpfCon = new VectorLayer({
                 fKey: "SPC",
                 source: vectorSource,
                 style: getStyleSpfCon
             });
-
-
             // for DTW, WEll g´head, well depth
 
             data.forEach((el) => {
@@ -302,7 +265,6 @@ class MyMap extends React.Component {
                     })
                 });
             }
-
             function getStyleWellHead(feature) {
                 return new Style({
                     image: new CircleStyle({
@@ -341,7 +303,6 @@ class MyMap extends React.Component {
                 source: vectorSource,
                 style: getStyleWellHead
             });
-
             var vectorLayerForWllDepth = new VectorLayer({
                 fKey: "WellDepth",
                 source: vectorSource,
@@ -410,15 +371,13 @@ class MyMap extends React.Component {
                     }
                 });
             }
-
-
         render() {
             if (this.state.layers) {
                     Object.values(this.state.layers).forEach((layer) => {
                     layer.getSource().changed();
                 });
             }
-                    let pairs = this.state.pairs;
+            let pairs = this.state.pairs;
             if (!pairs) pairs = [];
             if (this.state.map) {
                     const map = this.state.map;
@@ -429,7 +388,6 @@ class MyMap extends React.Component {
                     }
                 })
             }
-            
             const getStyle = (f) => {
                 return {
                     width: '36px',
@@ -440,8 +398,8 @@ class MyMap extends React.Component {
             }
 
             const drawerContent =
-                <>
-                    <AppBar position="static" style={{ background: '#2E3B55' }}>
+            <>
+            <AppBar position="static" style={{ background: '#2E3B55' }}>
                         <Toolbar>
                         <Typography variant="h6" >
                             Features
