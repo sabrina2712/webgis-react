@@ -194,6 +194,17 @@ class MyMap extends React.Component {
             </ListItem>
             }
 
+            getListItemIcon=(t)=>{
+                return <ListItemIcon>
+                <Checkbox checked={this.state.features.t}
+                    color="primary"
+                    onChange={() => {
+                        this.toogleFeature(t);
+                    }}
+                />
+            </ListItemIcon>
+            }
+
             /*
             gettingColorWizard =(w)=>{
                 {this.state.features.w === true ?
@@ -526,30 +537,17 @@ class MyMap extends React.Component {
                     
                     <List className="myDrawer" >
                         <ListItem button key="k1">
-                            <ListItemIcon>
-                                <Checkbox checked={this.state.features.DTW}
-                                    color="primary"
-                                    onChange={() => {
-                                        this.toogleFeature("DTW");
-                                    }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="DTW" />
+                            { this.getListItemIcon("DTW")}
+                        <ListItemText primary="DTW" />
                             {this.state.features.DTW === true ?
                             this.getPicker("DTW") : null}
                         </ListItem>
                             {this.state.colorPickerVisibility.DTW ? 
-                        this.getPickerVisvibility("DTW") : null}
+                            this.getPickerVisvibility("DTW") : null}
+                        
                         <ListItem button key="k2">
-                            <ListItemIcon>
-                                <Checkbox checked={this.state.features.WD}
-                                    color="primary"
-                                    onChange={() => {
-                                        this.toogleFeature("WD");
-                                    }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="Well Depth" />
+                            { this.getListItemIcon("WD")}
+                        <ListItemText primary="Well Depth" />
                             {this.state.features.WD === true ?
                             this.getPicker("WD") : null}
                         </ListItem>
@@ -557,69 +555,40 @@ class MyMap extends React.Component {
                         this.getPickerVisvibility("WD") : null}
 
                         <ListItem button key="k3">
-                            <ListItemIcon>
-                                <Checkbox checked={this.state.features.WH}
-                                    color="primary"
-                                    onChange={() => {
-                                        this.toogleFeature("WH");
-                                    }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="Well Head" />
+                            { this.getListItemIcon("WH")}
+                        <ListItemText primary="Well Head" />
                             {this.state.features.WH === true ?
-                              this.getPicker("WH") : null}
-                              </ListItem>
-                                  {this.state.colorPickerVisibility.WH ? 
-                              this.getPickerVisvibility("WH") : null}
+                            this.getPicker("WH") : null}
+                        </ListItem>
+                            {this.state.colorPickerVisibility.WH ? 
+                            this.getPickerVisvibility("WH") : null}
 
-                        
                         <ListItem button key="k4">
-                            <ListItemIcon>
-                                <Checkbox checked={this.state.features.HC}
-                                    color="primary"
-                                    onChange={() => {
-                                        this.toogleFeature("HC");
-                                    }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="Hydraulic Conductivity" />
+                            {this.getListItemIcon("HC")}
+                        <ListItemText primary="Hydraulic Conductivity" />
                             {this.state.features.HC === true ?
-                             this.getPicker("HC") : null}
-                             </ListItem>
-                                 {this.state.colorPickerVisibility.HC? 
-                             this.getPickerVisvibility("HC") : null}
+                            this.getPicker("HC") : null}
+                        </ListItem>
+                            {this.state.colorPickerVisibility.HC? 
+                            this.getPickerVisvibility("HC") : null}
 
                         <ListItem button key="k5">
-                            <ListItemIcon>
-                                <Checkbox checked={this.state.features.DD}
-                                    color="primary"
-                                    onChange={() => {
-                                        this.toogleFeature("DD");
-                                    }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="DD" />
+                            {this.getListItemIcon("DD")}
+                        <ListItemText primary="DD" />
                             {this.state.features.DD === true ?
-                             this.getPicker("DD") : null}
-                             </ListItem>
-                                 {this.state.colorPickerVisibility.DD ? 
-                             this.getPickerVisvibility("DD") : null}
+                            this.getPicker("DD") : null}
+                        </ListItem>
+                            {this.state.colorPickerVisibility.DD ? 
+                            this.getPickerVisvibility("DD") : null}
+                        
                         <ListItem button key="k6">
-                            <ListItemIcon>
-                                <Checkbox checked={this.state.features.PP}
-                                    color="primary"
-                                    onChange={() => {
-                                        this.toogleFeature("PP");
-                                    }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary="pump" />
+                            {this.getListItemIcon("PP")}
+                        <ListItemText primary="pump" />
                             {this.state.features.PP === true ?
-                        this.getPicker("PP") : null}
+                            this.getPicker("PP") : null}
                         </ListItem>
                             {this.state.colorPickerVisibility.PP ? 
-                        this.getPickerVisvibility("PP") : null}
-                       
+                            this.getPickerVisvibility("PP") : null}
                     </List>
                 </>;
 
