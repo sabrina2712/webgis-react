@@ -167,8 +167,52 @@ class MyMap extends React.Component {
             return colorPickerVisibility;
             })
             };
-        
+         getStyle = (f) => {
+                return {
+                    width: '26px',
+                    height: '14px',
+                    borderRadius: '2px',
+                    backgroundColor: this.state.colors[f],
+                    margin : "75px"
+                }
+            }
+            getPicker=(p)=>{
+                return <ListItemSecondaryAction>
+                <div onClick={() => {
+                      console.log(p)
+                    this.toggleColorPicker(p);
+                }}>
+                    <div style={this.getStyle(p)} />
+                </div>
+            </ListItemSecondaryAction>
+            }
+            getPickerVisvibility=(v)=>{
+                return <ListItem>
+                <div style={{}}>
+            <SketchPicker color={this.state.colors.v} onChange={(color) => { this.changeFeatureColor(v, color.hex) }} />
+                </div>
+            </ListItem>
+            }
 
+            /*
+            gettingColorWizard =(w)=>{
+                {this.state.features.w === true ?
+                    <ListItemSecondaryAction>
+                        <div onClick={() => {
+                              
+                            this.toggleColorPicker(w);
+                        }}>
+                            <div style={getStyle(w)} />
+                        </div>
+                    </ListItemSecondaryAction> : null}
+                    {this.state.colorPickerVisibility.w ? 
+                    <ListItem>
+                    <div style={{}}>
+                <SketchPicker color={this.state.colors.HC} onChange={(color) => { this.changeFeatureColor("HC", color.hex) }} />
+                    </div>
+                </ListItem> : null}
+            }
+                */
         changeFeatureColor = (f, color) => {
             this.setState((state) => {
                 const colors = state.colors;
@@ -428,15 +472,7 @@ class MyMap extends React.Component {
                     }
                 })
             }
-            const getStyle = (f) => {
-                return {
-                    width: '26px',
-                    height: '14px',
-                    borderRadius: '2px',
-                    backgroundColor: this.state.colors[f],
-                    margin : "75px"
-                }
-            }
+          
 
             const drawerStudyArea =
             <>
@@ -499,22 +535,11 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="DTW" />
-                            {this.state.colorPickerVisibility.DTW === true ?
-                            <ListItemSecondaryAction>
-                                <div onClick={() => {
-                                    this.toggleColorPicker("DTW");
-                                }}>
-                                    <div style={getStyle("DTW")} />
-                                </div>
-                            </ListItemSecondaryAction> : null}
-                    
+                            {this.state.features.DTW === true ?
+                            this.getPicker("DTW") : null}
                         </ListItem>
                             {this.state.colorPickerVisibility.DTW ? 
-                        <ListItem>
-                            <div style={{}}>
-                        <SketchPicker color={this.state.colors.DTW} onChange={(color) => { this.changeFeatureColor("DTW", color.hex) }} />
-                            </div>
-                        </ListItem> : null}
+                        this.getPickerVisvibility("DTW") : null}
                         <ListItem button key="k2">
                             <ListItemIcon>
                                 <Checkbox checked={this.state.features.WD}
@@ -525,8 +550,12 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="Well Depth" />
-                            
+                            {this.state.features.WD === true ?
+                            this.getPicker("WD") : null}
                         </ListItem>
+                            {this.state.colorPickerVisibility.WD ? 
+                        this.getPickerVisvibility("WD") : null}
+
                         <ListItem button key="k3">
                             <ListItemIcon>
                                 <Checkbox checked={this.state.features.WH}
@@ -537,7 +566,13 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="Well Head" />
-                        </ListItem>
+                            {this.state.features.WH === true ?
+                              this.getPicker("WH") : null}
+                              </ListItem>
+                                  {this.state.colorPickerVisibility.WH ? 
+                              this.getPickerVisvibility("WH") : null}
+
+                        
                         <ListItem button key="k4">
                             <ListItemIcon>
                                 <Checkbox checked={this.state.features.HC}
@@ -548,7 +583,12 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="Hydraulic Conductivity" />
-                        </ListItem>
+                            {this.state.features.HC === true ?
+                             this.getPicker("HC") : null}
+                             </ListItem>
+                                 {this.state.colorPickerVisibility.HC? 
+                             this.getPickerVisvibility("HC") : null}
+
                         <ListItem button key="k5">
                             <ListItemIcon>
                                 <Checkbox checked={this.state.features.DD}
@@ -559,7 +599,11 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="DD" />
-                        </ListItem>
+                            {this.state.features.DD === true ?
+                             this.getPicker("DD") : null}
+                             </ListItem>
+                                 {this.state.colorPickerVisibility.DD ? 
+                             this.getPickerVisvibility("DD") : null}
                         <ListItem button key="k6">
                             <ListItemIcon>
                                 <Checkbox checked={this.state.features.PP}
@@ -570,7 +614,12 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="pump" />
+                            {this.state.features.PP === true ?
+                        this.getPicker("PP") : null}
                         </ListItem>
+                            {this.state.colorPickerVisibility.PP ? 
+                        this.getPickerVisvibility("PP") : null}
+                       
                     </List>
                 </>;
 
