@@ -157,13 +157,18 @@ class MyMap extends React.Component {
                     }
                  });
             }
+     
+
+
         toggleColorPicker = (f) => {
             this.setState((state) => {
-                const colorPickerVisibility = state.colorPickerVisibility;
-                colorPickerVisibility[f] = !colorPickerVisibility[f];
-                return { colorPickerVisibility: colorPickerVisibility };
+            const colorPickerVisibility = state.colorPickerVisibility;
+            colorPickerVisibility[f] = !colorPickerVisibility[f];
+            return colorPickerVisibility;
             })
-        };
+            };
+        
+
         changeFeatureColor = (f, color) => {
             this.setState((state) => {
                 const colors = state.colors;
@@ -494,13 +499,14 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="DTW" />
+                            {this.state.colorPickerVisibility.DTW === true ?
                             <ListItemSecondaryAction>
                                 <div onClick={() => {
                                     this.toggleColorPicker("DTW");
                                 }}>
                                     <div style={getStyle("DTW")} />
                                 </div>
-                            </ListItemSecondaryAction> 
+                            </ListItemSecondaryAction> : null}
                     
                         </ListItem>
                             {this.state.colorPickerVisibility.DTW ? 
@@ -519,13 +525,7 @@ class MyMap extends React.Component {
                                 />
                             </ListItemIcon>
                             <ListItemText primary="Well Depth" />
-                            <ListItemSecondaryAction>
-                                <div onClick={() => {
-                                    this.toggleColorPicker("WD");
-                                }}>
-                                    <div style={getStyle("WD")} />
-                                </div>
-                            </ListItemSecondaryAction> 
+                            
                         </ListItem>
                         <ListItem button key="k3">
                             <ListItemIcon>
