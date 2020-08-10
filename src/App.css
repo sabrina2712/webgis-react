@@ -6,6 +6,31 @@
   z-index: 1;
 }
 
+
+#legend{
+    margin-top:100px;
+    width: 100px;    
+    position: absolute;
+    background: rgba(184,245,181,0.5);
+    
+    z-index: 1000;
+    right: 5px;
+    top: 65px;
+    border-radius: 8px;
+    padding: 8px;
+    color: black;
+    text-align: center;
+    border: 1px solid #9bd798;
+  
+}
+.legend-span{
+  padding: 5px;
+  margin: 30px;
+}
+.legend-header{
+  font-weight: bold;
+}
+
 .controlPanel {
   width: 220px;    
   position: absolute;
