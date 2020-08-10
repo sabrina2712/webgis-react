@@ -22,6 +22,7 @@ export default function FadeMenu(props) {
         const [anchorEl, setAnchorEl] = React.useState(null);
         const [locations,setLocations] = React.useState({"TAR" : [34.767511,36.842215 ],
             "Rome" : [ 12.496366, 41.902782]});
+        const [selectedLocation, setSelectedLocation] = React.useState(null)
         const [selectedArea, setSelectedArea] = React.useState({
             selectedArea: null
         })
@@ -34,37 +35,60 @@ export default function FadeMenu(props) {
         setAnchorEl(null);
         };
         const goToLocation =(location)=>{
-            console.log(location)
+           
            const  selectedArea = location
             console.log(selectedArea)
             let coor =locations[selectedArea];
        
         handleClose()
-        if(coor){
+        if (coor){
             let view =  map.getView()
             view.animate({
-                center:fromLonLat(coor),
+            center:fromLonLat(coor),
                 zoom: 11,
+            duration: 300
+            });
+        }
+        if(selectedArea === location) {
+            console.log(selectedArea)
+            let view =  map.getView()
+            view.animate({
+                center:fromLonLat([0,0]),
+                    zoom: 2,
                 duration: 300
-                });    
+                });
             }
-        if (selectedArea === location){
-                const map = props.map
+             }
+        
+        const  toggleLocation = (location) => {
+            
+           const currentLocation = selectedLocation;
+            setSelectedLocation(()=>{
+               
+            console.log(location)
+            console.log(currentLocation)
+            if(location === currentLocation) {
                 let view =  map.getView()
                 view.animate({
                     center:fromLonLat([0,0]),
-                    zoom: 2,
+                        zoom: 2,
                     duration: 300
-                    }); 
-                }
-             }
+                    });
+
+
+               
+                    } else {
+                return {selectedLocatin: location}
+                    }
+                    });
+            }
        
     return (
         <div>
         <Button aria-controls="fade-menu" 
                 aria-haspopup="true" 
                 onClick={handleClick}
-                style ={{color: "white"}}
+                style ={{color: "white", padding: "16px", fontWeight: "bold"}}
         >       Study 
                 Area
         </Button>

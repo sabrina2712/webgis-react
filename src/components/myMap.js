@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import 'ol/ol.css';
 import Feature from 'ol/Feature';
@@ -50,6 +51,8 @@ import "./map.css"
 import { Card } from "@material-ui/core";
 import { none } from "ol/centerconstraint";
 import FadeMenu from "./areaMenu"
+import Button from "@material-ui/core/Button";
+import FormatColorFill from '@material-ui/icons/FormatColorFill';
 
 const drawerWidth = 240;
 
@@ -86,47 +89,17 @@ class MyMap extends React.Component {
             if (t === "SPC") return "HC";
                 return t;
         }
-        
-            /*
 
-       goToLocation =(location)=>{
-           
-        const  selectedArea = this.location
-        console.log(selectedArea)
-        let coor =this.state.locations[this.selectedArea];
-       
-       
-        
-        if(coor){
-            let view =  this.state.map.getView()
-            view.animate({
-                center:fromLonLat(coor),
-                zoom: 11,
-                duration: 300
-                });      
-
-        }
-            
-        if (selectedArea === location){
-           
-              
-                let view =  this.state.map.getView()
-                view.animate({
-                    center:fromLonLat([0,0]),
-                    zoom: 2,
-                    duration: 300
-                    }); 
-                
-        }}
-            */
-
+          
         handleClose = () => {
               let isDrawerOpen = this.state.isDrawerOpen;
            this.setState({isDrawerOpen : false})
             };
-            
+        
         goToLocation =(location)=>{
         let selectedArea = location;
+        console.log(selectedArea)
+        console.log(location)
             let coor =this.state.locations[location];
             let view =this.state.map.getView();
 
@@ -136,16 +109,19 @@ class MyMap extends React.Component {
             center:fromLonLat(coor),
                 zoom: 11,
             duration: 300
-            });      
+            });
         }
         if(selectedArea === location) {
+            console.log(selectedArea)
             view.animate({
                 center:fromLonLat([0,0]),
                     zoom: 2,
                 duration: 300
-                }); 
+                });
             }
         }
+
+        
         toggleLocation = (location) => {
             this.setState((state)=>{
             const currentLocation = state.selectedLocation;
@@ -157,73 +133,40 @@ class MyMap extends React.Component {
                     }
                  });
             }
-     
 
+                
 
         toggleColorPicker = (f) => {
             this.setState((state) => {
             const colorPickerVisibility = state.colorPickerVisibility;
             colorPickerVisibility[f] = !colorPickerVisibility[f];
-            return colorPickerVisibility;
+        	    return colorPickerVisibility;
             })
-            };
+        };
          getStyle = (f) => {
                 return {
-                    width: '26px',
+                    width: '14px',
                     height: '14px',
                     borderRadius: '2px',
                     backgroundColor: this.state.colors[f],
-                    margin : "75px"
                 }
-            }
-            getPicker=(p)=>{
-                return <ListItemSecondaryAction>
-                <div onClick={() => {
-                      console.log(p)
-                    this.toggleColorPicker(p);
-                }}>
-                    <div style={this.getStyle(p)} />
-                </div>
-            </ListItemSecondaryAction>
             }
             getPickerVisvibility=(v)=>{
                 return <ListItem>
-                <div style={{}}>
-            <SketchPicker color={this.state.colors.v} onChange={(color) => { this.changeFeatureColor(v, color.hex) }} />
-                </div>
-            </ListItem>
+                    <SketchPicker color={this.state.colors.v} onChange={(color) => { this.changeFeatureColor(v, color.hex) }} />
+    	        </ListItem>
             }
 
             getListItemIcon=(t)=>{
-                return <ListItemIcon>
-                <Checkbox checked={this.state.features.t}
-                    color="primary"
-                    onChange={() => {
-                        this.toogleFeature(t);
-                    }}
-                />
-            </ListItemIcon>
+                return <Checkbox checked={this.state.features.t}
+								 color="primary"
+								 onChange={() => {
+									 this.toogleFeature(t);
+								 }}
+				/>
             }
 
-            /*
-            gettingColorWizard =(w)=>{
-                {this.state.features.w === true ?
-                    <ListItemSecondaryAction>
-                        <div onClick={() => {
-                              
-                            this.toggleColorPicker(w);
-                        }}>
-                            <div style={getStyle(w)} />
-                        </div>
-                    </ListItemSecondaryAction> : null}
-                    {this.state.colorPickerVisibility.w ? 
-                    <ListItem>
-                    <div style={{}}>
-                <SketchPicker color={this.state.colors.HC} onChange={(color) => { this.changeFeatureColor("HC", color.hex) }} />
-                    </div>
-                </ListItem> : null}
-            }
-                */
+        
         changeFeatureColor = (f, color) => {
             this.setState((state) => {
                 const colors = state.colors;
@@ -274,9 +217,9 @@ class MyMap extends React.Component {
                     image: new CircleStyle({
                     radius: feature.get("properties").pump*200,
                     fill: new Fill({
-                        color: colors.PP 
+                        color: colors.PP
                     }),
-                    stroke: new Stroke({ color: 'rgba(30,144,255, 0.7)', width: 1 })
+                    stroke: new Stroke({ color: colors.PP, width: 1 })
                     })
                 });
             }
@@ -288,11 +231,11 @@ class MyMap extends React.Component {
                     fill: new Fill({
                         color: colors.DD
                     }),
-                    stroke: new Stroke({ color: 'rgba(220,20,60,0.7)', width: 1 })
+                    stroke: new Stroke({ color: colors.DD, width: 1 })
                     })
                 })
             }
-            // layer for Drawdown  
+            // layer for Drawdown
             var vectorLayerForDD = new VectorLayer({
                 fKey: "DD",
                 source: vectorSource,
@@ -304,7 +247,7 @@ class MyMap extends React.Component {
                 source: vectorSource,
                 style: getStylePump
             })
-            
+
             // for specific conductivity
             outputData.forEach((el) => {
                 var x = el.geometry.coordinates[0]
@@ -325,7 +268,7 @@ class MyMap extends React.Component {
                         fill: new Fill({
                         color: colors.HC
                         }),
-                        stroke: new Stroke({ color: 'rgba(247, 202, 24, 0.8)', width: 1 })
+                        stroke: new Stroke({ color: colors.HC, width: 1 })
                     })
                 });
             }
@@ -356,7 +299,7 @@ class MyMap extends React.Component {
                         fill: new Fill({
                             color: colors.DTW
                         }),
-                        stroke: new Stroke({ color: 'rgba(0, 0,255, 0.3)', width: 1 })
+                        stroke: new Stroke({ color:colors.DTW, width: 1 })
                     })
                 });
             }
@@ -369,7 +312,7 @@ class MyMap extends React.Component {
                         radius: feature.get("properties").Wellhead * 5,
 
                     }),
-                    stroke: new Stroke({ color: 'rgba(255,0, 0, 0.3)', width: 1 })
+                    stroke: new Stroke({ color: colors.WH, width: 1 })
                 });
             }
             function getStyleDepth(feature) {
@@ -378,7 +321,7 @@ class MyMap extends React.Component {
                         fill: new Fill({
                             color: colors.WD
                         }),
-                        stroke: new Stroke({ color:  'rgba(0, 128, 0, 0.9)', width: 1 }),
+                        stroke: new Stroke({ color:  colors.WD, width: 1 }),
                         points: 3,
                         radius: feature.get("properties").WellDepth / 10,
                         rotation: Math.PI / 4,
@@ -407,7 +350,7 @@ class MyMap extends React.Component {
 
         // pop up ovberlay
         // var info = document.getElementById('info');
-     
+
             const overLayer = new Overlay({
                 element: this.infoRef.current
             })
@@ -415,7 +358,7 @@ class MyMap extends React.Component {
             // on click or onchange handlers
 
             // creating map
-            
+
             var map = new Map({
                 layers: [
                     new TileLayer({
@@ -433,7 +376,7 @@ class MyMap extends React.Component {
                 console.log(view)
                 // adding overlay
                 map.addOverlay(overLayer)
-            
+
                 // onclick on map and show pop up
 
             map.on('click', (evt) => {
@@ -483,11 +426,11 @@ class MyMap extends React.Component {
                     }
                 })
             }
-          
+
 
             const drawerStudyArea =
             <>
-            <AppBar position="static" style={{ background: '#2E3B55' }}>
+            <AppBar position="static" style={{ background: '#2E3B55'}}>
                         <Toolbar>
                         <Typography variant="h6" >
                             Study Area
@@ -498,12 +441,12 @@ class MyMap extends React.Component {
                         <ListItem button key="k1"
                        >
                             <ListItemIcon>
-                                <Checkbox 
+                                <Checkbox
                                     color="primary"
                                     onClick={()=>{
                                         this.goToLocation("TAR")
                                              }}
-                                    
+
                                 />
                             </ListItemIcon>
                             <ListItemText primary="TAR" />
@@ -511,7 +454,7 @@ class MyMap extends React.Component {
                         <ListItem button key="k2"
                          >
                             <ListItemIcon>
-                                <Checkbox 
+                                <Checkbox
                                     color="primary"
                                     onClick={()=>{
                                         this.goToLocation("Rome")
@@ -521,75 +464,48 @@ class MyMap extends React.Component {
                             <ListItemText primary="Rome" />
                            </ListItem>
                         </List>
-                    
+
 
             </>
 
+			const featureItems = [
+				{title:"DTW", key: "DTW"},
+				{title:"Well Depth", key: "WD"},
+				{title:"Well Head", key: "WH"},
+				{title:"Hydraulic Conductivity", key: "HC"},
+				{title:"DD", key: "DD"},
+				{title:"Pump", key: "PP"}
+			].map((f)=>{
+				return <>
+					<ListItem button key={f.key}>
+						<ListItemIcon>
+							{ this.getListItemIcon(f.key)}
+						</ListItemIcon>
+						<ListItemText id={f.key} primary={f.title} />
+						<ListItemSecondaryAction>
+							<IconButton variant="contained" onClick={() => {
+								this.toggleColorPicker(f.key);
+							}} style={this.getStyle(f.key)} edge={"end"}>
+							</IconButton>
+						</ListItemSecondaryAction>
+					</ListItem>
+					{this.state.colorPickerVisibility[f.key] === true ?
+						this.getPickerVisvibility(f.key) : null}
+					</>
+			});
             const drawerContent =
             <>
             <AppBar position="static" style={{ background: '#2E3B55' }}>
-                        <Toolbar>
-                        <Typography variant="h6" >
-                            Features
-                        </Typography>
-                        </Toolbar>
-                    </AppBar>
-                    
-                    <List className="myDrawer" >
-                        <ListItem button key="k1">
-                            { this.getListItemIcon("DTW")}
-                        <ListItemText primary="DTW" />
-                            {this.state.features.DTW === true ?
-                            this.getPicker("DTW") : null}
-                        </ListItem>
-                            {this.state.colorPickerVisibility.DTW ? 
-                            this.getPickerVisvibility("DTW") : null}
-                        
-                        <ListItem button key="k2">
-                            { this.getListItemIcon("WD")}
-                        <ListItemText primary="Well Depth" />
-                            {this.state.features.WD === true ?
-                            this.getPicker("WD") : null}
-                        </ListItem>
-                            {this.state.colorPickerVisibility.WD ? 
-                        this.getPickerVisvibility("WD") : null}
+				<Toolbar>
+					<Typography variant="h6" >
+						Features
+					</Typography>
+				</Toolbar>
+			</AppBar>
 
-                        <ListItem button key="k3">
-                            { this.getListItemIcon("WH")}
-                        <ListItemText primary="Well Head" />
-                            {this.state.features.WH === true ?
-                            this.getPicker("WH") : null}
-                        </ListItem>
-                            {this.state.colorPickerVisibility.WH ? 
-                            this.getPickerVisvibility("WH") : null}
-
-                        <ListItem button key="k4">
-                            {this.getListItemIcon("HC")}
-                        <ListItemText primary="Hydraulic Conductivity" />
-                            {this.state.features.HC === true ?
-                            this.getPicker("HC") : null}
-                        </ListItem>
-                            {this.state.colorPickerVisibility.HC? 
-                            this.getPickerVisvibility("HC") : null}
-
-                        <ListItem button key="k5">
-                            {this.getListItemIcon("DD")}
-                        <ListItemText primary="DD" />
-                            {this.state.features.DD === true ?
-                            this.getPicker("DD") : null}
-                        </ListItem>
-                            {this.state.colorPickerVisibility.DD ? 
-                            this.getPickerVisvibility("DD") : null}
-                        
-                        <ListItem button key="k6">
-                            {this.getListItemIcon("PP")}
-                        <ListItemText primary="pump" />
-                            {this.state.features.PP === true ?
-                            this.getPicker("PP") : null}
-                        </ListItem>
-                            {this.state.colorPickerVisibility.PP ? 
-                            this.getPickerVisvibility("PP") : null}
-                    </List>
+			<List className="myDrawer" style={{width: "100%"}}>
+				{featureItems}
+			</List>
                 </>;
 
         return (
@@ -597,15 +513,15 @@ class MyMap extends React.Component {
                 <Hidden xsDown >
                     <div className="controlPanel">
                         {drawerContent}
-                       
+                      
                     </div>
-                   
+
                 </Hidden>
                 <Hidden smUp>
                     <Drawer anchor="right" open={this.state.isDrawerOpen} variant="persistent" onClick={this.mapOnClick}>
                         {drawerContent}
                         {drawerStudyArea}
-                      
+
                     </Drawer>
                 </Hidden>
                 <AppBar position="static" style={{ background: '#2E3B55' }}>
@@ -618,9 +534,9 @@ class MyMap extends React.Component {
                         <Typography variant="h6">
                             WebGIS Demo
                         </Typography>
-                       
+
                         <FadeMenu map ={this.state.map}/>
-                       
+
                     </Toolbar>
                 </AppBar>
                 <div id="map" onClick={this.toggleDrawer}></div>
@@ -655,6 +571,9 @@ class MyMap extends React.Component {
 
 
 export default MyMap;
+
+
+
 
 
 

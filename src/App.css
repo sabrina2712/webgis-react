@@ -7,11 +7,11 @@
 }
 
 .controlPanel {
-  width: 350px;    
+  width: 220px;    
   position: absolute;
   background: #868686c9;
   z-index: 1000;
-  right: 8px;
+  right: 5px;
   top: 65px;
   border-radius: 16px;
   padding: 8px;
