@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Switch } from "react-router";
 
 import "./App.css"
-import MyMap from "./components/Mymap";
-import MyBoot from "./components/boot";
+
+import  SecondMap from "./components/fromScratch";
 
 export default function App() {
-  return <MyMap />
+  return < SecondMap />
 
 }

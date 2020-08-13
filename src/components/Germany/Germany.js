@@ -9,10 +9,10 @@ import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 import { OSM, Vector as VectorSource } from 'ol/source';
 import { Circle as CircleStyle, Fill, Stroke, Style, Icon, RegularShape } from 'ol/style';
 import { fromLonLat, get } from "ol/proj"
-import data from "./germany.json"
+import dataGer from "./germany.json"
 
 import Overlay from 'ol/Overlay';
-import distData from "./distrct-ger.json"
+import distData from "../distrct-ger.json"
 
 console.log(distData)
 
@@ -560,7 +560,7 @@ class MainMap extends React.Component {
         */
 
         ///revinue for States Germany
-        data.features.forEach((f) => {
+        dataGer.features.forEach((f) => {
             const stateOfThisFeature = f.properties['id'];
             const revenueForThisState = this.state.stateRevenue[stateOfThisFeature];
             f.properties['revenue'] = revenueForThisState;
@@ -587,6 +587,7 @@ class MainMap extends React.Component {
         /**
          * Create an overlay to anchor the popup to the map.
          */
+        /*
      var overlay = new Overlay({
            element: infoMy,
            autoPan: true,
@@ -594,13 +595,14 @@ class MainMap extends React.Component {
                duration: 250
             }
          });
+         */
 
-   
+        const overlay = this.props.overLayer
         var vectorSourceState = new VectorSource({
             features: new GeoJSON({
                 dataProjection: "EPSG:4326",
                 featureProjection: "EPSG:3857"
-            }).readFeatures(data),
+            }).readFeatures(dataGer),
         });
 
         let vectorLayerState = new VectorLayer({ style: getStyle, source: vectorSourceState });
@@ -626,6 +628,7 @@ class MainMap extends React.Component {
                 let stateName = feature.get("name");
 
                 if (stateName) {
+
                     this.setState((state) => {
                         return { selectedState: stateName };
                     })
