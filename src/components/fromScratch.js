@@ -69,14 +69,16 @@ import FadeMenu from "./areaMenu"
                         "Turkey": ([34.767511, 36.842215]),
                         "Germany": ([13.404954, 52.520008]),
                     },
-                    map: this.map
-                   
-                  
-                }
+                    }
     }
     goLocation = (location) => {
-
-        console.log(this.map)
+            console.log(this.map)
+        let view = this.map.getView()
+        view.animate({
+            center: fromLonLat(location),
+            zoom: 6,
+            duration: 300
+        });
      console.log({location}) 
     
 
@@ -110,16 +112,16 @@ import FadeMenu from "./areaMenu"
                 })
             })
       
-            this.map.on('click', (evt) => {
+         map.on('click', (evt) => {
                 overLayer.setPosition(undefined)
                 let pixel = evt.pixel;
                 let pairs = [];
             });
     this.setState({map: map})
-            var view = this.map.getView();
+            var view = map.getView();
             console.log(view)
             // adding overlay
-            this.map.addOverlay(overlay)
+            map.addOverlay(overlay)
             
           
         }
@@ -131,6 +133,7 @@ import FadeMenu from "./areaMenu"
                     
                     <a href="#news" onClick={()=>{
                        this.goLocation(locations.Turkey)
+                       console.log(locations.Turkey)
                     }}>Turkey</a>
                     <a href="#contact"  onClick={()=>{
                         console.log("hi GE")
