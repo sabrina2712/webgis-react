@@ -43,6 +43,11 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import FadeMenu from "./areaMenu"
 import distData from "./distrct-ger.json"
+import dataGer from "./germany.json"
+
+
+
+
 
             class TurkeyService{
                 constructor() {
@@ -531,39 +536,32 @@ import distData from "./distrct-ger.json"
                     const stateOfThisFeature = f['id'];
                     const revenueForThisDist = this.state.distRev[stateOfThisFeature];
                     f.properties['reve'] = revenueForThisDist;
+                });
                 
-        
-                });
-                const getStyleForDist = (f) => {
-                    let id = f.get("id")
-                    let name = f.get("name")
-                    let rev = this.state.distRev[id]
-        
-                    console.log(rev)
-                    return new Style({
-                        stroke: new Stroke({
-                            width: 2
-                        }),
-                        fill: new Fill({
-                            color: this.getColor(f.get("reve"))
-                        })
-                    })
-                }
+                this.createVectorLayer(distData, this.getStyleForDist(dataGer))
 
-                var vectorSourceDist = new VectorSource({
-                    features: [],
-                });
-        
-                let vectorLayerDist = new VectorLayer({ style: getStyleForDist, source: vectorSourceDist });
-                this.vectorLayerDist = vectorLayerDist;
-                var vectorSourceDist = new VectorSource({
-                features: [],
-            });
-        
-            
-          
-             
+           
             }
+           
+            getStyleForDist = (f) => {
+                 f.features.map((fr)=>{
+                  let id = fr.properties.id
+                  let rev = this.state.stateRevenue[id]
+                 
+                  return new Style({
+                    stroke: new Stroke({
+                        width: 2
+                    }),
+                    fill: new Fill({
+                        color: this.getColor(rev)
+                    })
+                })
+                
+                  })
+
+            }
+
+        
             getLegendColor = (d) => {
                 console.log("hello coclor")
                 return d > 6000 ? '#800026' :
@@ -589,7 +587,10 @@ import distData from "./distrct-ger.json"
             getColor=()=>{
                 return null
             }
-        }
+
+           
+    }
+
         class SecondMap extends React.Component {
             constructor(props) {
                 super(props);
@@ -605,6 +606,12 @@ import distData from "./distrct-ger.json"
                             "Germany": ([13.404954, 52.520008]),
                         },
                         isDrawerOpen: false,
+                        colors: { red: "rgba(255,0,0,1)", green: "rgba(0,255,0,1)", blue: "rgba(0,0,255,1)", purple: "rgba(145, 61, 136, 1)" },
+                    info: "",
+                    map: this.map,
+                    selectedState: null,
+                    infoText : "",
+                   
                     }
             }
             goLocation = (location) => {
@@ -629,9 +636,20 @@ import distData from "./distrct-ger.json"
               return services.getDistLayer()
         
             }
+            createVectorLayer=(l,s)=>{
+
+                var vectorSource = new VectorSource({
+                    features: new GeoJSON().readFeatures(l),
+                  });
+                  
+                 
+                  var vectorLayer = new VectorLayer({
+                    source: vectorSource,
+                    style: s,
+                  });
+
+            }
            
- 
-    
         componentDidMount() {
             var overlay = new Overlay({
                 element: this.infoRef.current,
@@ -643,12 +661,14 @@ import distData from "./distrct-ger.json"
             const overLayer = new Overlay({
                 element: this.infoRef.current,
             })
-    
+            
             var map = new Map({
+                
                 layers: [
                     new TileLayer({
                         source: new OSM()
-                    }),
+                    })
+                 
                 ],
                 target: 'map',
                 view: new View({
@@ -656,8 +676,8 @@ import distData from "./distrct-ger.json"
                     zoom: 2
                 })
             })
-      
-         map.on('click', (evt) => {
+  
+        map.on('click', (evt) => {
                 overLayer.setPosition(undefined)
                 let pixel = evt.pixel;
                 let pairs = [];
@@ -667,12 +687,9 @@ import distData from "./distrct-ger.json"
             console.log(view)
             // adding overlay
             map.addOverlay(overlay)
-
-       
-            
-          
         }
-            render(){
+            
+        render(){
                 let locationServices = this.state.locationServices;
                 let locations = this.state.locations
                 return(<>
@@ -694,9 +711,7 @@ import distData from "./distrct-ger.json"
             </>
                 )
 
-            }
-  
-    
+        }
     }
 
     export default SecondMap;
