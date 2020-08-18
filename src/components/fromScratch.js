@@ -62,7 +62,7 @@ import dataTar from "./dataTar.json";
               return transform([X, Y], "EPSG:4326", "EPSG:3857");
             }
 
-            class TurkeyService {
+        class TurkeyService {
               constructor() {
                 this.zoom = 12;
                 this.location = [34.767511, 36.842215];
@@ -99,42 +99,163 @@ import dataTar from "./dataTar.json";
 
                   map: this.map,
                   view: this.view,
-                  showDrawer: null
-                  
+              
+                
                 };
               }
-    
-
-           getData = () => {
-             let draw = dataTar.filter((el) => {
-              return el.properties.Drawdown_m
-            })
-              console.log(draw)
-             return draw
-            };
-          getStyleForFeature = (f) => {
-            return new Style({
-              image: new CircleStyle({
-                radius: this.DD* 2,
-                fill: new Fill({
-                color: "red"
-              }),
-                stroke: new Stroke({ color: 'rgba(220,20,60,0.7)', width: 1 })
+          getPicker = (p) => {
+                return <ListItemSecondaryAction>
+                    <div onClick={() => {
+                        console.log(p)
+                        this.toggleColorPicker(p);
+                    }}>
+                        <div style={this.getStyle(p)} />
+                    </div>
+                </ListItemSecondaryAction>
+            }
+          getPickerVisvibility = (v) => {
+                return <ListItem>
+                    <div style={{}}>
+                        <SketchPicker color={this.state.colors.v} onChange={(color) => { this.changeFeatureColor(v, color.hex) }} />
+                    </div>
+                </ListItem>
+            }
+          toogleFeature = (f) => {
+              this.setState((state) => {
+                  const features = state.features;
+                  features[f] = !features[f];
+                  return { features: features };
               })
-          })
+          }
+          getListItemIcon = (t) => {
+              return <ListItemIcon>
+                  <Checkbox checked={this.state.features.t}
+                      color="primary"
+                      onChange={() => {
+                        this.getStyleForFeature(t)
+                      }}
+                  />
+              </ListItemIcon>
           }
 
+          getData = () => {
+             let draw = dataTar.map((el) => {
+              let DD = el.properties.Drawdown_m;
+              let pump = el.properties.Pumping_m3
+              return DD
+            })
+            let spc =  outputData.map((el)=> el.properties.Specific_capacity)
 
+            let well = data.map((el)=>{
+              let DTW =el.DTW;
+              let WH = el.Wellhead;
+              let WD=  el.Well_depth;
+
+              return [...DTW,...WH,...WD]
+            })
+            
+             return [...draw,...spc,... well]
+            };
+
+          getStyleForFeature = (f) => {
+            let data = this.getData()
+            console.log(f)
+            console.log(data)
+            return new Style({
+              image: new CircleStyle({
+                radius: data,
+                fill: new Fill({
+                color: "red"
+            }),
+                stroke: new Stroke({ color: 'rgba(220,20,60,0.7)', width: 1 })
+            })
+          })
+          }
+        
+              // layer for Drawdown  
+                  /*
+              getLayer=()=>{
+                let vectorLayerForDD;
+                return vectorLayerForDD = new VectorLayer({
+                  fKey: "DD",
+                  source: vectorSource,
+                  style: this.getStyleForFeature(this.state.features.DD)
+              })
+              }*/
+
+         
+          getDrawer=()=>{
+            return <>
+              <AppBar position="static" style={{ background: '#2E3B55' }}>
+                  <Toolbar>
+                      <Typography variant="h6" >
+                          Features
+                      </Typography>
+                  </Toolbar>
+              </AppBar>
+
+              <List className="myDrawer" >
+                  <ListItem button key="k1">
+                      {this.getListItemIcon("DTW")}
+                      <ListItemText primary="DTW" />
+                    
+                  </ListItem>
+                  {this.state.colorPickerVisibility.DTW ?
+                      this.getPickerVisvibility("DTW") : null}
+
+                  <ListItem button key="k2">
+                      {this.getListItemIcon("WD")}
+                      <ListItemText primary="Well Depth" />
+                    
+                  </ListItem>
+                  {this.state.colorPickerVisibility.WD ?
+                      this.getPickerVisvibility("WD") : null}
+
+                  <ListItem button key="k3">
+                      {this.getListItemIcon("WH")}
+                      <ListItemText primary="Well Head" />
+                     
+                  </ListItem>
+               
+
+                  <ListItem button key="k4">
+                      {this.getListItemIcon("HC")}
+                      <ListItemText primary="Hydraulic Conductivity" />
+                   
+                  </ListItem>
+                
+                  <ListItem button key="k5">
+                      {this.getListItemIcon("DD")}
+                      <ListItemText primary="DD" />
+                  
+                  </ListItem>
+               
+                  <ListItem button key="k6">
+                      {this.getListItemIcon("PP")}
+                      <ListItemText primary="pump" />
+                  
+                  </ListItem>
+                 
+                </List>
+              </>;
+            }
+          
+        
+          
           onMapClick = (features) => {
             if (!features || !features.length || features.length < 1) return;
               features.forEach((el)=>{
             })
               }
-              drawerContent=()=>{
+          drawerContent=()=>{
                 console.log("hello Turkey")
-                return <div>its from Turkey</div>  
+              return <div>
+                 
+                  {this.getDrawer()}
+                </div>  
             }
-        }
+          }
+          
           class GermanyService {
             constructor() {
                   this.zoom = 5;
@@ -602,7 +723,9 @@ import dataTar from "./dataTar.json";
               
             drawerContent=()=>{
               console.log("hello Germany")
-              return <div>its from Germany</div>  }         
+              return <div>legend
+                <div>{this.getLegend()}</div>
+              </div>  }         
             
             toggleDrawer = () => {
               return null;
@@ -816,7 +939,7 @@ import dataTar from "./dataTar.json";
                       Germany: new GermanyService(),
                     },
                     isDrawerOpen: false,
-                    getDrawer: false,
+                  
                    
                     
                     colors: {
@@ -829,7 +952,7 @@ import dataTar from "./dataTar.json";
                     map: this.map,
                     selectedState: null,
                     infoText: "",
-                    getDrawer: null,
+                   
                     drawerContent: null
                   };
               }
@@ -837,7 +960,7 @@ import dataTar from "./dataTar.json";
                   this.setState({ location: location });
                   let service = this.state.locationServices[location];
                  
-                  this.setState({getDrawer: service.drawerContent()})
+                  this.setState({drawerContent: service.drawerContent()})
                  
                   const coodinate = service.location;
                   let view = this.state.map.getView();
@@ -945,7 +1068,7 @@ import dataTar from "./dataTar.json";
                       <div id="map"></div>
                       <div id="feature-content">
                         {this.state.drawerContent}
-                        
+                       
                       </div>
                      
                     </>
