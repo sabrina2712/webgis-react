@@ -78,8 +78,8 @@ import dataTar from "./dataTar.json";
                   info: "",
                   mapClick: false,
                   selectedlocation: "none",
-                  drawerContent: "",
-                  showDrawer: false,
+                  drawerContent: null,
+                  showDrawer: null,
                   features: {
                     DTW: false,
                     WD: false,
@@ -99,6 +99,7 @@ import dataTar from "./dataTar.json";
 
                   map: this.map,
                   view: this.view,
+                  showDrawer: null
                   
                 };
               }
@@ -107,40 +108,33 @@ import dataTar from "./dataTar.json";
            getData = () => {
              let draw = dataTar.filter((el) => {
               return el.properties.Drawdown_m
-})
-
-console.log(draw)
+            })
+              console.log(draw)
              return draw
-
-          };
-
-
+            };
           getStyleForFeature = (f) => {
             return new Style({
               image: new CircleStyle({
-                  radius: this.DD* 2,
-                  fill: new Fill({
-                      color: "red"
-                  }),
-                  stroke: new Stroke({ color: 'rgba(220,20,60,0.7)', width: 1 })
+                radius: this.DD* 2,
+                fill: new Fill({
+                color: "red"
+              }),
+                stroke: new Stroke({ color: 'rgba(220,20,60,0.7)', width: 1 })
               })
           })
           }
 
 
           onMapClick = (features) => {
-              if (!features || !features.length || features.length < 1) return;
-              
-              
+            if (!features || !features.length || features.length < 1) return;
               features.forEach((el)=>{
-                 
-
-
-                })
+            })
               }
+              drawerContent=()=>{
+                console.log("hello Turkey")
+                return <div>its from Turkey</div>  
             }
-          
-
+        }
           class GermanyService {
             constructor() {
                   this.zoom = 5;
@@ -601,106 +595,106 @@ console.log(draw)
                       432: 2049,
                       433: 1307,
                     },
-                  };
-            }
-
-                showDrawer=()=>{
-                  return null
-                }
-                toggleDrawer = () => {
-                  return null;
-                }
-                getData = () =>
-                  this.showingState === true ? this.getStateData() : this.getDistData();
-
-                getStateData = () => {
-                  dataGer.features.forEach((f) => {
-                    const stateOfThisFeature = f.properties["id"];
-                    const revenueForThisDist = this.state.stateRevenue[stateOfThisFeature];
-                    f.properties["reve"] = revenueForThisDist;
-                  });
-                  return dataGer;
-                };
-
-                getDistData = () => {
-                  let currState = this.stateId;
-                  let data = JSON.parse(JSON.stringify(distData));
-                  let features = data.features
-                    .filter((f) => {
-                      const state = f.properties.NAME_1;
-                      return currState === state;
-                    })
-                    .map((f) => {
-                      const stateOfThisFeature = f["id"];
-                      const revenueForThisDist = this.state.distRev[stateOfThisFeature];
-                      f.properties["reve"] = revenueForThisDist;
-                      return f;
-                    });
-
-                  let states = this.getStateData();
-
-                  let filteredStates = states.features.filter((f) => {
-                    f.id = f.id + 100000;
-                    const stateOfThisFeature = f.properties["name"];
-
-                    return stateOfThisFeature != currState;
-                  });
-
-                  data.features = features.concat(filteredStates);
-                  console.log("in dist data", filteredStates);
-                  return data;
-                };
-
-                isFeatureState = (f) => {
-                  const stateId = f.get("name");
-                  if (stateId) return stateId;
-                  return false;
-                };
-
-                getStyleForFeature = (f) => {
-                  console.log(this.stateId)
-                
-                  let rev = f.get("reve");
-                  console.log(rev)
-
-
-
-                    const result = dataGer.features.map(p => p.properties.name);
-                    const filterState= result.filter((e)=> e === this.stateId)
-                    console.log(filterState.join())
-
-                  if( filterState.join() === this.stateId ){
-                    return new Style({
-                      stroke: new Stroke({
-                        width: 2,
-                      }),
-                      fill: new Fill({
-                        color: "rgba(0,0,0,0.4)",
-                      }),
-                    });
                     
-                  }else {
-                      
-                  return new Style({
-                    stroke: new Stroke({
-                      width: 2,
-                    }),
-                    fill: new Fill({
-                      color: this.getColor(rev),
-                    }),
-                  });
+                  };
+              }
+         
+              
+            drawerContent=()=>{
+              console.log("hello Germany")
+              return <div>its from Germany</div>  }         
+            
+            toggleDrawer = () => {
+              return null;
+              }
+            getData = () =>
+              this.showingState === true ? this.getStateData() : this.getDistData();
 
-                  }};
+            getStateData = () => {
+              dataGer.features.forEach((f) => {
+                const stateOfThisFeature = f.properties["id"];
+                const revenueForThisDist = this.state.stateRevenue[stateOfThisFeature];
+                f.properties["reve"] = revenueForThisDist;
+              });
+              return dataGer;
+              };
 
-                onMapClick = (features) => {
-                  if (!features || !features.length || features.length < 1) return;
+            getDistData = () => {
+              
+              let currState = this.stateId;
+              let data = JSON.parse(JSON.stringify(distData));
+              let features = data.features
+                .filter((f) => {
+                  const state = f.properties.NAME_1;
+                  return currState === state;
+                })
+                .map((f) => {
+                  const stateOfThisFeature = f["id"];
+                  const revenueForThisDist = this.state.distRev[stateOfThisFeature];
+                  f.properties["reve"] = revenueForThisDist;
+                  return f;
+                });
 
-                  const stateId = features[0].get("name");
-                  const isSameStateClicked = !stateId;
+                let states = this.getStateData();
 
-                  this.showingState = isSameStateClicked;
+                let filteredStates = states.features.filter((f) => {
+                  f.id = f.id + 100000;
+                  const stateOfThisFeature = f.properties["name"];
 
-                  this.stateId = this.showingState ? null : stateId;
+                  return stateOfThisFeature != currState;
+                });
+
+                data.features = features.concat(filteredStates);
+                console.log("in dist data", filteredStates);
+                return data;
+              };
+
+            isFeatureState = (f) => {
+                const stateId = f.get("name");
+                if (stateId) return stateId;
+                return false;
+              };
+
+            getStyleForFeature = (f) => {
+               
+                let rev = f.get("reve");
+                
+                /*
+                const result = dataGer.features.map(p => p.properties.name);
+                const filterState= result.filter((e)=> e === this.stateId)
+                console.log(filterState.join())
+
+              if( filterState.join() === this.stateId ){
+                return new Style({
+                  stroke: new Stroke({
+                    width: 2,
+                  }),
+                  fill: new Fill({
+                    color: "rgba(0,0,0,0.4)",
+                  }),
+                });
+                
+              }else {
+                */
+                  
+              return new Style({
+                stroke: new Stroke({
+                  width: 2,
+                }),
+                fill: new Fill({
+                  color: this.getColor(rev),
+                }),
+              });
+
+              };
+
+            onMapClick = (features) => {
+              if (!features || !features.length || features.length < 1) return;
+
+              const stateId = features[0].get("name");
+              const isSameStateClicked = !stateId;
+              this.showingState = isSameStateClicked;
+              this.stateId = this.showingState ? null : stateId;
 
                   // getting legend
                   let legend = this.getLegend()
@@ -714,7 +708,7 @@ console.log(draw)
                   // this.zoom = this.showingState ? 6 : 6;
                 };
 
-                getLegendColor = (d) => {
+            getLegendColor = (d) => {
                   console.log("hello coclor");
                   return d > 6000
                     ? "#800026"
@@ -732,7 +726,7 @@ console.log(draw)
                     ? "#FED976"
                     : "#FFEDA0";
                 };
-                getLegend = () => {
+            getLegend = () => {
                   return (
                     <>
                       <div
@@ -792,7 +786,7 @@ console.log(draw)
                     </>
                   );
                 };
-                getColor = (d) => {
+            getColor = (d) => {
                   return d > 6000
                     ? "#800026"
                     : d > 5000
@@ -809,8 +803,7 @@ console.log(draw)
                     ? "#FED976"
                     : "#FFEDA0";
                 };
-
-              }
+             }
 
           class SecondMap extends React.Component {
               constructor(props) {
@@ -823,8 +816,9 @@ console.log(draw)
                       Germany: new GermanyService(),
                     },
                     isDrawerOpen: false,
-                    showDrawer: false,
-                    drawerContent: "",
+                    getDrawer: false,
+                   
+                    
                     colors: {
                       red: "rgba(255,0,0,1)",
                       green: "rgba(0,255,0,1)",
@@ -835,13 +829,16 @@ console.log(draw)
                     map: this.map,
                     selectedState: null,
                     infoText: "",
+                    getDrawer: null,
+                    drawerContent: null
                   };
               }
-                goLocation = (location) => {
+            goLocation = (location) => {
                   this.setState({ location: location });
                   let service = this.state.locationServices[location];
-                  let showDrawer = this.state.showDrawer
-                  this.setState({showDrawer: true})
+                 
+                  this.setState({getDrawer: service.drawerContent()})
+                 
                   const coodinate = service.location;
                   let view = this.state.map.getView();
                   view.animate({
@@ -855,7 +852,7 @@ console.log(draw)
 
                   const distData = service.getData();
                   
-                  console.log("-->", distData);
+                 
                   if (distData && distData.features && distData.features.length > 0) {
                     const vectorLayer = this.state.layer;
                     var vectorSource = new VectorSource({
@@ -867,13 +864,10 @@ console.log(draw)
                     vectorLayer.setStyle(service.getStyleForFeature);
                     vectorLayer.setSource(vectorSource);
                   }
-                
-                
-                
                   console.log({ location });
                 };
 
-                componentDidMount() {
+            componentDidMount() {
                   var overlay = new Overlay({
                     element: this.infoRef.current,
                     autoPan: true,
@@ -907,7 +901,7 @@ console.log(draw)
                     }),
                   });
 
-                  map.on("click", (evt) => {
+            map.on("click", (evt) => {
                     overLayer.setPosition(undefined);
                     let pixel = evt.pixel;
                     let pairs = [];
@@ -918,14 +912,14 @@ console.log(draw)
                     this.goLocation(location);
                   });
                   this.setState({ map: map, layer: vectorLayer });
-                  this.setState({ map: map, layer: vectorLayer });
+                
                   var view = map.getView();
-                  console.log(view);
+                  
                   // adding overlay
                   map.addOverlay(overlay);
                 }
 
-                render() {
+            render() {
                   return (
                     <>
                       <div class="topnav" >
@@ -949,11 +943,14 @@ console.log(draw)
                         </a>
                       </div>
                       <div id="map"></div>
-
-                      {this.state.drawerContent}
+                      <div id="feature-content">
+                        {this.state.drawerContent}
+                        
+                      </div>
+                     
                     </>
                   );
                 }
               }
 
-              export default SecondMap;
+    export default SecondMap;
