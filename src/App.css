@@ -107,3 +107,13 @@ margin-right: 5px;
   background-color: #4CAF50;
   color: white;
 }
+#feature-content{
+  top: 100px;
+  width: 170px;
+  height: 500px;
+  z-index: 1000;
+  position: absolute;
+  /* right: 500px; */
+  margin-left: 526px;
+  font: 1em;
+}

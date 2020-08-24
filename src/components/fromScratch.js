@@ -77,7 +77,8 @@ class TurkeyService {
       info: "",
       mapClick: false,
       selectedlocation: "none",
-
+      drawerContent: null,
+      showDrawer: null,
       features: {
         DTW: false,
         WD: false,
@@ -99,20 +100,81 @@ class TurkeyService {
       view: this.view,
     };
   }
+  getPicker = (p) => {
+    return (
+      <ListItemSecondaryAction>
+        <div
+          onClick={() => {
+            console.log(p);
+            this.toggleColorPicker(p);
+          }}
+        >
+          <div style={this.getStyle(p)} />
+        </div>
+      </ListItemSecondaryAction>
+    );
+  };
+  getPickerVisvibility = (v) => {
+    return (
+      <ListItem>
+        <div style={{}}>
+          <SketchPicker
+            color={this.state.colors.v}
+            onChange={(color) => {
+              this.changeFeatureColor(v, color.hex);
+            }}
+          />
+        </div>
+      </ListItem>
+    );
+  };
+  toogleFeature = (f) => {
+    this.setState((state) => {
+      const features = state.features;
+      features[f] = !features[f];
+      return { features: features };
+    });
+  };
+  getListItemIcon = (t) => {
+    return (
+      <ListItemIcon>
+        <Checkbox
+          checked={this.state.features.t}
+          color="primary"
+          onChange={() => {
+            this.getStyleForFeature(t);
+          }}
+        />
+      </ListItemIcon>
+    );
+  };
 
   getData = () => {
     let draw = dataTar.map((el) => {
-      return el.properties.Drawdown_m;
+      let DD = el.properties.Drawdown_m;
+      let pump = el.properties.Pumping_m3;
+      return DD;
+    });
+    let spc = outputData.map((el) => el.properties.Specific_capacity);
+
+    let well = data.map((el) => {
+      let DTW = el.DTW;
+      let WH = el.Wellhead;
+      let WD = el.Well_depth;
+
+      return [...DTW, ...WH, ...WD];
     });
 
-    console.log(draw);
-    return draw;
+    return [...draw, ...spc, ...well];
   };
 
   getStyleForFeature = (f) => {
+    let data = this.getData();
+    console.log(f);
+    console.log(data);
     return new Style({
       image: new CircleStyle({
-        radius: this.DD * 2,
+        radius: data,
         fill: new Fill({
           color: "red",
         }),
@@ -121,24 +183,74 @@ class TurkeyService {
     });
   };
 
-  onMapClick = (features) => {
-    if (!features || !features.length || features.length < 1) return;
+  // layer for Drawdown
+  /*
+              getLayer=()=>{
+                let vectorLayerForDD;
+                return vectorLayerForDD = new VectorLayer({
+                  fKey: "DD",
+                  source: vectorSource,
+                  style: this.getStyleForFeature(this.state.features.DD)
+              })
+              }*/
 
-    features.forEach((el) => {});
-  };
   getDrawer = () => {
     return (
-      <div>
-        <h2>hello Turkey</h2>
-        <div>
-          <input
-            type="checkbox"
-            defaultChecked={this.state.features.DTW}
-            onChange={this.handleChangeChk}
-          />
-        </div>
-      </div>
+      <>
+        <AppBar position="static" style={{ background: "#2E3B55" }}>
+          <Toolbar>
+            <Typography variant="h6">Features</Typography>
+          </Toolbar>
+        </AppBar>
+
+        <List className="myDrawer">
+          <ListItem button key="k1">
+            {this.getListItemIcon("DTW")}
+            <ListItemText primary="DTW" />
+          </ListItem>
+          {this.state.colorPickerVisibility.DTW
+            ? this.getPickerVisvibility("DTW")
+            : null}
+
+          <ListItem button key="k2">
+            {this.getListItemIcon("WD")}
+            <ListItemText primary="Well Depth" />
+          </ListItem>
+          {this.state.colorPickerVisibility.WD
+            ? this.getPickerVisvibility("WD")
+            : null}
+
+          <ListItem button key="k3">
+            {this.getListItemIcon("WH")}
+            <ListItemText primary="Well Head" />
+          </ListItem>
+
+          <ListItem button key="k4">
+            {this.getListItemIcon("HC")}
+            <ListItemText primary="Hydraulic Conductivity" />
+          </ListItem>
+
+          <ListItem button key="k5">
+            {this.getListItemIcon("DD")}
+            <ListItemText primary="DD" />
+          </ListItem>
+
+          <ListItem button key="k6">
+            {this.getListItemIcon("PP")}
+            <ListItemText primary="pump" />
+          </ListItem>
+        </List>
+      </>
     );
+  };
+
+  onMapClick = (features) => {
+    if (!features || !features.length || features.length < 1) return;
+    features.forEach((el) => {});
+  };
+  drawerContent = () => {
+    console.log("hello Turkey");
+    return <div>{this.getDrawer()}</div>;
   };
 }
 
@@ -605,9 +717,16 @@ class GermanyService {
     };
   }
 
-  getDrawer = () => {
-    return <h2>Hello Germany</h2>;
+  drawerContent = () => {
+    console.log("hello Germany");
+    return (
+      <div>
+        legend
+        <div>{this.getLegend()}</div>
+      </div>
+    );
   };
+
   toggleDrawer = () => {
     return null;
   };
@@ -659,34 +778,34 @@ class GermanyService {
   };
 
   getStyleForFeature = (f) => {
-    console.log(this.stateId);
-
     let rev = f.get("reve");
-    console.log(rev);
 
-    const result = dataGer.features.map((p) => p.properties.name);
-    const filterState = result.filter((e) => e === this.stateId);
-    console.log(filterState.join());
+    /*
+                const result = dataGer.features.map(p => p.properties.name);
+                const filterState= result.filter((e)=> e === this.stateId)
+                console.log(filterState.join())
 
-    if (filterState.join() === this.stateId) {
-      return new Style({
-        stroke: new Stroke({
-          width: 2,
-        }),
-        fill: new Fill({
-          color: "rgba(0,0,0,0.4)",
-        }),
-      });
-    } else {
-      return new Style({
-        stroke: new Stroke({
-          width: 2,
-        }),
-        fill: new Fill({
-          color: this.getColor(rev),
-        }),
-      });
-    }
+              if( filterState.join() === this.stateId ){
+                return new Style({
+                  stroke: new Stroke({
+                    width: 2,
+                  }),
+                  fill: new Fill({
+                    color: "rgba(0,0,0,0.4)",
+                  }),
+                });
+                
+              }else {
+                */
+
+    return new Style({
+      stroke: new Stroke({
+        width: 2,
+      }),
+      fill: new Fill({
+        color: this.getColor(rev),
+      }),
+    });
   };
 
   onMapClick = (features) => {
@@ -694,9 +813,7 @@ class GermanyService {
 
     const stateId = features[0].get("name");
     const isSameStateClicked = !stateId;
-
     this.showingState = isSameStateClicked;
-
     this.stateId = this.showingState ? null : stateId;
 
     // getting legend
@@ -818,7 +935,8 @@ class SecondMap extends React.Component {
         Turkey: new TurkeyService(),
         Germany: new GermanyService(),
       },
-      drawerContent: null,
+      isDrawerOpen: false,
+
       colors: {
         red: "rgba(255,0,0,1)",
         green: "rgba(0,255,0,1)",
@@ -829,14 +947,15 @@ class SecondMap extends React.Component {
       map: this.map,
       selectedState: null,
       infoText: "",
+
+      drawerContent: null,
     };
   }
-
   goLocation = (location) => {
     this.setState({ location: location });
     let service = this.state.locationServices[location];
 
-    this.setState({ drawerContent: service.getDrawer() });
+    this.setState({ drawerContent: service.drawerContent() });
 
     const coodinate = service.location;
     let view = this.state.map.getView();
@@ -851,7 +970,6 @@ class SecondMap extends React.Component {
 
     const distData = service.getData();
 
-    console.log("-->", distData);
     if (distData && distData.features && distData.features.length > 0) {
       const vectorLayer = this.state.layer;
       var vectorSource = new VectorSource({
@@ -863,7 +981,6 @@ class SecondMap extends React.Component {
       vectorLayer.setStyle(service.getStyleForFeature);
       vectorLayer.setSource(vectorSource);
     }
-
     console.log({ location });
   };
 
@@ -912,9 +1029,9 @@ class SecondMap extends React.Component {
       this.goLocation(location);
     });
     this.setState({ map: map, layer: vectorLayer });
-    this.setState({ map: map, layer: vectorLayer });
+
     var view = map.getView();
-    console.log(view);
+
     // adding overlay
     map.addOverlay(overlay);
   }
@@ -940,9 +1057,8 @@ class SecondMap extends React.Component {
             Germany
           </a>
         </div>
-        {/* <div id="map"></div> */}
-
-        {this.state.drawerContent}
+        <div id="map"></div>
+        <div id="feature-content">{this.state.drawerContent}</div>
       </>
     );
   }

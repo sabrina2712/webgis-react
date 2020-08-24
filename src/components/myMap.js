@@ -374,11 +374,8 @@ class TurkeyService {
             key: layer.values_.fKey,
             value: feature.values_.properties[layer.values_.fKey]
         });
-
-    
-   
-}
     }
+}
 
 
     class GermanyService{
