@@ -150,37 +150,74 @@ class TurkeyService {
   };
 
   getData = () => {
-    let draw = dataTar.map((el) => {
-      let DD = el.properties.Drawdown_m;
-      let pump = el.properties.Pumping_m3;
-      return DD;
-    });
-    let spc = outputData.map((el) => el.properties.Specific_capacity);
+    const dtwIsChecked = false;
+    const wdIsChecked = true;
+    const whIsChecked = true;
 
-    let well = data.map((el) => {
-      let DTW = el.DTW;
-      let WH = el.Wellhead;
-      let WD = el.Well_depth;
+    function makeFeature(el, prop, color, scale) {
+      let style = new Style({
+        image: new CircleStyle({
+          radius: el[prop] * scale,
+          fill: new Fill({
+            color: color,
+          }),
+          stroke: new Stroke({ color: "rgba(220,20,60,0.7)", width: 1 }),
+        }),
+      });
+      return {
+        type: "Feature",
+        id: prop + el.id,
+        properties: {
+          id: prop + el.id,
+          type: prop,
+          prop: el[prop],
+          style: style,
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [el.Longitude, el.Lattitude],
+        },
+      };
+    }
+    let allCheckedFeatures = [];
+    const len = data.length;
+    console.log("==> data len " + len);
+    for (var i = 0; i < len; i++) {
+      let el = data[i];
+      if (dtwIsChecked) {
+        console.log("adding dtw");
+        allCheckedFeatures.push(makeFeature(el, "DTW", "rgba(0,60,60,0.7)", 1));
+      }
+      if (wdIsChecked) {
+        console.log("adding wdIsChecked");
+        allCheckedFeatures.push(
+          makeFeature(el, "Well_depth", "rgba(60,200,60,0.7)", 0.5)
+        );
+      }
 
-      return [...DTW, ...WH, ...WD];
-    });
+      if (whIsChecked) {
+        console.log("adding whIsChecked");
+        allCheckedFeatures.push(
+          makeFeature(el, "Wellhead", "rgba(20,20,200,0.7)", 10)
+        );
+      }
+    }
 
-    return [...draw, ...spc, ...well];
+    console.log("==> allCheckedFeatures len " + allCheckedFeatures.length);
+
+    const geojsonObj = {
+      type: "FeatureCollection",
+      features: allCheckedFeatures,
+    };
+
+    // for pumping rate and drawdown
+
+    return geojsonObj;
   };
 
   getStyleForFeature = (f) => {
-    let data = this.getData();
-    console.log(f);
-    console.log(data);
-    return new Style({
-      image: new CircleStyle({
-        radius: data,
-        fill: new Fill({
-          color: "red",
-        }),
-        stroke: new Stroke({ color: "rgba(220,20,60,0.7)", width: 1 }),
-      }),
-    });
+    console.log(f.get("type"));
+    return f.get("style");
   };
 
   // layer for Drawdown
