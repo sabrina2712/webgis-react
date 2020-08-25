@@ -64,6 +64,7 @@ import dataTar from "./dataTar.json";
 
         class TurkeyService {
               constructor() {
+                this.vectorSource =
                 this.zoom = 12;
                 this.location = [34.767511, 36.842215];
                 this.state = {
@@ -985,7 +986,7 @@ import dataTar from "./dataTar.json";
                       }).readFeatures(distData),
                     });
                     vectorLayer.setStyle(service.getStyleForFeature);
-                    vectorLayer.setSource(vectorSource);
+                    vectorLayer.setSource(service.vectorSource || vectorSource);
                   }
                   console.log({ location });
                 };
@@ -1031,7 +1032,7 @@ import dataTar from "./dataTar.json";
                     let location = this.state.location;
                     let service = this.state.locationServices[location];
                     var features = map.getFeaturesAtPixel(pixel);
-                    service.onMapClick(features);
+                   service.onMapClick(features);
                     this.goLocation(location);
                   });
                   this.setState({ map: map, layer: vectorLayer });

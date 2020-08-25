@@ -114,6 +114,7 @@ margin-right: 5px;
   z-index: 1000;
   position: absolute;
   /* right: 500px; */
-  margin-left: 526px;
+  margin-left: 620px;
   font: 1em;
+  background-color: rgba(189, 195, 199, 0.5);
 }
