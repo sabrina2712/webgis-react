@@ -62,8 +62,10 @@ function getCenterOfExtent(Extent) {
 }
 
 class TurkeyService {
-  constructor() {
-    this.zoom = 12;
+  constructor(reloadDataCallback, zoom) {
+    this.reloadData = reloadDataCallback;
+    this.zoom = zoom;
+
     this.location = [34.767511, 36.842215];
     this.state = {
       colorPickerVisibility: {
@@ -98,6 +100,10 @@ class TurkeyService {
 
       map: this.map,
       view: this.view,
+
+      dtwIsChecked: false,
+      wdIsChecked: false,
+      whIsChecked: false,
     };
   }
   getPicker = (p) => {
@@ -135,25 +141,8 @@ class TurkeyService {
       return { features: features };
     });
   };
-  getListItemIcon = (t) => {
-    return (
-      <ListItemIcon>
-        <Checkbox
-          checked={this.state.features.t}
-          color="primary"
-          onChange={() => {
-            this.getStyleForFeature(t);
-          }}
-        />
-      </ListItemIcon>
-    );
-  };
 
   getData = () => {
-    const dtwIsChecked = false;
-    const wdIsChecked = true;
-    const whIsChecked = true;
-
     function makeFeature(el, prop, color, scale) {
       let style = new Style({
         image: new CircleStyle({
@@ -184,18 +173,18 @@ class TurkeyService {
     console.log("==> data len " + len);
     for (var i = 0; i < len; i++) {
       let el = data[i];
-      if (dtwIsChecked) {
+      if (this.state.dtwIsChecked) {
         console.log("adding dtw");
         allCheckedFeatures.push(makeFeature(el, "DTW", "rgba(0,60,60,0.7)", 1));
       }
-      if (wdIsChecked) {
+      if (this.state.wdIsChecked) {
         console.log("adding wdIsChecked");
         allCheckedFeatures.push(
           makeFeature(el, "Well_depth", "rgba(60,200,60,0.7)", 0.5)
         );
       }
 
-      if (whIsChecked) {
+      if (this.state.whIsChecked) {
         console.log("adding whIsChecked");
         allCheckedFeatures.push(
           makeFeature(el, "Wellhead", "rgba(20,20,200,0.7)", 10)
@@ -231,6 +220,28 @@ class TurkeyService {
               })
               }*/
 
+  getListItemIcon = (t) => {
+    return (
+      <ListItemIcon>
+        <Checkbox
+          checked={this.state.features.t}
+          color="primary"
+          onChange={() => {
+            if (t === "DTW") {
+              this.state.dtwIsChecked = !this.state.dtwIsChecked;
+            }
+            if (t === "WD") {
+              this.state.wdIsChecked = !this.state.wdIsChecked;
+            }
+            if (t === "WH") {
+              this.state.whIsChecked = !this.state.whIsChecked;
+            }
+            this.reloadData();
+          }}
+        />
+      </ListItemIcon>
+    );
+  };
   getDrawer = () => {
     return (
       <>
@@ -292,7 +303,8 @@ class TurkeyService {
 }
 
 class GermanyService {
-  constructor() {
+  constructor(reloadDataCallback) {
+    this.reloadData = reloadDataCallback;
     this.zoom = 5;
     this.location = [13.404954, 52.520008];
     this.showingState = true;
@@ -969,8 +981,8 @@ class SecondMap extends React.Component {
     this.state = {
       anchorEl: null,
       locationServices: {
-        Turkey: new TurkeyService(),
-        Germany: new GermanyService(),
+        Turkey: new TurkeyService(this.reloadCurrentLocation, 12),
+        Germany: new GermanyService(this.reloadCurrentLocation),
       },
       isDrawerOpen: false,
 
@@ -988,6 +1000,9 @@ class SecondMap extends React.Component {
       drawerContent: null,
     };
   }
+  reloadCurrentLocation = () => {
+    this.goLocation(this.state.location);
+  };
   goLocation = (location) => {
     this.setState({ location: location });
     let service = this.state.locationServices[location];
@@ -1007,7 +1022,7 @@ class SecondMap extends React.Component {
 
     const distData = service.getData();
 
-    if (distData && distData.features && distData.features.length > 0) {
+    if (distData && distData.features) {
       const vectorLayer = this.state.layer;
       var vectorSource = new VectorSource({
         features: new GeoJSON({
