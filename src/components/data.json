@@ -9,6 +9,7 @@
 		"Topo": "9.98",
 		"DTW": "9.65",
 		"Wellhead": "0.12",
+		"Specific_capacity":"6.0",
 		"Yass": "0.21"
 	},
 	{
@@ -21,6 +22,7 @@
 		"Topo": "15.2",
 		"DTW": "13.44",
 		"Wellhead": "0.64",
+		"Specific_capacity": "1.3",
 		"Yass": "1.12"
 	},
 	{
@@ -33,6 +35,7 @@
 		"Topo": "7.05",
 		"DTW": "4.57",
 		"Wellhead": "0.45",
+		"Specific_capacity": "5.0",
 		"Yass": "2.03"
 	},
 	{
@@ -45,6 +48,7 @@
 		"Topo": "3.9",
 		"DTW": "4.52",
 		"Wellhead": "0.38",
+		"Specific_capacity":"5.0",
 		"Yass": "-1"
 	},
 	{
@@ -57,6 +61,7 @@
 		"Topo": "0.53",
 		"DTW": "4.05",
 		"Wellhead": "0.63",
+		"Specific_capacity": "5.0",
 		"Yass": "-4.15"
 	},
 	{
@@ -69,6 +74,7 @@
 		"Topo": "2.67",
 		"DTW": "4.2",
 		"Wellhead": "0.75",
+		"Specific_capacity": "4.8",
 		"Yass": "-2.28"
 	},
 	{
@@ -81,6 +87,7 @@
 		"Topo": "2.55",
 		"DTW": "3.14",
 		"Wellhead": "0.26",
+		"Specific_capacity": "12.3",
 		"Yass": "-0.85"
 	},
 	{
@@ -93,6 +100,7 @@
 		"Topo": "2.5",
 		"DTW": "4.57",
 		"Wellhead": "0.05",
+		"Specific_capacity": "3.7",
 		"Yass": "-2.12"
 	},
 	{
@@ -105,6 +113,7 @@
 		"Topo": "4.06",
 		"DTW": "4.18",
 		"Wellhead": "0",
+		"Specific_capacity": "3.9",
 		"Yass": "-0.12"
 	},
 	{
@@ -117,6 +126,7 @@
 		"Topo": "5.61",
 		"DTW": "6.09",
 		"Wellhead": "0.49",
+		"Specific_capacity": "4.5",
 		"Yass": "-0.97"
 	},
 	{
@@ -129,6 +139,7 @@
 		"Topo": "3.2",
 		"DTW": "4.2",
 		"Wellhead": "0",
+		"Specific_capacity": "0.5",
 		"Yass": "-1"
 	},
 	{
@@ -141,6 +152,7 @@
 		"Topo": "2.11",
 		"DTW": "4.05",
 		"Wellhead": "0",
+		"Specific_capacity": "0.7",
 		"Yass": "-1.94"
 	},
 	{
@@ -153,6 +165,7 @@
 		"Topo": "5.09",
 		"DTW": "4.32",
 		"Wellhead": "0",
+		"Specific_capacity": "0.6",
 		"Yass": "0.77"
 	},
 	{
@@ -165,6 +178,7 @@
 		"Topo": "4.91",
 		"DTW": "4.35",
 		"Wellhead": "0",
+		"Specific_capacity": "0.7",
 		"Yass": "0.56"
 	},
 	{
@@ -177,6 +191,7 @@
 		"Topo": "10.43",
 		"DTW": "9.64",
 		"Wellhead": "0.35",
+		"Specific_capacity": "20.3",
 		"Yass": "0.44"
 	},
 	{
@@ -189,6 +204,7 @@
 		"Topo": "9.09",
 		"DTW": "6.73",
 		"Wellhead": "0.67",
+		"Specific_capacity": "8.6",
 		"Yass": "1.69"
 	},
 	{
@@ -201,6 +217,7 @@
 		"Topo": "14.35",
 		"DTW": "9.3",
 		"Wellhead": "0.18",
+		"Specific_capacity": "7.0",
 		"Yass": "4.87"
 	},
 	{
@@ -213,6 +230,7 @@
 		"Topo": "6.65",
 		"DTW": "8.75",
 		"Wellhead": "0.81",
+		"Specific_capacity": "6.2",
 		"Yass": "-2.91"
 	},
 	{
@@ -225,6 +243,7 @@
 		"Topo": "5.42",
 		"DTW": "4.34",
 		"Wellhead": "0",
+		"Specific_capacity": "5.5",
 		"Yass": "1.08"
 	},
 	{
@@ -237,6 +256,7 @@
 		"Topo": "5.16",
 		"DTW": "3.12",
 		"Wellhead": "0",
+		"Specific_capacity": "0.1",
 		"Yass": "2.04"
 	},
 	{
@@ -249,6 +269,8 @@
 		"Topo": "5",
 		"DTW": "10.18",
 		"Wellhead": "0.23",
+		
+		"Specific_capacity": "2.5",
 		"Yass": "-5.41"
 	},
 	{
@@ -261,6 +283,7 @@
 		"Topo": "3.13",
 		"DTW": "6.24",
 		"Wellhead": "0.93",
+		"Specific_capacity": "11.5",
 		"Yass": "-4.04"
 	},
 	{
@@ -273,6 +296,7 @@
 		"Topo": "3.46",
 		"DTW": "7.15",
 		"Wellhead": "0.19",
+		"Specific_capacity": "0.1",
 		"Yass": "-3.89"
 	},
 	{
@@ -285,6 +309,7 @@
 		"Topo": "3.66",
 		"DTW": "7.59",
 		"Wellhead": "0.23",
+		"Specific_capacity": "5.0",
 		"Yass": "-4.16"
 	},
 	{
@@ -297,6 +322,7 @@
 		"Topo": "1.05",
 		"DTW": "5.05",
 		"Wellhead": "0.58",
+		"Specific_capacity": "1.2",
 		"Yass": "-4.58"
 	},
 	{
@@ -309,6 +335,7 @@
 		"Topo": "12.63",
 		"DTW": "3.54",
 		"Wellhead": "0.38",
+		"Specific_capacity": "7.6",
 		"Yass": "8.71"
 	},
 	{
@@ -321,6 +348,7 @@
 		"Topo": "15.08",
 		"DTW": "3.8",
 		"Wellhead": "0.03",
+		"Specific_capacity": "19.7",
 		"Yass": "11.25"
 	},
 	{
@@ -333,6 +361,7 @@
 		"Topo": "4.68",
 		"DTW": "1.21",
 		"Wellhead": "0",
+		"Specific_capacity": "5.3",
 		"Yass": "3.47"
 	},
 	{
@@ -345,6 +374,7 @@
 		"Topo": "5",
 		"DTW": "1.52",
 		"Wellhead": "0",
+		"Specific_capacity": "5.2",
 		"Yass": "3.48"
 	},
 	{
@@ -357,6 +387,7 @@
 		"Topo": "0.5",
 		"DTW": "0.84",
 		"Wellhead": "0.22",
+		"Specific_capacity": "4.9",
 		"Yass": "-0.56"
 	},
 	{
@@ -369,6 +400,7 @@
 		"Topo": "3.34",
 		"DTW": "3.58",
 		"Wellhead": "0",
+		"Specific_capacity": "3.2",
 		"Yass": "-0.24"
 	},
 	{
@@ -381,6 +413,7 @@
 		"Topo": "2.5",
 		"DTW": "4.07",
 		"Wellhead": "0.01",
+		"Specific_capacity": "4.1",
 		"Yass": "-1.58"
 	},
 	{
@@ -393,6 +426,7 @@
 		"Topo": "2.66",
 		"DTW": "3.68",
 		"Wellhead": "0",
+		"Specific_capacity": "2.4",
 		"Yass": "-1.03"
 	},
 	{
@@ -405,6 +439,7 @@
 		"Topo": "2.5",
 		"DTW": "5.02",
 		"Wellhead": "0.05",
+		"Specific_capacity": "3.0",
 		"Yass": "-2.57"
 	},
 	{
@@ -417,6 +452,7 @@
 		"Topo": "2.5",
 		"DTW": "5.25",
 		"Wellhead": "0.18",
+		"Specific_capacity": "51.9",
 		"Yass": "-2.93"
 	},
 	{
@@ -429,6 +465,7 @@
 		"Topo": "5.01",
 		"DTW": "4.22",
 		"Wellhead": "0",
+		"Specific_capacity": "0.1",
 		"Yass": "0.79"
 	},
 	{
@@ -441,6 +478,7 @@
 		"Topo": "5.15",
 		"DTW": "6.04",
 		"Wellhead": "0.32",
+		"Specific_capacity": "10.9",
 		"Yass": "-1.21"
 	},
 	{
@@ -453,6 +491,7 @@
 		"Topo": "2.49",
 		"DTW": "5.37",
 		"Wellhead": "0.15",
+		"Specific_capacity": "2.7",
 		"Yass": "-3.03"
 	},
 	{
@@ -465,6 +504,7 @@
 		"Topo": "4.87",
 		"DTW": "6.54",
 		"Wellhead": "1.74",
+		"Specific_capacity": "7.8",
 		"Yass": "-3.41"
 	},
 	{
@@ -477,6 +517,7 @@
 		"Topo": "2.5",
 		"DTW": "7.2",
 		"Wellhead": "0.56",
+		"Specific_capacity": "0.7",
 		"Yass": "-5.26"
 	},
 	{
@@ -489,6 +530,7 @@
 		"Topo": "2.5",
 		"DTW": "5.75",
 		"Wellhead": "1.48",
+		"Specific_capacity": "0.0",
 		"Yass": "-4.73"
 	},
 	{
@@ -501,6 +543,7 @@
 		"Topo": "9.34",
 		"DTW": "5.65",
 		"Wellhead": "0.54",
+		"Specific_capacity": "0.8",
 		"Yass": "3.15"
 	},
 	{
@@ -513,6 +556,7 @@
 		"Topo": "5.29",
 		"DTW": "4.41",
 		"Wellhead": "1.13",
+		"Specific_capacity": "3.0",
 		"Yass": "-0.25"
 	},
 	{
@@ -525,6 +569,7 @@
 		"Topo": "4.42",
 		"DTW": "3.32",
 		"Wellhead": "0.16",
+		"Specific_capacity": "2.7",
 		"Yass": "0.94"
 	},
 	{
@@ -537,6 +582,7 @@
 		"Topo": "4.62",
 		"DTW": "8.79",
 		"Wellhead": "0.71",
+		"Specific_capacity": "1.5",
 		"Yass": "-4.88"
 	},
 	{
@@ -549,6 +595,7 @@
 		"Topo": "4.35",
 		"DTW": "2.79",
 		"Wellhead": "0.01",
+		"Specific_capacity": "0.5",
 		"Yass": "1.55"
 	},
 	{
@@ -561,6 +608,7 @@
 		"Topo": "2.96",
 		"DTW": "3.8",
 		"Wellhead": "0.63",
+		"Specific_capacity": "0.9",
 		"Yass": "-1.47"
 	},
 	{
@@ -573,6 +621,7 @@
 		"Topo": "3.04",
 		"DTW": "3.07",
 		"Wellhead": "0.72",
+		"Specific_capacity": "4.0",
 		"Yass": "-0.76"
 	},
 	{
@@ -585,6 +634,7 @@
 		"Topo": "3.12",
 		"DTW": "6.95",
 		"Wellhead": "3.05",
+		"Specific_capacity": "6.0",
 		"Yass": "-6.88"
 	},
 	{
@@ -597,6 +647,7 @@
 		"Topo": "2.31",
 		"DTW": "3.64",
 		"Wellhead": "0.13",
+		"Specific_capacity": "0.8",
 		"Yass": "-1.46"
 	},
 	{
@@ -609,6 +660,7 @@
 		"Topo": "2.29",
 		"DTW": "5.76",
 		"Wellhead": "1.61",
+		"Specific_capacity": "7.0",
 		"Yass": "-5.08"
 	},
 	{
@@ -618,9 +670,11 @@
 		"Longitude": "34.8531",
 		"Lattitude": "36.87538",
 		"Well_depth": "4.5",
+		"Specific_capacity": "0.0",
 		"Topo": "7",
 		"DTW": "3.84",
 		"Wellhead": "0",
+		
 		"Yass": "3.16"
 	},
 	{
@@ -633,6 +687,7 @@
 		"Topo": "5.94",
 		"DTW": "3.25",
 		"Wellhead": "0.01",
+		"Specific_capacity": "7.8",
 		"Yass": "2.68"
 	},
 	{
@@ -645,6 +700,7 @@
 		"Topo": "5.27",
 		"DTW": "3.74",
 		"Wellhead": "0.15",
+		"Specific_capacity": "8.60",
 		"Yass": "1.38"
 	},
 	{
@@ -657,6 +713,7 @@
 		"Topo": "4.9",
 		"DTW": "3.32",
 		"Wellhead": "0.39",
+		"Specific_capacity": "0.6",
 		"Yass": "1.19"
 	},
 	{
@@ -669,6 +726,7 @@
 		"Topo": "4.38",
 		"DTW": "2.75",
 		"Wellhead": "0",
+		"Specific_capacity": "57.0",
 		"Yass": "1.63"
 	},
 	{
@@ -681,6 +739,7 @@
 		"Topo": "3.44",
 		"DTW": "3.96",
 		"Wellhead": "1.15",
+		"Specific_capacity": "´14.0",
 		"Yass": "-1.67"
 	},
 	{
@@ -693,6 +752,7 @@
 		"Topo": "4.58",
 		"DTW": "2.2",
 		"Wellhead": "0.41",
+		"Specific_capacity": "0.76",
 		"Yass": "1.97"
 	},
 	{
@@ -705,6 +765,7 @@
 		"Topo": "2.56",
 		"DTW": "3.15",
 		"Wellhead": "0.53",
+		"Specific_capacity": "0.76",
 		"Yass": "-1.12"
 	},
 	{
@@ -717,6 +778,7 @@
 		"Topo": "2.5",
 		"DTW": "1.86",
 		"Wellhead": "0.02",
+		"Specific_capacity": "3.7",
 		"Yass": "0.62"
 	},
 	{
@@ -729,6 +791,7 @@
 		"Topo": "2.41",
 		"DTW": "1.77",
 		"Wellhead": "0.17",
+		"Specific_capacity": "9.0",
 		"Yass": "0.47"
 	},
 	{
@@ -741,6 +804,7 @@
 		"Topo": "2.5",
 		"DTW": "4.45",
 		"Wellhead": "1.45",
+		"Specific_capacity": "0.6",
 		"Yass": "-3.4"
 	},
 	{
@@ -753,6 +817,7 @@
 		"Topo": "2.12",
 		"DTW": "5.32",
 		"Wellhead": "2.55",
+		"Specific_capacity": "5.66",
 		"Yass": "-5.75"
 	},
 	{
@@ -765,6 +830,7 @@
 		"Topo": "2.34",
 		"DTW": "2.1",
 		"Wellhead": "0",
+		"Specific_capacity": "5.0",
 		"Yass": "0.24"
 	},
 	{
@@ -777,6 +843,7 @@
 		"Topo": "2.42",
 		"DTW": "1.61",
 		"Wellhead": "0",
+		"Specific_capacity": "0.6",
 		"Yass": "0.81"
 	},
 	{
@@ -789,6 +856,7 @@
 		"Topo": "2.29",
 		"DTW": "1.55",
 		"Wellhead": "0.24",
+		"Specific_capacity": "03.7",
 		"Yass": "0.5"
 	},
 	{
@@ -801,6 +869,7 @@
 		"Topo": "2.5",
 		"DTW": "2.05",
 		"Wellhead": "0.24",
+		"Specific_capacity": "4.0",
 		"Yass": "0.21"
 	},
 	{
@@ -813,6 +882,7 @@
 		"Topo": "2.25",
 		"DTW": "3.05",
 		"Wellhead": "1.38",
+		"Specific_capacity": "7.12",
 		"Yass": "-2.19"
 	},
 	{
@@ -825,6 +895,7 @@
 		"Topo": "2.34",
 		"DTW": "4.04",
 		"Wellhead": "0.02",
+		"Specific_capacity": "0.9",
 		"Yass": "-1.72"
 	},
 	{
@@ -837,6 +908,7 @@
 		"Topo": "2.18",
 		"DTW": "2.87",
 		"Wellhead": "0.09",
+		"Specific_capacity": "12.7",
 		"Yass": "-0.78"
 	},
 	{
@@ -849,6 +921,7 @@
 		"Topo": "4.57",
 		"DTW": "1.92",
 		"Wellhead": "1.38",
+		"Specific_capacity": "6.2",
 		"Yass": "1.27"
 	},
 	{
@@ -861,6 +934,7 @@
 		"Topo": "4.95",
 		"DTW": "2.6",
 		"Wellhead": "0.05",
+		"Specific_capacity": "0.5",
 		"Yass": "2.3"
 	},
 	{
@@ -873,6 +947,7 @@
 		"Topo": "4.61",
 		"DTW": "2.01",
 		"Wellhead": "0.17",
+		"Specific_capacity": "4.0",
 		"Yass": "2.43"
 	},
 	{
@@ -885,6 +960,7 @@
 		"Topo": "4.5",
 		"DTW": "1.39",
 		"Wellhead": "0.59",
+		"Specific_capacity": "7.8",
 		"Yass": "2.52"
 	},
 	{
@@ -897,6 +973,7 @@
 		"Topo": "4.26",
 		"DTW": "1.2",
 		"Wellhead": "0.02",
+		"Specific_capacity": "2.5",
 		"Yass": "3.04"
 	},
 	{
@@ -909,6 +986,7 @@
 		"Topo": "4.74",
 		"DTW": "2.07",
 		"Wellhead": "0.06",
+		"Specific_capacity": "4.1",
 		"Yass": "2.61"
 	},
 	{
@@ -921,6 +999,7 @@
 		"Topo": "4.35",
 		"DTW": "1.9",
 		"Wellhead": "0.05",
+		"Specific_capacity": "3.0",
 		"Yass": "2.4"
 	},
 	{
@@ -933,6 +1012,7 @@
 		"Topo": "4.56",
 		"DTW": "1.99",
 		"Wellhead": "0.42",
+		"Specific_capacity": "9.2",
 		"Yass": "2.15"
 	},
 	{
@@ -945,6 +1025,7 @@
 		"Topo": "4.92",
 		"DTW": "0.75",
 		"Wellhead": "0.05",
+		"Specific_capacity": "0.2",
 		"Yass": "4.12"
 	},
 	{
@@ -957,6 +1038,7 @@
 		"Topo": "4.39",
 		"DTW": "0.81",
 		"Wellhead": "0.05",
+		"Specific_capacity": "0.5",
 		"Yass": "3.53"
 	},
 	{
@@ -969,6 +1051,7 @@
 		"Topo": "4.03",
 		"DTW": "1.55",
 		"Wellhead": "0.1",
+		"Specific_capacity": "2.0",
 		"Yass": "2.38"
 	},
 	{
@@ -981,6 +1064,7 @@
 		"Topo": "4.66",
 		"DTW": "1.43",
 		"Wellhead": "0.24",
+		"Specific_capacity": "0.1",
 		"Yass": "2.99"
 	},
 	{
@@ -993,6 +1077,7 @@
 		"Topo": "10.35",
 		"DTW": "3.92",
 		"Wellhead": "0.14",
+		"Specific_capacity": "2.6",
 		"Yass": "6.29"
 	},
 	{
@@ -1005,6 +1090,7 @@
 		"Topo": "14.71",
 		"DTW": "8.5",
 		"Wellhead": "0.56",
+		"Specific_capacity": "6.1",
 		"Yass": "5.65"
 	},
 	{
@@ -1017,6 +1103,7 @@
 		"Topo": "13.09",
 		"DTW": "8.74",
 		"Wellhead": "0.22",
+		"Specific_capacity": "2.4",
 		"Yass": "4.13"
 	},
 	{
@@ -1029,6 +1116,7 @@
 		"Topo": "16.43",
 		"DTW": "8.57",
 		"Wellhead": "0.27",
+		"Specific_capacity": "1.3",
 		"Yass": "7.59"
 	},
 	{
@@ -1041,6 +1129,7 @@
 		"Topo": "9.58",
 		"DTW": "9.21",
 		"Wellhead": "0.59",
+		"Specific_capacity": "0.25",
 		"Yass": "-0.22"
 	}
 ]
