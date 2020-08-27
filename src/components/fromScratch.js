@@ -232,7 +232,7 @@ class TurkeyService {
   };
 
   getStyleForFeature = (f) => {
-    console.log(f)
+    
     console.log(f.get("type"));
     return f.get("style");
   };
@@ -335,13 +335,16 @@ class TurkeyService {
     
       
       });
-
- 
-  };
+  
+  
+//this.setState({info : `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`})
+};
   drawerContent = () => {
     console.log("hello Turkey");
     return <div>{this.getDrawer()}</div>;
   };
+
+
 }
 
 class GermanyService {
@@ -837,12 +840,13 @@ class GermanyService {
 
   getDistData = () => {
     let currState = this.stateId;
+    console.log(currState)
     let data = JSON.parse(JSON.stringify(distData));
     let features = data.features
       .filter((f) => {
-        const state = f.properties.NAME_1;
-      console.log(currState)
-        return currState === state;
+        const stateName = f.properties.NAME_1;
+       
+        return currState === stateName;
       })
       .map((f) => {
         const stateOfThisFeature = f["id"];
@@ -850,6 +854,8 @@ class GermanyService {
         f.properties["reve"] = revenueForThisDist;
         return f;
       });
+
+
 
     let states = this.getStateData();
 
@@ -889,14 +895,23 @@ class GermanyService {
     if (!features || !features.length || features.length < 1) return;
 
     const stateId = features[0].get("name");
-    const isSameStateClicked = !stateId;
+    this.showingState = stateId;
+    /*
+  const isSameStateClicked = !stateId;
     this.showingState = isSameStateClicked;
     this.stateId = this.showingState ? null : stateId;
 
-  
+    */
+
+  console.log(stateId)
     // getting legend
     let legend = this.getLegend();
     if (this.stateId) return legend;
+
+  
+
+    //this.setState({info : `${features.map((e)=>e.get("name"))}`})
+
 
     // const feature = features[0];
     // const ex = feature.getGeometry().getExtent();
@@ -1021,12 +1036,12 @@ class SecondMap extends React.Component {
         blue: "rgba(0,0,255,1)",
         purple: "rgba(145, 61, 136, 1)",
       },
-      info: "",
+      info: "hello",
       map: this.map,
       selectedState: null,
       infoText: "",
-
       drawerContent: null,
+      isShowing: false
     };
   }
   reloadCurrentLocation = () => {
@@ -1108,17 +1123,42 @@ class SecondMap extends React.Component {
       var features = map.getFeaturesAtPixel(pixel);
       service.onMapClick(features);
       this.goLocation(location);
+
+      console.log(location)
+      console.log(service)
+      let info = this.state.info;
+
+    location === "Turkey" ?
+      this.setState({info : `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`}) :
+      this.setState({info : `${features.map((e)=>e.get("name"))} ${features.map((e)=>e.get("reve"))}`})
+
+ 
+    /*
+    let info = document.getElementById("info")
+    
+    if (service = this.state.locationServices.Turkey) {
+      info.innerHTML = `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`
+    } else {
+      info.innerHTML = `${features.map((e)=>e.get("prop"))} `
+    }
+    */
+ 
     });
     this.setState({ map: map, layer: vectorLayer });
+    
 
     var view = map.getView();
+ 
    
 
     // adding overlay
     map.addOverlay(overlay);
+
+  
   }
 
   render() {
+  let  { info, isShowing} = this.state
     return (
       <>
         <div class="topnav">
@@ -1139,8 +1179,11 @@ class SecondMap extends React.Component {
             Germany
           </a>
         </div>
+        <div className="conatiner">
+        <div id="info"> {info}</div>
         <div id="map"></div>
         <div id="feature-content">{this.state.drawerContent}</div>
+        </div>
       </>
     );
   }

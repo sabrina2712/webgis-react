@@ -1142,9 +1142,7 @@ this.vectorLayerState.getFeatures(pixel).then((features) => {
      
 
  }
- currentLocationService = () => {
-    return this.state.locationServices[this.state.selectedLocation];
-}
+
 }
     
 

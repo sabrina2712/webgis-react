@@ -20,10 +20,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 
 
-
-
-
-
 export default function FadeMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [locations, setLocations] = React.useState({

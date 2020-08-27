@@ -66,11 +66,16 @@
   width: 150px;
   z-index: 100;
   font-size: 0.6em;
-  color:white;
+  color: black ;
   font-weight: bold;
   background-color: gray;
+  top: 200px;
+
+  
 
 }
+
+
 #sidebar{
 background-color: lightblue;
 padding: 5px;
@@ -108,13 +113,14 @@ margin-right: 5px;
   color: white;
 }
 #feature-content{
-  top: 100px;
-  width: 170px;
-  height: 500px;
+  top: 300px;
+  width: 200px;
+  float: right;
   z-index: 1000;
-  position: absolute;
-  /* right: 500px; */
-  margin-left: 620px;
+  position: fixed;
+  
+  margin-left: 600px;
   font: 1em;
   background-color: rgba(189, 195, 199, 0.5);
+
 }
