@@ -47,13 +47,14 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import FadeMenu from "./areaMenu";
+import FadeMenu from "./fadeMenu";
 import { SketchPicker } from "react-color";
 import distData from "./distrct-ger.json";
 import dataGer from "./germany.json";
 import data from "./data.json";
 import outputData from "./output.json";
 import dataTar from "./dataTar.json";
+import Navbar from "./NavBar/Navbar"
 
 function getCenterOfExtent(Extent) {
   var X = Extent[0] + (Extent[2] - Extent[0]) / 2;
@@ -110,7 +111,7 @@ class TurkeyService {
   }
 
   popupInfo = (features) =>
-    features.map((el) => `${el.get("id")}, ${el.get("prop")}`);
+    features.map((el) => ` ${el.get("id")} : ${el.get("prop")} `);
 
   getPicker = (p) => {
     return (
@@ -238,16 +239,6 @@ class TurkeyService {
     return f.get("style");
   };
 
-  // layer for Drawdown
-  /*
-              getLayer=()=>{
-                let vectorLayerForDD;
-                return vectorLayerForDD = new VectorLayer({
-                  fKey: "DD",
-                  source: vectorSource,
-                  style: this.getStyleForFeature(this.state.features.DD)
-              })
-              }*/
 
   getListItemIcon = (t) => {
     return (
@@ -812,7 +803,7 @@ class GermanyService {
   drawerContent = () => {
     console.log("hello Germany");
     return (
-      <div>
+      <div >
         legend
         <div>{this.getLegend()}</div>
       </div>
@@ -856,13 +847,11 @@ class GermanyService {
     let filteredStates = states.features.filter((f) => {
       f.id = f.id + 100000;
       const stateOfThisFeature = f.properties["name"];
-
       return stateOfThisFeature != currState;
     });
-
-    data.features = features.concat(filteredStates);
-    console.log("in dist data", filteredStates);
-    return data;
+      data.features = features.concat(filteredStates);
+      console.log("in dist data", filteredStates);
+      return data;
   };
 
   isFeatureState = (f) => {
@@ -886,12 +875,15 @@ class GermanyService {
 
   onMapClick = (features) => {
     if (!features || !features.length || features.length < 1) return;
-
+    console.log(features)
     if (!this.stateId) {
-      const stateId = features[0].get("name");
+      const stateId = features.map((e)=>e.get("name"));
+      console.log(stateId)
       this.stateId = stateId;
     } else {
+     
     }
+    console.log(this.showingState)
     if (this.showingState === true) {
       this.showingState = false;
     }
@@ -900,14 +892,7 @@ class GermanyService {
     let legend = this.getLegend();
     if (this.stateId) return legend;
 
-    //this.setState({info : `${features.map((e)=>e.get("name"))}`})
-
-    // const feature = features[0];
-    // const ex = feature.getGeometry().getExtent();
-    // var center = getCenter(ex);
-    // center = transform(center, "EPSG:3857", "EPSG:4326");
-    // this.location = this.showingState === true ? [13.404954, 52.520008] : center;
-    // this.zoom = this.showingState ? 6 : 6;
+  
   };
 
   getLegendColor = (d) => {
@@ -1036,6 +1021,24 @@ class SecondMap extends React.Component {
   reloadCurrentLocation = () => {
     this.goLocation(this.state.location);
   };
+  toggleLocation = (location) => {
+    this.setState((state) => {
+        const currentLocation = state.selectedLocation;
+        console.log(currentLocation)
+        if (location === currentLocation) {
+            return { selectedLocation: "none" } // toggling
+        } else {
+            return { selectedLocation: location }
+        }
+    });
+ 
+}
+
+toggleDrawer = () => {
+  this.setState((state) => {
+      return { isDrawerOpen: !state.isDrawerOpen }
+  })
+}
   goLocation = (location) => {
     this.setState({ location: location });
     let service = this.state.locationServices[location];
@@ -1077,10 +1080,7 @@ class SecondMap extends React.Component {
         duration: 250,
       },
     });
-    // const overLayer = new Overlay({
-    //   element: this.infoRef.current,
-    // });
-
+ 
     var vectorSource = new VectorSource({
       features: [],
     });
@@ -1106,7 +1106,6 @@ class SecondMap extends React.Component {
 
     map.on("click", (evt) => {
       overlay.setPosition(undefined);
-
       let pixel = evt.pixel;
       overlay.setPosition(evt.coordinate);
       let pairs = [];
@@ -1115,25 +1114,12 @@ class SecondMap extends React.Component {
       var features = map.getFeaturesAtPixel(pixel);
       service.onMapClick(features);
       this.goLocation(location);
-
-      console.log(location);
-      console.log(service);
       let info = this.state.info;
 
       this.setState({
         info: service.popupInfo(features),
       });
-
-      /*
-    let info = document.getElementById("info")
-    
-    if (service = this.state.locationServices.Turkey) {
-      info.innerHTML = `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`
-    } else {
-      info.innerHTML = `${features.map((e)=>e.get("prop"))} `
-    }
-    */
-    });
+ });
     this.setState({ map: map, layer: vectorLayer });
 
     var view = map.getView();
@@ -1146,7 +1132,28 @@ class SecondMap extends React.Component {
     let { info, isShowing } = this.state;
     return (
       <>
-        <div class="topnav">
+ 
+      <Navbar toggleDrawer={this.toggleDrawer} toggleLocation={this.toggleLocation} selectedLocation={this.state.selectedLocation} goLocation={this.goLocation} />
+
+        <div className="conatiner">
+          <div id="info" ref={this.infoRef}>
+            {info}
+          </div>
+          <div id="map"></div>
+          <div id="feature-content">{this.state.drawerContent}
+            {this.state.getPickerVisvibility}</div>
+        </div>
+      </>
+    );
+  }
+}
+
+export default SecondMap;
+
+
+
+/*
+<div class="topnav">
           <a
             href="#news"
             onClick={() => {
@@ -1164,16 +1171,4 @@ class SecondMap extends React.Component {
             Germany
           </a>
         </div>
-        <div className="conatiner">
-          <div id="info" ref={this.infoRef}>
-            {info}
-          </div>
-          <div id="map"></div>
-          <div id="feature-content">{this.state.drawerContent}</div>
-        </div>
-      </>
-    );
-  }
-}
-
-export default SecondMap;
+*/

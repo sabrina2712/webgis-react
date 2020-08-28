@@ -65,7 +65,9 @@
 }
 
 .topnav {
-  background-color: #333;
+ 
+  background-color: #2E3B55;;
+
   overflow: hidden;
 }
 
@@ -91,15 +93,16 @@
   color: white;
 }
 #feature-content {
-  top: 300px;
   width: 200px;
-  float: right;
+  position: absolute;
+  background: #868686c9;
   z-index: 1000;
-  position: fixed;
-
-  margin-left: 600px;
-  font: 1em;
-  background-color: rgba(189, 195, 199, 0.5);
+  right: 5px;
+  top: 85px;
+  border-radius: 16px;
+  padding: 8px;
+  color: white;
+ 
 }
 
 .ol-popup {

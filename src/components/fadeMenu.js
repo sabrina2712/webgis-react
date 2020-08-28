@@ -21,6 +21,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 
 export default function FadeMenu(props) {
+    
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [locations, setLocations] = React.useState({
         "Turkey": [34.767511, 36.842215],
@@ -65,7 +66,7 @@ export default function FadeMenu(props) {
                             color="primary"
                             name="Turkey"
                             onClick={() => {
-                                props.goToLocation("Turkey")
+                                props.goLocation("Turkey")
                             }}
                         />
                     </ListItemIcon>
@@ -80,7 +81,7 @@ export default function FadeMenu(props) {
                             color="primary"
                             name="Germany"
                             onClick={() => {
-                                props.goToLocation("Germany")
+                                props.goLocation("Germany")
                             }}
                         />
                     </ListItemIcon>

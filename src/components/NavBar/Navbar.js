@@ -22,7 +22,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { SketchPicker } from 'react-color'
 import { fromLonLat, get } from "ol/proj"
-import FadeMenu from "../areaMenu"
+import FadeMenu from "../fadeMenu"
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -79,7 +79,7 @@ class Navbar extends React.Component {
             return { features: features };
         })
     }
-    goToLocation = (location) => {
+    goLocation = (location) => {
         const map = this.props.map
         let selectedArea = location;
         let coor = this.state.locations[location];
@@ -113,7 +113,8 @@ class Navbar extends React.Component {
                 <AppBar position="static" style={{ background: '#2E3B55' }}>
                     <Toolbar>
                         <Hidden smUp>
-                            <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.props.toggleDrawer}>
+                            <IconButton edge="start" color="inherit" aria-label="menu" 
+                            onClick={this.props.toggleDrawer}>
                                 <MenuIcon />
                             </IconButton>
                         </Hidden>
@@ -121,7 +122,12 @@ class Navbar extends React.Component {
                             WebGIS Demo
                         </Typography>
 
-                        <FadeMenu map={this.state.map} toggleLocation={this.props.toggleLocation} selectedLocation={this.props.selectedLocation} goToLocation={this.props.goToLocation} />
+                        <FadeMenu map={this.state.map} 
+                        toggleLocation={this.props.toggleLocation} 
+                        selectedLocation={this.props.selectedLocation} 
+                        goLocation={this.props.goLocation} 
+                        
+                        />
 
                     </Toolbar>
 

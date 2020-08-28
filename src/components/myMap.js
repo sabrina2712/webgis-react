@@ -929,7 +929,7 @@ goToLocation =(location)=>{
             })
         })
     }
-     getStyle = (f) => {
+    getStyle = (f) => {
         let id = f.get("id")
         let name = f.get("name")
         let rev = this.state.stateRevenue[id]
@@ -1049,44 +1049,35 @@ class MyMap extends React.Component {
             "PP": vectorLayerForPump
         }
     });
-    
-      
-    let stateName = feature.get("name")
+        let stateName = feature.get("name")
 
-    console.log(stateName)
-    let eachId = feature.get("id")
-    console.log(this.stateRev)
-    let curRev = this.stateRev[eachId]
+        console.log(stateName)
+        let eachId = feature.get("id")
+        console.log(this.stateRev)
+        let curRev = this.stateRev[eachId]
+        var coordinate = evt.coordinate;
+        this.overlay.setPosition(coordinate);
 
+    this.vectorLayerState.getFeatures(pixel).then((features) => {
+        if (features.length < 1) return;
+        let feature = features[0];
+        console.log(feature)
+        let stateName = feature.get("name");
 
-    var coordinate = evt.coordinate;
-    this.overlay.setPosition(coordinate);
+        if (stateName) {
+            this.setState((state) => {
+                return { selectedState: stateName };
+            })
+        }
+    })
+        let info = document.getElementById("mapGermany")
+        info.innerHTML = ` ${stateName} Rv: ${curRev}`
+        let legend = document.getElementById("legend")
 
-     
+        //map present district data
 
-this.vectorLayerState.getFeatures(pixel).then((features) => {
-    if (features.length < 1) return;
-    let feature = features[0];
-    console.log(feature)
-    let stateName = feature.get("name");
-
-    if (stateName) {
-        this.setState((state) => {
-            return { selectedState: stateName };
-        })
-    }
-})
-
-
-
-    let info = document.getElementById("mapGermany")
-    info.innerHTML = ` ${stateName} Rv: ${curRev}`
-    let legend = document.getElementById("legend")
-
-    //map present district data
-
-    let infoDist = document.getElementById("info-dist")
-    info.innerHTML = ` ${stateName} Rv: ${curRev}`
+        let infoDist = document.getElementById("info-dist")
+        info.innerHTML = ` ${stateName} Rv: ${curRev}`
 
 }
 
@@ -1139,10 +1130,7 @@ this.vectorLayerState.getFeatures(pixel).then((features) => {
          </div>
 
      </>
-     
-
- }
-
+    }
 }
     
 
