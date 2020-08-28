@@ -66,7 +66,6 @@ class TurkeyService {
     this.reloadData = reloadDataCallback;
     this.zoom = zoom;
 
-
     this.location = [34.767511, 36.842215];
     this.state = {
       colorPickerVisibility: {
@@ -77,7 +76,6 @@ class TurkeyService {
         PP: false,
         DD: false,
       },
-      info: "",
       mapClick: false,
       selectedlocation: "none",
       drawerContent: null,
@@ -108,10 +106,12 @@ class TurkeyService {
       pumpIsChecked: false,
       ddIsChecked: false,
       spcIsChecked: false,
-      info: "",
-      infoText :""
     };
   }
+
+  popupInfo = (features) =>
+    features.map((el) => `${el.get("id")}, ${el.get("prop")}`);
+
   getPicker = (p) => {
     return (
       <ListItemSecondaryAction>
@@ -160,7 +160,6 @@ class TurkeyService {
         }),
       });
       return {
-      
         type: "Feature",
         id: prop + el.id,
         properties: {
@@ -177,10 +176,10 @@ class TurkeyService {
     }
     let allCheckedFeatures = [];
     const len = data.length;
-   
+
     for (var i = 0; i < len; i++) {
       let el = data[i];
-      
+
       if (this.state.dtwIsChecked) {
         console.log("adding dtw");
         allCheckedFeatures.push(makeFeature(el, "DTW", "rgba(0,60,60,0.7)", 1));
@@ -198,28 +197,31 @@ class TurkeyService {
           makeFeature(el, "Wellhead", "rgba(20,20,200,0.7)", 10)
         );
       }
-      if(this.state.ddIsChecked){
+      if (this.state.ddIsChecked) {
         console.log("adding spcIsChecked");
-        allCheckedFeatures.push(makeFeature(el,"Specific_capacity","rgba(247, 202, 24, 0.8)", 1))
+        allCheckedFeatures.push(
+          makeFeature(el, "Specific_capacity", "rgba(247, 202, 24, 0.8)", 1)
+        );
       }
     }
-      for (let index = 0; index < dataTar.length; index++) {
+    for (let index = 0; index < dataTar.length; index++) {
       const el = dataTar[index];
-   
-      if(this.state.pumpIsChecked){
+
+      if (this.state.pumpIsChecked) {
         console.log("adding pumpIsChecked");
-        allCheckedFeatures.push(makeFeature(el,"Pumping_m3", "rgba(0,60,250,0.7)", 100))
+        allCheckedFeatures.push(
+          makeFeature(el, "Pumping_m3", "rgba(0,60,250,0.7)", 100)
+        );
       }
-      if(this.state.spcIsChecked){
+      if (this.state.spcIsChecked) {
         console.log("adding spcIsChecked");
-        allCheckedFeatures.push(makeFeature(el,"Drawdown_m", "rgba(220,60,250,0.7)", 1))
+        allCheckedFeatures.push(
+          makeFeature(el, "Drawdown_m", "rgba(220,60,250,0.7)", 1)
+        );
       }
-   
-     
-      
     }
 
-   console.log("==> allCheckedFeatures len " + allCheckedFeatures.length);
+    console.log("==> allCheckedFeatures len " + allCheckedFeatures.length);
 
     const geojsonObj = {
       type: "FeatureCollection",
@@ -227,12 +229,11 @@ class TurkeyService {
     };
 
     // for pumping rate and drawdown
-    console.log(geojsonObj)
+    console.log(geojsonObj);
     return geojsonObj;
   };
 
   getStyleForFeature = (f) => {
-    
     console.log(f.get("type"));
     return f.get("style");
   };
@@ -331,20 +332,14 @@ class TurkeyService {
 
   onMapClick = (features) => {
     if (!features || !features.length || features.length < 1) return;
-    features.forEach((el) => {
-    
-      
-      });
-  
-  
-//this.setState({info : `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`})
-};
+    features.forEach((el) => {});
+
+    //this.setState({info : `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`})
+  };
   drawerContent = () => {
     console.log("hello Turkey");
     return <div>{this.getDrawer()}</div>;
   };
-
-
 }
 
 class GermanyService {
@@ -808,10 +803,11 @@ class GermanyService {
         432: 2049,
         433: 1307,
       },
-      info: "",
-      infoText :""
     };
   }
+
+  popupInfo = (features) =>
+    features.map((el) => `${el.get("id")}, ${el.get("reve")}`);
 
   drawerContent = () => {
     console.log("hello Germany");
@@ -840,12 +836,12 @@ class GermanyService {
 
   getDistData = () => {
     let currState = this.stateId;
-    console.log(currState)
+    console.log(currState);
     let data = JSON.parse(JSON.stringify(distData));
     let features = data.features
       .filter((f) => {
         const stateName = f.properties.NAME_1;
-       
+
         return currState === stateName;
       })
       .map((f) => {
@@ -854,8 +850,6 @@ class GermanyService {
         f.properties["reve"] = revenueForThisDist;
         return f;
       });
-
-
 
     let states = this.getStateData();
 
@@ -880,7 +874,6 @@ class GermanyService {
   getStyleForFeature = (f) => {
     let rev = f.get("reve");
 
-
     return new Style({
       stroke: new Stroke({
         width: 2,
@@ -894,24 +887,20 @@ class GermanyService {
   onMapClick = (features) => {
     if (!features || !features.length || features.length < 1) return;
 
-    const stateId = features[0].get("name");
-    this.showingState = stateId;
-    /*
-  const isSameStateClicked = !stateId;
-    this.showingState = isSameStateClicked;
-    this.stateId = this.showingState ? null : stateId;
+    if (!this.stateId) {
+      const stateId = features[0].get("name");
+      this.stateId = stateId;
+    } else {
+    }
+    if (this.showingState === true) {
+      this.showingState = false;
+    }
 
-    */
-
-  console.log(stateId)
     // getting legend
     let legend = this.getLegend();
     if (this.stateId) return legend;
 
-  
-
     //this.setState({info : `${features.map((e)=>e.get("name"))}`})
-
 
     // const feature = features[0];
     // const ex = feature.getGeometry().getExtent();
@@ -1041,7 +1030,7 @@ class SecondMap extends React.Component {
       selectedState: null,
       infoText: "",
       drawerContent: null,
-      isShowing: false
+      isShowing: false,
     };
   }
   reloadCurrentLocation = () => {
@@ -1088,9 +1077,9 @@ class SecondMap extends React.Component {
         duration: 250,
       },
     });
-    const overLayer = new Overlay({
-      element: this.infoRef.current,
-    });
+    // const overLayer = new Overlay({
+    //   element: this.infoRef.current,
+    // });
 
     var vectorSource = new VectorSource({
       features: [],
@@ -1101,6 +1090,7 @@ class SecondMap extends React.Component {
     });
 
     var map = new Map({
+      overlays: [overlay],
       layers: [
         new TileLayer({
           source: new OSM(),
@@ -1115,8 +1105,10 @@ class SecondMap extends React.Component {
     });
 
     map.on("click", (evt) => {
-      overLayer.setPosition(undefined);
+      overlay.setPosition(undefined);
+
       let pixel = evt.pixel;
+      overlay.setPosition(evt.coordinate);
       let pairs = [];
       let location = this.state.location;
       let service = this.state.locationServices[location];
@@ -1124,16 +1116,15 @@ class SecondMap extends React.Component {
       service.onMapClick(features);
       this.goLocation(location);
 
-      console.log(location)
-      console.log(service)
+      console.log(location);
+      console.log(service);
       let info = this.state.info;
 
-    location === "Turkey" ?
-      this.setState({info : `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`}) :
-      this.setState({info : `${features.map((e)=>e.get("name"))} ${features.map((e)=>e.get("reve"))}`})
+      this.setState({
+        info: service.popupInfo(features),
+      });
 
- 
-    /*
+      /*
     let info = document.getElementById("info")
     
     if (service = this.state.locationServices.Turkey) {
@@ -1142,23 +1133,17 @@ class SecondMap extends React.Component {
       info.innerHTML = `${features.map((e)=>e.get("prop"))} `
     }
     */
- 
     });
     this.setState({ map: map, layer: vectorLayer });
-    
 
     var view = map.getView();
- 
-   
 
     // adding overlay
-    map.addOverlay(overlay);
-
-  
+    // map.addOverlay(overlay);
   }
 
   render() {
-  let  { info, isShowing} = this.state
+    let { info, isShowing } = this.state;
     return (
       <>
         <div class="topnav">
@@ -1180,9 +1165,11 @@ class SecondMap extends React.Component {
           </a>
         </div>
         <div className="conatiner">
-        <div id="info"> {info}</div>
-        <div id="map"></div>
-        <div id="feature-content">{this.state.drawerContent}</div>
+          <div id="info" ref={this.infoRef}>
+            {info}
+          </div>
+          <div id="map"></div>
+          <div id="feature-content">{this.state.drawerContent}</div>
         </div>
       </>
     );
