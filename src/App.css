@@ -97,13 +97,30 @@
   position: absolute;
   background: #868686c9;
   z-index: 1000;
-  right: 5px;
-  top: 85px;
+  right: 35px;
+  top: 200px;
   border-radius: 16px;
   padding: 8px;
   color: white;
- 
+
 }
+#feature-content-down{
+  position: absolute;
+  background: #868686c9;
+  z-index: 1000;
+  bottom: 0;
+  border-radius: 16px;
+  top: 600px;
+  color: white;
+  height: 200px;
+}
+
+.myDrawerDown{
+  display: flex;
+
+
+}
+
 
 .ol-popup {
   position: absolute;
@@ -115,6 +132,8 @@
   bottom: 12px;
   left: -50px;
   min-width: 280px;
+
+
 }
 .ol-popup:after,
 .ol-popup:before {
@@ -150,10 +169,11 @@
 #info {
   padding: 7px;
   border: 1px solid rgb(148, 145, 145);
-  width: 150px;
+
   z-index: 100;
   font-size: 0.6em;
-  color: black;
+  color: white;
   font-weight: bold;
   background-color: gray;
+  opacity: 0.7;
 }

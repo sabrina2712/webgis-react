@@ -100,6 +100,7 @@ class TurkeyService {
 
       map: this.map,
       view: this.view,
+      isShowing: false,
 
       dtwIsChecked: false,
       wdIsChecked: false,
@@ -111,6 +112,7 @@ class TurkeyService {
   }
 
   popupInfo = (features) =>
+
     features.map((el) => ` ${el.get("id")} : ${el.get("prop")} `);
 
   getPicker = (p) => {
@@ -238,8 +240,6 @@ class TurkeyService {
     console.log(f.get("type"));
     return f.get("style");
   };
-
-
   getListItemIcon = (t) => {
     return (
       <ListItemIcon>
@@ -320,12 +320,59 @@ class TurkeyService {
       </>
     );
   };
+  drawerContentDown = () => {
+    return (
+      <>
+        <AppBar position="static" style={{ background: "#2E3B55" }}>
+          <Toolbar>
+            <Typography variant="h6">Features</Typography>
+          </Toolbar>
+        </AppBar>
+      
+        <List className="myDrawerDown">
+          <ListItem button key="k1">
+            {this.getListItemIcon("DTW")}
+            <ListItemText primary="DTW" />
+          </ListItem>
+          {this.state.colorPickerVisibility.DTW
+            ? this.getPickerVisvibility("DTW")
+            : null}
+
+          <ListItem button key="k2">
+            {this.getListItemIcon("WD")}
+            <ListItemText primary="Well Depth" />
+          </ListItem>
+          {this.state.colorPickerVisibility.WD
+            ? this.getPickerVisvibility("WD")
+            : null}
+
+          <ListItem button key="k3">
+            {this.getListItemIcon("WH")}
+            <ListItemText primary="Well Head" />
+          </ListItem>
+
+          <ListItem button key="k4">
+            {this.getListItemIcon("SPC")}
+            <ListItemText primary="Specific Capacity" />
+          </ListItem>
+
+          <ListItem button key="k5">
+            {this.getListItemIcon("DD")}
+            <ListItemText primary="DD" />
+          </ListItem>
+
+          <ListItem button key="k6">
+            {this.getListItemIcon("PP")}
+            <ListItemText primary="pump" />
+          </ListItem>
+        </List>
+      </>
+    );
+  };
 
   onMapClick = (features) => {
     if (!features || !features.length || features.length < 1) return;
     features.forEach((el) => {});
-
-    //this.setState({info : `${features.map((e)=>e.get("id"))} ${features.map((e)=>e.get("prop"))}`})
   };
   drawerContent = () => {
     console.log("hello Turkey");
@@ -336,9 +383,10 @@ class TurkeyService {
 class GermanyService {
   constructor(reloadDataCallback) {
     this.reloadData = reloadDataCallback;
-    this.zoom = 5;
-    this.location = [13.404954, 52.520008];
+    this.zoom = 6;
+    this.location = [10.202057, 52.520008];
     this.showingState = true;
+   
 
     this.state = {
       stateRevenue: {
@@ -798,7 +846,7 @@ class GermanyService {
   }
 
   popupInfo = (features) =>
-    features.map((el) => `${el.get("id")}, ${el.get("reve")}`);
+    features.map((el) => `${el.get("name")}, ${el.get("reve")}`);
 
   drawerContent = () => {
     console.log("hello Germany");
@@ -808,10 +856,6 @@ class GermanyService {
         <div>{this.getLegend()}</div>
       </div>
     );
-  };
-
-  toggleDrawer = () => {
-    return null;
   };
   getData = () =>
     this.showingState === true ? this.getStateData() : this.getDistData();
@@ -832,7 +876,6 @@ class GermanyService {
     let features = data.features
       .filter((f) => {
         const stateName = f.properties.NAME_1;
-
         return currState === stateName;
       })
       .map((f) => {
@@ -843,7 +886,6 @@ class GermanyService {
       });
 
     let states = this.getStateData();
-
     let filteredStates = states.features.filter((f) => {
       f.id = f.id + 100000;
       const stateOfThisFeature = f.properties["name"];
@@ -876,13 +918,11 @@ class GermanyService {
   onMapClick = (features) => {
     if (!features || !features.length || features.length < 1) return;
     console.log(features)
-    if (!this.stateId) {
+    if (this.stateId) {
       const stateId = features.map((e)=>e.get("name"));
       console.log(stateId)
       this.stateId = stateId;
-    } else {
-     
-    }
+    } 
     console.log(this.showingState)
     if (this.showingState === true) {
       this.showingState = false;
@@ -990,6 +1030,10 @@ class GermanyService {
       ? "#FED976"
       : "#FFEDA0";
   };
+  drawerContentDown=()=>{
+    return null
+  }
+  
 }
 
 class SecondMap extends React.Component {
@@ -1015,7 +1059,10 @@ class SecondMap extends React.Component {
       selectedState: null,
       infoText: "",
       drawerContent: null,
+      drawerContentDown: null,
       isShowing: false,
+      toggleDrawer: null,
+      open : false
     };
   }
   reloadCurrentLocation = () => {
@@ -1029,21 +1076,17 @@ class SecondMap extends React.Component {
             return { selectedLocation: "none" } // toggling
         } else {
             return { selectedLocation: location }
-        }
+        } 
     });
- 
-}
-
-toggleDrawer = () => {
-  this.setState((state) => {
-      return { isDrawerOpen: !state.isDrawerOpen }
-  })
-}
+  }
   goLocation = (location) => {
     this.setState({ location: location });
     let service = this.state.locationServices[location];
 
     this.setState({ drawerContent: service.drawerContent() });
+    this.setState({ drawerContentDown: service.drawerContentDown() });
+    
+    this.setState({  toggleDrawer: service.toggleDrawer});
 
     const coodinate = service.location;
     let view = this.state.map.getView();
@@ -1115,35 +1158,35 @@ toggleDrawer = () => {
       service.onMapClick(features);
       this.goLocation(location);
       let info = this.state.info;
-
+     
       this.setState({
         info: service.popupInfo(features),
       });
- });
+    });
     this.setState({ map: map, layer: vectorLayer });
-
     var view = map.getView();
-
-    // adding overlay
-    // map.addOverlay(overlay);
+ }
+ toggleDrawer = () => {
+  console.log("hello toggle")
+  this.setState({open: !this.state.open});
   }
 
   render() {
-    let { info, isShowing } = this.state;
-    return (
-      <>
- 
-      <Navbar toggleDrawer={this.toggleDrawer} toggleLocation={this.toggleLocation} selectedLocation={this.state.selectedLocation} goLocation={this.goLocation} />
-
-        <div className="conatiner">
-          <div id="info" ref={this.infoRef}>
-            {info}
-          </div>
-          <div id="map"></div>
-          <div id="feature-content">{this.state.drawerContent}
-            {this.state.getPickerVisvibility}</div>
-        </div>
-      </>
+      let { info, isShowing, drawerContent, isDrawerOpen, drawerContentDown } = this.state;
+        return (
+          <>
+          <Navbar toggleDrawer={this.toggleDrawer} toggleLocation={this.toggleLocation} selectedLocation={this.state.selectedLocation} goLocation={this.goLocation} />
+                <div className="conatiner">
+                <div id="info" ref={this.infoRef}>
+                  {info}
+                </div>
+                <div id="map"></div>
+                  { drawerContent ?
+                <div id="feature-content">{drawerContent }
+                  {this.state.getPickerVisvibility}</div> : null }
+                  <div id="feature-content-down">{drawerContentDown }</div>
+              </div>
+          </>
     );
   }
 }

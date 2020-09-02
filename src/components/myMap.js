@@ -90,10 +90,7 @@ class TurkeyService {
 
         };
     }
-   
-
-               
-    goToLocation =(location)=>{
+   goToLocation =(location)=>{
 
     const  selectedArea = this.location
     console.log(selectedArea)
@@ -112,8 +109,6 @@ class TurkeyService {
     toggleLocation = (location) => {
         return null;
     }
-  
-    
     handleClose = () => {
         let isDrawerOpen = this.state.isDrawerOpen;
         this.setState({ isDrawerOpen: false })
@@ -202,7 +197,7 @@ class TurkeyService {
                     this.toogleFeature(t);
                 }}
             />
-        </ListItemIcon>
+            </ListItemIcon>
     }
     getStylePump=(feature)=> {
             const colors =this.state.colors;
@@ -861,28 +856,28 @@ class TurkeyService {
     }
    
         
-goToLocation =(location)=>{
+    goToLocation =(location)=>{
 
-    const  selectedArea = this.location
-    console.log(selectedArea)
-    let coor =this.state.locations[this.selectedArea];
+        const  selectedArea = this.location
+        console.log(selectedArea)
+        let coor =this.state.locations[this.selectedArea];
 
-        if (coor) {
-            let view = this.map.getView()
-            view.animate({
-                center: fromLonLat(coor),
-                zoom: 6,
-                duration: 300
-            });
-        }
-        if (selectedArea === location) {
-            let view = this.map.getView()
-            view.animate({
-                center: fromLonLat([0, 0]),
-                zoom: 3,
-                duration: 300
-            });
-        }
+            if (coor) {
+                let view = this.map.getView()
+                view.animate({
+                    center: fromLonLat(coor),
+                    zoom: 6,
+                    duration: 300
+                });
+            }
+            if (selectedArea === location) {
+                let view = this.map.getView()
+                view.animate({
+                    center: fromLonLat([0, 0]),
+                    zoom: 3,
+                    duration: 300
+                });
+            }
     }
     toogleFeature = (f) => {
        return null;
@@ -901,8 +896,6 @@ goToLocation =(location)=>{
                                 d > 500 ? '#FED976' :
                                     '#FFEDA0';
     }
-
-
     getLegend = () => {
         return <>
             <div style={{ width: "20px", height: "20px", backgroundColor: this.getColor(1000) }}><span className="legend-span">{">"}1000</span></div>
@@ -1001,8 +994,6 @@ class MyMap extends React.Component {
 				"Turkey": new TurkeyService(),
 				"Germany": new GermanyService(),
 			}}
-   
-  
         }
     componentDidMount() {
         var map = new Map({
@@ -1037,101 +1028,101 @@ class MyMap extends React.Component {
         this.setState(() => {
             return { pairs: pairs };
         });
-    });
-    this.setState({
-        map: map,
-        layers: {
-            "DTW": vectorLayerForDTW,
-            "WH": vectorLayerForWellHead,
-            "WD": vectorLayerForWllDepth,
-            "HC": vectorLayerForSpfCon,
-            "DD": vectorLayerForDD,
-            "PP": vectorLayerForPump
+        });
+        this.setState({
+            map: map,
+            layers: {
+                "DTW": vectorLayerForDTW,
+                "WH": vectorLayerForWellHead,
+                "WD": vectorLayerForWllDepth,
+                "HC": vectorLayerForSpfCon,
+                "DD": vectorLayerForDD,
+                "PP": vectorLayerForPump
+            }
+        });
+            let stateName = feature.get("name")
+
+            console.log(stateName)
+            let eachId = feature.get("id")
+            console.log(this.stateRev)
+            let curRev = this.stateRev[eachId]
+            var coordinate = evt.coordinate;
+            this.overlay.setPosition(coordinate);
+
+        this.vectorLayerState.getFeatures(pixel).then((features) => {
+            if (features.length < 1) return;
+            let feature = features[0];
+            console.log(feature)
+            let stateName = feature.get("name");
+
+            if (stateName) {
+                this.setState((state) => {
+                    return { selectedState: stateName };
+                })
+            }
+        })
+            let info = document.getElementById("mapGermany")
+            info.innerHTML = ` ${stateName} Rv: ${curRev}`
+            let legend = document.getElementById("legend")
+
+            //map present district data
+
+            let infoDist = document.getElementById("info-dist")
+            info.innerHTML = ` ${stateName} Rv: ${curRev}`
+
         }
-    });
-        let stateName = feature.get("name")
 
-        console.log(stateName)
-        let eachId = feature.get("id")
-        console.log(this.stateRev)
-        let curRev = this.stateRev[eachId]
-        var coordinate = evt.coordinate;
-        this.overlay.setPosition(coordinate);
+        render() {
+            const studyArea =
+                <>
 
-    this.vectorLayerState.getFeatures(pixel).then((features) => {
-        if (features.length < 1) return;
-        let feature = features[0];
-        console.log(feature)
-        let stateName = feature.get("name");
+                    <AppBar position="static" style={{ background: '#2E3B55' }}>
+                        <Toolbar>
+                            <Typography variant="h6" >
+                                Study Area
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <List className="myDrawer" >
+                        <ListItem button key="k1"
+                        >
+                            <ListItemIcon>
+                                <Checkbox
+                                    color="primary"
+                                    onClick={() => {
+                                        this.goToLocation("Turkey")
+                                    }}
 
-        if (stateName) {
-            this.setState((state) => {
-                return { selectedState: stateName };
-            })
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary="TAR" />
+                        </ListItem>
+                        <ListItem button key="k2"
+                        >
+                            <ListItemIcon>
+                                <Checkbox
+                                    color="primary"
+                                    onClick={() => {
+                                        this.goToLocation("Germany")
+                                    }}
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary="Germany" />
+                        </ListItem>
+                    </List>
+                </>
+                const service = this.currentLocationService();
+            return <>
+            <Navbar toggleDrawer={this.toggleDrawer} toggleLocation={this.toggleLocation} selectedLocation={this.state.selectedLocation} goToLocation={this.goToLocation} />
+
+            <div id="map" className="main-map" >
+                <div id="info" ref={this.infoRef}>{service ? service.getInfo() : null}</div>
+                {service ? service.getLegend() : null}
+            </div>
+
+        </>
         }
-    })
-        let info = document.getElementById("mapGermany")
-        info.innerHTML = ` ${stateName} Rv: ${curRev}`
-        let legend = document.getElementById("legend")
-
-        //map present district data
-
-        let infoDist = document.getElementById("info-dist")
-        info.innerHTML = ` ${stateName} Rv: ${curRev}`
-
-}
-
-    render() {
-        const studyArea =
-            <>
-
-                <AppBar position="static" style={{ background: '#2E3B55' }}>
-                    <Toolbar>
-                        <Typography variant="h6" >
-                            Study Area
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-                <List className="myDrawer" >
-                    <ListItem button key="k1"
-                    >
-                        <ListItemIcon>
-                            <Checkbox
-                                color="primary"
-                                onClick={() => {
-                                    this.goToLocation("Turkey")
-                                }}
-
-                            />
-                        </ListItemIcon>
-                        <ListItemText primary="TAR" />
-                    </ListItem>
-                    <ListItem button key="k2"
-                    >
-                        <ListItemIcon>
-                            <Checkbox
-                                color="primary"
-                                onClick={() => {
-                                    this.goToLocation("Germany")
-                                }}
-                            />
-                        </ListItemIcon>
-                        <ListItemText primary="Germany" />
-                    </ListItem>
-                </List>
-            </>
-            const service = this.currentLocationService();
-         return <>
-         <Navbar toggleDrawer={this.toggleDrawer} toggleLocation={this.toggleLocation} selectedLocation={this.state.selectedLocation} goToLocation={this.goToLocation} />
-
-         <div id="map" className="main-map" >
-             <div id="info" ref={this.infoRef}>{service ? service.getInfo() : null}</div>
-             {service ? service.getLegend() : null}
-         </div>
-
-     </>
     }
-}
     
 
 

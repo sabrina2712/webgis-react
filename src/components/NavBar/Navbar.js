@@ -104,12 +104,8 @@ class Navbar extends React.Component {
     }
     render() {
         const features = this.state.features;
-
-
         const drawerStudyArea =
             <>
-
-
                 <AppBar position="static" style={{ background: '#2E3B55' }}>
                     <Toolbar>
                         <Hidden smUp>
@@ -125,26 +121,13 @@ class Navbar extends React.Component {
                         <FadeMenu map={this.state.map} 
                         toggleLocation={this.props.toggleLocation} 
                         selectedLocation={this.props.selectedLocation} 
-                        goLocation={this.props.goLocation} 
-                        
-                        />
-
-                    </Toolbar>
-
-                </AppBar>
-
-            </>
-
-
-        return <>
-
-            {drawerStudyArea}
-
-        </>
-
-    }
-
-
-
-}
+                        goLocation={this.props.goLocation}  />
+                        </Toolbar>
+                    </AppBar>
+                </>
+                return <>
+                    {drawerStudyArea}
+                    </>
+                    }
+                }
 export default Navbar;
