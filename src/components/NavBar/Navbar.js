@@ -110,7 +110,7 @@ class Navbar extends React.Component {
                     <Toolbar>
                         <Hidden smUp>
                             <IconButton edge="start" color="inherit" aria-label="menu" 
-                            onClick={this.props.toggleDrawer}>
+                            onClick={this.props.toggleDrawer} >
                                 <MenuIcon />
                             </IconButton>
                         </Hidden>
@@ -121,7 +121,8 @@ class Navbar extends React.Component {
                         <FadeMenu map={this.state.map} 
                         toggleLocation={this.props.toggleLocation} 
                         selectedLocation={this.props.selectedLocation} 
-                        goLocation={this.props.goLocation}  />
+                        goLocation={this.props.goLocation} 
+                         />
                         </Toolbar>
                     </AppBar>
                 </>

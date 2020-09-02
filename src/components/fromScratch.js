@@ -66,7 +66,6 @@ class TurkeyService {
   constructor(reloadDataCallback, zoom) {
     this.reloadData = reloadDataCallback;
     this.zoom = zoom;
-
     this.location = [34.767511, 36.842215];
     this.state = {
       colorPickerVisibility: {
@@ -97,23 +96,21 @@ class TurkeyService {
         PP: "rgba(30,144,255, 0.7)",
         DD: "rgba(220,20,60,0.7)",
       },
-
       map: this.map,
       view: this.view,
       isShowing: false,
-
       dtwIsChecked: false,
       wdIsChecked: false,
       whIsChecked: false,
       pumpIsChecked: false,
       ddIsChecked: false,
       spcIsChecked: false,
+      width: "33%"
     };
   }
 
   popupInfo = (features) =>
-
-    features.map((el) => ` ${el.get("id")} : ${el.get("prop")} `);
+      features.map((el) => ` ${el.get("id")} : ${el.get("prop")} `);
 
   getPicker = (p) => {
     return (
@@ -330,7 +327,7 @@ class TurkeyService {
         </AppBar>
       
         <List className="myDrawerDown">
-          <ListItem button key="k1">
+          <ListItem button key="k1" style={{width : this.state.width}} >
             {this.getListItemIcon("DTW")}
             <ListItemText primary="DTW" />
           </ListItem>
@@ -338,7 +335,7 @@ class TurkeyService {
             ? this.getPickerVisvibility("DTW")
             : null}
 
-          <ListItem button key="k2">
+          <ListItem button key="k2" style={{width : this.state.width}}>
             {this.getListItemIcon("WD")}
             <ListItemText primary="Well Depth" />
           </ListItem>
@@ -346,22 +343,22 @@ class TurkeyService {
             ? this.getPickerVisvibility("WD")
             : null}
 
-          <ListItem button key="k3">
+          <ListItem button key="k3" style={{width : this.state.width}}>
             {this.getListItemIcon("WH")}
             <ListItemText primary="Well Head" />
           </ListItem>
 
-          <ListItem button key="k4">
+          <ListItem button key="k4" style={{width : this.state.width}}>
             {this.getListItemIcon("SPC")}
             <ListItemText primary="Specific Capacity" />
           </ListItem>
 
-          <ListItem button key="k5">
+          <ListItem button key="k5" style={{width : this.state.width}}>
             {this.getListItemIcon("DD")}
             <ListItemText primary="DD" />
           </ListItem>
 
-          <ListItem button key="k6">
+          <ListItem button key="k6" style={{width : this.state.width}}>
             {this.getListItemIcon("PP")}
             <ListItemText primary="pump" />
           </ListItem>
@@ -386,8 +383,6 @@ class GermanyService {
     this.zoom = 6;
     this.location = [10.202057, 52.520008];
     this.showingState = true;
-   
-
     this.state = {
       stateRevenue: {
         "DE-BB": 5627,
@@ -1034,6 +1029,7 @@ class GermanyService {
     return null
   }
   
+  
 }
 
 class SecondMap extends React.Component {
@@ -1168,6 +1164,8 @@ class SecondMap extends React.Component {
  }
  toggleDrawer = () => {
   console.log("hello toggle")
+
+
   this.setState({open: !this.state.open});
   }
 
@@ -1175,7 +1173,11 @@ class SecondMap extends React.Component {
       let { info, isShowing, drawerContent, isDrawerOpen, drawerContentDown } = this.state;
         return (
           <>
-          <Navbar toggleDrawer={this.toggleDrawer} toggleLocation={this.toggleLocation} selectedLocation={this.state.selectedLocation} goLocation={this.goLocation} />
+          <Navbar toggleDrawer={this.toggleDrawer} 
+          drawerContentDown={this.drawerContentDown}
+          toggleLocation={this.toggleLocation} 
+          selectedLocation={this.state.selectedLocation} 
+          goLocation={this.goLocation} />
                 <div className="conatiner">
                 <div id="info" ref={this.infoRef}>
                   {info}

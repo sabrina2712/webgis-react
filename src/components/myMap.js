@@ -1071,7 +1071,8 @@ class MyMap extends React.Component {
             info.innerHTML = ` ${stateName} Rv: ${curRev}`
 
         }
-
+    
+    
         render() {
             const studyArea =
                 <>
@@ -1123,11 +1124,6 @@ class MyMap extends React.Component {
         </>
         }
     }
-    
-
-
-    
-
 export default MyMap;
 
 

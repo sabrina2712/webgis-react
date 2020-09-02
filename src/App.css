@@ -110,15 +110,14 @@
   z-index: 1000;
   bottom: 0;
   border-radius: 16px;
-  top: 600px;
+ 
   color: white;
   height: 200px;
+  overflow: hidden;
 }
-
 .myDrawerDown{
   display: flex;
-
-
+  flex-wrap: wrap;
 }
 
 
@@ -132,9 +131,8 @@
   bottom: 12px;
   left: -50px;
   min-width: 280px;
-
-
 }
+
 .ol-popup:after,
 .ol-popup:before {
   top: 100%;
