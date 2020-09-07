@@ -7,6 +7,7 @@ import GeoJSON from "ol/format/GeoJSON";
 import { Circle, Point } from "ol/geom";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { OSM, Vector as VectorSource } from "ol/source";
+
 import {
   Circle as CircleStyle,
   Fill,
@@ -54,7 +55,7 @@ import dataGer from "./germany.json";
 import data from "./data.json";
 import outputData from "./output.json";
 import dataTar from "./dataTar.json";
-import Navbar from "./NavBar/Navbar"
+import Navbar from "./NavBar/Navbar";
 
 function getCenterOfExtent(Extent) {
   var X = Extent[0] + (Extent[2] - Extent[0]) / 2;
@@ -105,12 +106,12 @@ class TurkeyService {
       pumpIsChecked: false,
       ddIsChecked: false,
       spcIsChecked: false,
-      width: "33%"
+      width: "33%",
     };
   }
 
   popupInfo = (features) =>
-      features.map((el) => ` ${el.get("id")} : ${el.get("prop")} `);
+    features.map((el) => ` ${el.get("id")} : ${el.get("prop")} `);
 
   getPicker = (p) => {
     return (
@@ -270,51 +271,53 @@ class TurkeyService {
   };
   getDrawer = () => {
     return (
-      <>
-        <AppBar position="static" style={{ background: "#2E3B55" }}>
-          <Toolbar>
-            <Typography variant="h6">Features</Typography>
-          </Toolbar>
-        </AppBar>
+      <Hidden mdDown>
+        <div id="feature-content">
+          <AppBar position="static" style={{ background: "#2E3B55" }}>
+            <Toolbar>
+              <Typography variant="h6">Features</Typography>
+            </Toolbar>
+          </AppBar>
 
-        <List className="myDrawer">
-          <ListItem button key="k1">
-            {this.getListItemIcon("DTW")}
-            <ListItemText primary="DTW" />
-          </ListItem>
-          {this.state.colorPickerVisibility.DTW
-            ? this.getPickerVisvibility("DTW")
-            : null}
+          <List className="myDrawer">
+            <ListItem button key="k1">
+              {this.getListItemIcon("DTW")}
+              <ListItemText primary="DTW" />
+            </ListItem>
+            {this.state.colorPickerVisibility.DTW
+              ? this.getPickerVisvibility("DTW")
+              : null}
 
-          <ListItem button key="k2">
-            {this.getListItemIcon("WD")}
-            <ListItemText primary="Well Depth" />
-          </ListItem>
-          {this.state.colorPickerVisibility.WD
-            ? this.getPickerVisvibility("WD")
-            : null}
+            <ListItem button key="k2">
+              {this.getListItemIcon("WD")}
+              <ListItemText primary="Well Depth" />
+            </ListItem>
+            {this.state.colorPickerVisibility.WD
+              ? this.getPickerVisvibility("WD")
+              : null}
 
-          <ListItem button key="k3">
-            {this.getListItemIcon("WH")}
-            <ListItemText primary="Well Head" />
-          </ListItem>
+            <ListItem button key="k3">
+              {this.getListItemIcon("WH")}
+              <ListItemText primary="Well Head" />
+            </ListItem>
 
-          <ListItem button key="k4">
-            {this.getListItemIcon("SPC")}
-            <ListItemText primary="Specific Capacity" />
-          </ListItem>
+            <ListItem button key="k4">
+              {this.getListItemIcon("SPC")}
+              <ListItemText primary="Specific Capacity" />
+            </ListItem>
 
-          <ListItem button key="k5">
-            {this.getListItemIcon("DD")}
-            <ListItemText primary="DD" />
-          </ListItem>
+            <ListItem button key="k5">
+              {this.getListItemIcon("DD")}
+              <ListItemText primary="DD" />
+            </ListItem>
 
-          <ListItem button key="k6">
-            {this.getListItemIcon("PP")}
-            <ListItemText primary="pump" />
-          </ListItem>
-        </List>
-      </>
+            <ListItem button key="k6">
+              {this.getListItemIcon("PP")}
+              <ListItemText primary="pump" />
+            </ListItem>
+          </List>
+        </div>
+      </Hidden>
     );
   };
   drawerContentDown = () => {
@@ -325,9 +328,9 @@ class TurkeyService {
             <Typography variant="h6">Features</Typography>
           </Toolbar>
         </AppBar>
-      
+
         <List className="myDrawerDown">
-          <ListItem button key="k1" style={{width : this.state.width}} >
+          <ListItem button key="k1" style={{ width: this.state.width }}>
             {this.getListItemIcon("DTW")}
             <ListItemText primary="DTW" />
           </ListItem>
@@ -335,7 +338,7 @@ class TurkeyService {
             ? this.getPickerVisvibility("DTW")
             : null}
 
-          <ListItem button key="k2" style={{width : this.state.width}}>
+          <ListItem button key="k2" style={{ width: this.state.width }}>
             {this.getListItemIcon("WD")}
             <ListItemText primary="Well Depth" />
           </ListItem>
@@ -343,22 +346,22 @@ class TurkeyService {
             ? this.getPickerVisvibility("WD")
             : null}
 
-          <ListItem button key="k3" style={{width : this.state.width}}>
+          <ListItem button key="k3" style={{ width: this.state.width }}>
             {this.getListItemIcon("WH")}
             <ListItemText primary="Well Head" />
           </ListItem>
 
-          <ListItem button key="k4" style={{width : this.state.width}}>
+          <ListItem button key="k4" style={{ width: this.state.width }}>
             {this.getListItemIcon("SPC")}
             <ListItemText primary="Specific Capacity" />
           </ListItem>
 
-          <ListItem button key="k5" style={{width : this.state.width}}>
+          <ListItem button key="k5" style={{ width: this.state.width }}>
             {this.getListItemIcon("DD")}
             <ListItemText primary="DD" />
           </ListItem>
 
-          <ListItem button key="k6" style={{width : this.state.width}}>
+          <ListItem button key="k6" style={{ width: this.state.width }}>
             {this.getListItemIcon("PP")}
             <ListItemText primary="pump" />
           </ListItem>
@@ -373,7 +376,7 @@ class TurkeyService {
   };
   drawerContent = () => {
     console.log("hello Turkey");
-    return <div>{this.getDrawer()}</div>;
+    return this.getDrawer();
   };
 }
 
@@ -846,7 +849,7 @@ class GermanyService {
   drawerContent = () => {
     console.log("hello Germany");
     return (
-      <div >
+      <div id="feature-content">
         legend
         <div>{this.getLegend()}</div>
       </div>
@@ -886,9 +889,9 @@ class GermanyService {
       const stateOfThisFeature = f.properties["name"];
       return stateOfThisFeature != currState;
     });
-      data.features = features.concat(filteredStates);
-      console.log("in dist data", filteredStates);
-      return data;
+    data.features = features.concat(filteredStates);
+    console.log("in dist data", filteredStates);
+    return data;
   };
 
   isFeatureState = (f) => {
@@ -912,13 +915,13 @@ class GermanyService {
 
   onMapClick = (features) => {
     if (!features || !features.length || features.length < 1) return;
-    console.log(features)
+    console.log(features);
     if (this.stateId) {
-      const stateId = features.map((e)=>e.get("name"));
-      console.log(stateId)
+      const stateId = features.map((e) => e.get("name"));
+      console.log(stateId);
       this.stateId = stateId;
-    } 
-    console.log(this.showingState)
+    }
+    console.log(this.showingState);
     if (this.showingState === true) {
       this.showingState = false;
     }
@@ -926,8 +929,6 @@ class GermanyService {
     // getting legend
     let legend = this.getLegend();
     if (this.stateId) return legend;
-
-  
   };
 
   getLegendColor = (d) => {
@@ -1025,11 +1026,9 @@ class GermanyService {
       ? "#FED976"
       : "#FFEDA0";
   };
-  drawerContentDown=()=>{
-    return null
-  }
-  
-  
+  drawerContentDown = () => {
+    return null;
+  };
 }
 
 class SecondMap extends React.Component {
@@ -1058,7 +1057,7 @@ class SecondMap extends React.Component {
       drawerContentDown: null,
       isShowing: false,
       toggleDrawer: null,
-      open : false
+      open: false,
     };
   }
   reloadCurrentLocation = () => {
@@ -1066,23 +1065,23 @@ class SecondMap extends React.Component {
   };
   toggleLocation = (location) => {
     this.setState((state) => {
-        const currentLocation = state.selectedLocation;
-        console.log(currentLocation)
-        if (location === currentLocation) {
-            return { selectedLocation: "none" } // toggling
-        } else {
-            return { selectedLocation: location }
-        } 
+      const currentLocation = state.selectedLocation;
+      console.log(currentLocation);
+      if (location === currentLocation) {
+        return { selectedLocation: "none" }; // toggling
+      } else {
+        return { selectedLocation: location };
+      }
     });
-  }
+  };
   goLocation = (location) => {
     this.setState({ location: location });
     let service = this.state.locationServices[location];
 
     this.setState({ drawerContent: service.drawerContent() });
     this.setState({ drawerContentDown: service.drawerContentDown() });
-    
-    this.setState({  toggleDrawer: service.toggleDrawer});
+
+    this.setState({ toggleDrawer: service.toggleDrawer });
 
     const coodinate = service.location;
     let view = this.state.map.getView();
@@ -1119,7 +1118,7 @@ class SecondMap extends React.Component {
         duration: 250,
       },
     });
- 
+
     var vectorSource = new VectorSource({
       features: [],
     });
@@ -1154,48 +1153,51 @@ class SecondMap extends React.Component {
       service.onMapClick(features);
       this.goLocation(location);
       let info = this.state.info;
-     
+
       this.setState({
         info: service.popupInfo(features),
       });
     });
     this.setState({ map: map, layer: vectorLayer });
     var view = map.getView();
- }
- toggleDrawer = () => {
-  console.log("hello toggle")
-
-
-  this.setState({open: !this.state.open});
   }
+  toggleDrawer = () => {
+    console.log("hello toggle");
+
+    this.setState({ open: !this.state.open });
+  };
 
   render() {
-      let { info, isShowing, drawerContent, isDrawerOpen, drawerContentDown } = this.state;
-        return (
-          <>
-          <Navbar toggleDrawer={this.toggleDrawer} 
+    let {
+      info,
+      isShowing,
+      drawerContent,
+      isDrawerOpen,
+      drawerContentDown,
+    } = this.state;
+    return (
+      <>
+        <Navbar
+          toggleDrawer={this.toggleDrawer}
           drawerContentDown={this.drawerContentDown}
-          toggleLocation={this.toggleLocation} 
-          selectedLocation={this.state.selectedLocation} 
-          goLocation={this.goLocation} />
-                <div className="conatiner">
-                <div id="info" ref={this.infoRef}>
-                  {info}
-                </div>
-                <div id="map"></div>
-                  { drawerContent ?
-                <div id="feature-content">{drawerContent }
-                  {this.state.getPickerVisvibility}</div> : null }
-                  <div id="feature-content-down">{drawerContentDown }</div>
-              </div>
-          </>
+          toggleLocation={this.toggleLocation}
+          selectedLocation={this.state.selectedLocation}
+          goLocation={this.goLocation}
+        />
+        <div className="conatiner">
+          <div id="info" ref={this.infoRef}>
+            {info}
+          </div>
+          <div id="map"></div>
+          {drawerContent ? drawerContent : null}
+          <div id="feature-content-down">{drawerContentDown}</div>
+        </div>
+      </>
     );
   }
 }
 
 export default SecondMap;
-
-
 
 /*
 <div class="topnav">
