@@ -108,12 +108,7 @@ class Navbar extends React.Component {
             <>
                 <AppBar position="static" style={{ background: '#2E3B55' }}>
                     <Toolbar>
-                        <Hidden smUp>
-                            <IconButton edge="start" color="inherit" aria-label="menu" 
-                            onClick={this.props.toggleDrawer} >
-                                <MenuIcon />
-                            </IconButton>
-                        </Hidden>
+                    
                         <Typography variant="h6">
                             WebGIS Demo
                         </Typography>
