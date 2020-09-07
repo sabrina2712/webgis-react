@@ -270,8 +270,9 @@ class TurkeyService {
   };
   getDrawer = () => {
     return (
-      <>
-        <AppBar position="static" style={{ background: "#2E3B55" }}>
+      <div id="feature-content" >
+        <AppBar position="static" style={{ background: "#2E3B55" }}
+        display={{ xs: 'none', lg: 'block'}}>
           <Toolbar>
             <Typography variant="h6">Features</Typography>
           </Toolbar>
@@ -314,13 +315,14 @@ class TurkeyService {
             <ListItemText primary="pump" />
           </ListItem>
         </List>
-      </>
+      </div>
     );
   };
   drawerContentDown = () => {
     return (
-      <>
-        <AppBar position="static" style={{ background: "#2E3B55" }}>
+      < div   id="feature-content-down" display={{ xs: 'none', md: 'block', lg: 'none' }}>
+        <AppBar position="static" style={{ background: "#2E3B55" }} 
+      >
           <Toolbar>
             <Typography variant="h6">Features</Typography>
           </Toolbar>
@@ -363,7 +365,7 @@ class TurkeyService {
             <ListItemText primary="pump" />
           </ListItem>
         </List>
-      </>
+      </div>
     );
   };
 
@@ -846,7 +848,7 @@ class GermanyService {
   drawerContent = () => {
     console.log("hello Germany");
     return (
-      <div >
+      <div  id="feature-content">
         legend
         <div>{this.getLegend()}</div>
       </div>
@@ -1184,9 +1186,9 @@ class SecondMap extends React.Component {
                 </div>
                 <div id="map"></div>
                   { drawerContent ?
-                <div id="feature-content">{drawerContent }
+                <div>{drawerContent }
                   {this.state.getPickerVisvibility}</div> : null }
-                  <div id="feature-content-down">{drawerContentDown }</div>
+                  {drawerContentDown }
               </div>
           </>
     );
