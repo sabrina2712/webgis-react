@@ -111,7 +111,7 @@ class TurkeyService {
   }
 
   popupInfo = (features) =>
-    features.map((el) => ` ${el.get("id")} : ${el.get("prop")} `);
+    features.map((el) => ` ${el.get("id")} : ${el.get("prop")}, `);
 
   getPicker = (p) => {
     return (
@@ -183,7 +183,7 @@ class TurkeyService {
 
       if (this.state.dtwIsChecked) {
         console.log("adding dtw");
-        allCheckedFeatures.push(makeFeature(el, "DTW", "rgba(201,224,50,0.7)", 1));
+        allCheckedFeatures.push(makeFeature(el, "DTW", "rgba(145,76,214,0.7)", 1));
       }
       if (this.state.wdIsChecked) {
         console.log("adding wdIsChecked");
@@ -211,13 +211,13 @@ class TurkeyService {
       if (this.state.pumpIsChecked) {
         console.log("adding pumpIsChecked");
         allCheckedFeatures.push(
-          makeFeature(el, "Pumping_m3", "rgba(0,60,250,0.7)", 100)
+          makeFeature(el, "Pumping_m3", "rgba(237,53,145,0.7)", 300)
         );
       }
       if (this.state.spcIsChecked) {
         console.log("adding spcIsChecked");
         allCheckedFeatures.push(
-          makeFeature(el, "Drawdown_m", "rgba(220,60,250,0.7)", .7)
+          makeFeature(el, "Drawdown_m", "rgba(53,145, 237,0.7)", .7)
         );
       }
     }
