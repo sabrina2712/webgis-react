@@ -5,7 +5,7 @@ import Map from "ol/Map";
 import View from "ol/View";
 import GeoJSON from "ol/format/GeoJSON";
 import { Circle, Point } from "ol/geom";
-import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
+import { Tile as TileLayer, Vector as VectorLayer, Heatmap } from "ol/layer";
 import { OSM, Vector as VectorSource } from "ol/source";
 
 import {
@@ -53,6 +53,7 @@ import { SketchPicker } from "react-color";
 import distData from "./distrct-ger.json";
 import dataGer from "./germany.json";
 import data from "./data.json";
+import adddata from "./warswah-data.json";
 import outputData from "./output.json";
 import dataTar from "./dataTar.json";
 import Navbar from "./NavBar/Navbar";
@@ -67,7 +68,7 @@ class TurkeyService {
   constructor(reloadDataCallback, zoom) {
     this.reloadData = reloadDataCallback;
     this.zoom = zoom;
-    this.location = [ 34.820910, 36.815247];
+    this.location = [34.82091, 36.815247];
     this.state = {
       colorPickerVisibility: {
         DTW: false,
@@ -183,7 +184,9 @@ class TurkeyService {
 
       if (this.state.dtwIsChecked) {
         console.log("adding dtw");
-        allCheckedFeatures.push(makeFeature(el, "DTW", "rgba(145,76,214,0.7)", 1));
+        allCheckedFeatures.push(
+          makeFeature(el, "DTW", "rgba(145,76,214,0.7)", 1)
+        );
       }
       if (this.state.wdIsChecked) {
         console.log("adding wdIsChecked");
@@ -217,7 +220,7 @@ class TurkeyService {
       if (this.state.spcIsChecked) {
         console.log("adding spcIsChecked");
         allCheckedFeatures.push(
-          makeFeature(el, "Drawdown_m", "rgba(53,145, 237,0.7)", .7)
+          makeFeature(el, "Drawdown_m", "rgba(53,145, 237,0.7)", 0.7)
         );
       }
     }
@@ -272,14 +275,14 @@ class TurkeyService {
   getDrawer = () => {
     return (
       <Hidden smDown>
-        <div id="feature-content" display={{ xs: 'none', sm: 'block' }}>
+        <div id="feature-content" display={{ xs: "none", sm: "block" }}>
           <AppBar position="static" style={{ background: "#2E3B55" }}>
             <Toolbar>
               <Typography variant="h6">Features</Typography>
             </Toolbar>
           </AppBar>
 
-          <List className="myDrawer" >
+          <List className="myDrawer">
             <ListItem button key="k1">
               {this.getListItemIcon("DTW")}
               <ListItemText primary="DTW" />
@@ -288,7 +291,7 @@ class TurkeyService {
               ? this.getPickerVisvibility("DTW")
               : null}
 
-            <ListItem button key="k2" >
+            <ListItem button key="k2">
               {this.getListItemIcon("WD")}
               <ListItemText primary="Well Depth" />
             </ListItem>
@@ -313,7 +316,7 @@ class TurkeyService {
 
             <ListItem button key="k6">
               {this.getListItemIcon("PP")}
-              <ListItemText primary="pump"  />
+              <ListItemText primary="pump" />
             </ListItem>
           </List>
         </div>
@@ -322,52 +325,52 @@ class TurkeyService {
   };
   drawerContentDown = () => {
     return (
-      <Hidden smUp>
-      < div   id="feature-content-down" display={{ xs: 'block', sm: 'none' }}>
-        <AppBar position="static" style={{ background: "#2E3B55"}}>
-          <Toolbar>
-            <Typography variant="h6">Features</Typography>
-          </Toolbar>
-        </AppBar>
+      <Hidden mdUp>
+        <div id="feature-content-down" display={{ xs: "block", sm: "none" }}>
+          <AppBar position="static" style={{ background: "#2E3B55" }}>
+            <Toolbar>
+              <Typography variant="h6">Features</Typography>
+            </Toolbar>
+          </AppBar>
 
-        <List className="myDrawerDown">
-          <ListItem button key="k1" style={{ width: this.state.width }}>
-            {this.getListItemIcon("DTW")}
-            <ListItemText primary="DTW" />
-          </ListItem>
-          {this.state.colorPickerVisibility.DTW
-            ? this.getPickerVisvibility("DTW")
-            : null}
+          <List className="myDrawerDown">
+            <ListItem button key="k1" style={{ width: this.state.width }}>
+              {this.getListItemIcon("DTW")}
+              <ListItemText primary="DTW" />
+            </ListItem>
+            {this.state.colorPickerVisibility.DTW
+              ? this.getPickerVisvibility("DTW")
+              : null}
 
-          <ListItem button key="k2" style={{ width: this.state.width }}>
-            {this.getListItemIcon("WD")}
-            <ListItemText primary="Well Depth" />
-          </ListItem>
-          {this.state.colorPickerVisibility.WD
-            ? this.getPickerVisvibility("WD")
-            : null}
+            <ListItem button key="k2" style={{ width: this.state.width }}>
+              {this.getListItemIcon("WD")}
+              <ListItemText primary="Well Depth" />
+            </ListItem>
+            {this.state.colorPickerVisibility.WD
+              ? this.getPickerVisvibility("WD")
+              : null}
 
-          <ListItem button key="k3" style={{ width: this.state.width }}>
-            {this.getListItemIcon("WH")}
-            <ListItemText primary="Well Head" />
-          </ListItem>
+            <ListItem button key="k3" style={{ width: this.state.width }}>
+              {this.getListItemIcon("WH")}
+              <ListItemText primary="Well Head" />
+            </ListItem>
 
-          <ListItem button key="k4" style={{ width: this.state.width }}>
-            {this.getListItemIcon("SPC")}
-            <ListItemText primary="Specific Capacity" />
-          </ListItem>
+            <ListItem button key="k4" style={{ width: this.state.width }}>
+              {this.getListItemIcon("SPC")}
+              <ListItemText primary="Specific Capacity" />
+            </ListItem>
 
-          <ListItem button key="k5" style={{ width: this.state.width }}>
-            {this.getListItemIcon("DD")}
-            <ListItemText primary="DD" />
-          </ListItem>
+            <ListItem button key="k5" style={{ width: this.state.width }}>
+              {this.getListItemIcon("DD")}
+              <ListItemText primary="DD" />
+            </ListItem>
 
-          <ListItem button key="k6" style={{ width: this.state.width }}>
-            {this.getListItemIcon("PP")}
-            <ListItemText primary="pump" />
-          </ListItem>
-        </List>
-      </div>
+            <ListItem button key="k6" style={{ width: this.state.width }}>
+              {this.getListItemIcon("PP")}
+              <ListItemText primary="pump" />
+            </ListItem>
+          </List>
+        </div>
       </Hidden>
     );
   };
@@ -379,6 +382,9 @@ class TurkeyService {
   drawerContent = () => {
     console.log("hello Turkey");
     return this.getDrawer();
+  };
+  getHeatLayerFeatures = () => {
+    return null;
   };
 }
 
@@ -1031,8 +1037,61 @@ class GermanyService {
   drawerContentDown = () => {
     return null;
   };
+
+  getHeatLayerFeatures = () => {
+    return null;
+  };
 }
 
+class Kazakhstan extends React.Component {
+  constructor() {
+    super();
+    this.location = [60.997972, 47.319778];
+  }
+
+  getHeatLayerFeatures = () => {
+    //addfeature
+    const convertCoordinates = (lon, lat) => {
+      var x = (lon * 20037508.34) / 180;
+      var y =
+        Math.log(Math.tan(((90 + lat) * Math.PI) / 360)) / (Math.PI / 180);
+      y = (y * 20037508.34) / 180;
+      return [x, y];
+    };
+
+    let features = [];
+    for (var i = 0; i < adddata.length; i++) {
+      const xy = convertCoordinates(adddata[i][1], adddata[i][0]);
+      var feature = new Feature({
+        id: 234434 + i,
+        geometry: new Point(xy),
+      });
+      features.push(feature);
+    }
+    return features;
+  };
+
+  drawerContent = () => {
+    console.log("hello Kazakstan");
+    return (
+      <div id="feature-content">
+        legend
+        <div>{this.getLegend()}</div>
+      </div>
+    );
+  };
+  drawerContentDown = () => {
+    return null;
+  };
+
+  getData = () => {
+    return null;
+  };
+
+  getLegend = () => {
+    return "hello Kazakstan";
+  };
+}
 class SecondMap extends React.Component {
   constructor(props) {
     super(props);
@@ -1042,6 +1101,7 @@ class SecondMap extends React.Component {
       locationServices: {
         Turkey: new TurkeyService(this.reloadCurrentLocation, 12),
         Germany: new GermanyService(this.reloadCurrentLocation),
+        Kazakhstan: new Kazakhstan(this.reloadCurrentLocation),
       },
       isDrawerOpen: false,
 
@@ -1062,6 +1122,7 @@ class SecondMap extends React.Component {
       open: false,
     };
   }
+
   reloadCurrentLocation = () => {
     this.goLocation(this.state.location);
   };
@@ -1109,7 +1170,13 @@ class SecondMap extends React.Component {
       vectorLayer.setStyle(service.getStyleForFeature);
       vectorLayer.setSource(vectorSource);
     }
-    console.log({ location });
+
+    const hotFeatures = service.getHeatLayerFeatures();
+
+    const heatlayer = this.state.heatLayer;
+    hotFeatures.forEach((feature) => {
+      heatlayer.getSource().addFeature(feature);
+    });
   };
 
   componentDidMount() {
@@ -1129,6 +1196,12 @@ class SecondMap extends React.Component {
       source: vectorSource,
     });
 
+    const heatlayer = new Heatmap({
+      source: new VectorSource(),
+      blur: parseInt(20),
+      radius: parseInt(10),
+    });
+
     var map = new Map({
       overlays: [overlay],
       layers: [
@@ -1136,6 +1209,7 @@ class SecondMap extends React.Component {
           source: new OSM(),
         }),
         vectorLayer,
+        heatlayer,
       ],
       target: "map",
       view: new View({
@@ -1146,11 +1220,13 @@ class SecondMap extends React.Component {
 
     map.on("click", (evt) => {
       overlay.setPosition(undefined);
+      let location = this.state.location;
+      let service = this.state.locationServices[location];
+      if (!service) return;
+
       let pixel = evt.pixel;
       overlay.setPosition(evt.coordinate);
       let pairs = [];
-      let location = this.state.location;
-      let service = this.state.locationServices[location];
       var features = map.getFeaturesAtPixel(pixel);
       service.onMapClick(features);
       this.goLocation(location);
@@ -1160,7 +1236,7 @@ class SecondMap extends React.Component {
         info: service.popupInfo(features),
       });
     });
-    this.setState({ map: map, layer: vectorLayer });
+    this.setState({ map: map, layer: vectorLayer, heatLayer: heatlayer });
     var view = map.getView();
   }
   toggleDrawer = () => {
@@ -1192,7 +1268,6 @@ class SecondMap extends React.Component {
           <div id="map"></div>
           {drawerContent ? drawerContent : null}
           {drawerContentDown ? drawerContentDown : null}
-         
         </div>
       </>
     );
