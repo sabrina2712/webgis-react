@@ -54,11 +54,11 @@ import FadeMenu from "./fadeMenu";
 import { SketchPicker } from "react-color";
 import distData from "./distrct-ger.json";
 import dataGer from "./germany.json";
-import data from "./data.json";
+
 import adddata from "./warswah-data.json";
 import worldData from "./whole-world.json";
 import outputData from "./output.json";
-import dataTar from "./dataTar.json";
+import dataTar from "./tarData.json";
 import btd242data from "./BTD-242-geojson.json";
 import btd2431data from "./BTD-2431-DRY-geojson.json";
 import btd2432data from "./BTD-2432-wet-geohson.json";
@@ -72,40 +72,34 @@ function getCenterOfExtent(Extent) {
   return transform([X, Y], "EPSG:4326", "EPSG:3857");
 }
 
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+
+  return color;
+}
+
 class TurkeyService {
   constructor(reloadDataCallback, zoom) {
     this.reloadData = reloadDataCallback;
     this.zoom = zoom;
+    this.data = dataTar.data;
+    this.dataProperties = dataTar.properties;
     this.location = [34.82091, 36.815247];
     this.state = {
-      colorPickerVisibility: {
-        DTW: false,
-        WD: false,
-        WH: false,
-        SPC: false,
-        PP: false,
-        DD: false,
-      },
+      checkedProperties: [],
+      allOpenProperties: false,
+
+      colorPickerVisibility: [],
       mapClick: false,
       selectedlocation: "none",
       drawerContent: null,
       showDrawer: null,
-      features: {
-        DTW: false,
-        WD: false,
-        WH: false,
-        SPC: false,
-        PP: false,
-        DD: false,
-      },
-      colors: {
-        DTW: "rgba(255,0, 0, 0.7)",
-        WD: "rgba(0, 128, 0, 0.9)",
-        WH: "rgb(56, 31, 65, 0.7)",
-        SPC: "rgba(201, 224, 50, 0.8)",
-        PP: "rgb(19, 17, 250,0.8)",
-        DD: "rgb(179, 167, 228,.7)",
-      },
+
+      colors: [getRandomColor()],
 
       map: this.map,
       view: this.view,
@@ -139,7 +133,7 @@ class TurkeyService {
           color={this.state.colors.v}
           onChange={(color) => {
             console.log("get picker dtw inside");
-            this.changeFeatureColor(v, color.hex);
+            this.changeFeatureColor(v, color);
             this.reloadData();
           }}
         />
@@ -148,11 +142,11 @@ class TurkeyService {
   };
 
   toogleFeature = (f) => {
-    this.setState((state) => {
-      const features = state.features;
-      features[f] = !features[f];
-      return { features: features };
-    });
+    this.state.checkedProperties.includes(f)
+      ? (this.state.checkedProperties = this.state.checkedProperties.filter(
+          (el) => el !== f
+        ))
+      : this.state.checkedProperties.push(f);
   };
 
   getData = () => {
@@ -181,51 +175,30 @@ class TurkeyService {
         },
       };
     }
+
+    console.log(this.state.colors);
     let allCheckedFeatures = [];
-    const len = data.length;
+
+    const len = this.data.length;
 
     for (var i = 0; i < len; i++) {
-      let el = data[i];
+      let el = this.data[i];
 
-      if (this.state.dtwIsChecked) {
-        console.log("adding dtw");
-        allCheckedFeatures.push(
-          makeFeature(el, "DTW", this.state.colors["DTW"], 1)
-        );
-      }
-      if (this.state.wdIsChecked) {
-        allCheckedFeatures.push(
-          makeFeature(el, "Well_depth", this.state.colors["WD"], 0.3)
-        );
-      }
+      const currentKeys = Object.keys(el);
 
-      if (this.state.whIsChecked) {
-        allCheckedFeatures.push(
-          makeFeature(el, "Wellhead", this.state.colors["WH"], 10)
+      let keys = currentKeys.filter(
+        (key) => !this.state.checkedProperties.includes(key)
+      );
+      keys.forEach((key) => {
+        this.state.checkedProperties.push(
+          makeFeature(el, key, this.state.colors, 1)
         );
-      }
-      if (this.state.spcIsChecked) {
-        allCheckedFeatures.push(
-          makeFeature(el, "Specific_capacity", this.state.colors["SPC"], 1)
-        );
-      }
-    }
-    for (let index = 0; index < dataTar.length; index++) {
-      const el = dataTar[index];
-
-      if (this.state.pumpIsChecked) {
-        allCheckedFeatures.push(
-          makeFeature(el, "Pumping_m3", this.state.colors["PP"], 300)
-        );
-      }
-      if (this.state.ddIsChecked) {
-        allCheckedFeatures.push(
-          makeFeature(el, "Drawdown_m", this.state.colors["DD"], 0.7)
-        );
-      }
+      });
     }
 
-    console.log("==> allCheckedFeatures len " + allCheckedFeatures.length);
+    console.log(
+      "==> allCheckedFeatures len " + this.state.checkedProperties.length
+    );
 
     const geojsonObj = {
       type: "FeatureCollection",
@@ -251,27 +224,10 @@ class TurkeyService {
     return (
       <ListItemIcon>
         <Checkbox
-          checked={this.state.features.t}
+          checked={this.state.checkedProperties.includes(t)}
           color="primary"
           onChange={() => {
-            if (t === "DTW") {
-              this.state.dtwIsChecked = !this.state.dtwIsChecked;
-            }
-            if (t === "WD") {
-              this.state.wdIsChecked = !this.state.wdIsChecked;
-            }
-            if (t === "WH") {
-              this.state.whIsChecked = !this.state.whIsChecked;
-            }
-            if (t === "PP") {
-              this.state.pumpIsChecked = !this.state.pumpIsChecked;
-            }
-            if (t === "DD") {
-              this.state.ddIsChecked = !this.state.ddIsChecked;
-            }
-            if (t === "SPC") {
-              this.state.spcIsChecked = !this.state.spcIsChecked;
-            }
+            this.toogleFeature(t);
             this.reloadData();
           }}
         />
@@ -280,24 +236,12 @@ class TurkeyService {
   };
 
   pickerVisvibilityMethod = (t) => {
-    if (t === "DTW") {
-      this.state.isDtwOpen = !this.state.isDtwOpen;
-    }
-    if (t === "WD") {
-      this.state.isWdOpen = !this.state.isWdOpen;
-    }
-    if (t === "WH") {
-      this.state.isWhOpen = !this.state.isWhOpen;
-    }
-    if (t === "PP") {
-      this.state.isPumpOpen = !this.state.isPumpOpen;
-    }
-    if (t === "DD") {
-      this.state.isDdOpen = !this.state.isDdOpen;
-    }
-    if (t === "SPC") {
-      this.state.isSpcOpen = !this.state.isSpcOpen;
-    }
+    let showCheckedPro = this.state.checkedProperties.map((property) => {
+      if (property === t) {
+        this.state.allOpenProperties = !this.state.allOpenProperties;
+      }
+    });
+
     this.reloadData();
   };
 
@@ -312,115 +256,31 @@ class TurkeyService {
           </AppBar>
 
           <List className="myDrawer">
-            <ListItem button key="k1">
-              {this.getListItemIcon("DTW")}
+            <ListItem button>
+              {this.dataProperties.map((d) => {
+                return (
+                  <div>
+                    {this.getListItemIcon(d)}
 
-              <ListItemText primary="DTW" />
-
-              <div className="picker-turkey">
-                <div
-                  onClick={() => this.pickerVisvibilityMethod("DTW")}
-                  style={{
-                    backgroundColor: this.state.colors["DTW"],
-                    height: "20px",
-                    width: "20px",
-                  }}
-                ></div>
-              </div>
+                    <div className="picker-turkey">
+                      <div
+                        onClick={() => this.pickerVisvibilityMethod(d)}
+                        style={{
+                          backgroundColor: this.state.colors,
+                          height: "20px",
+                          width: "20px",
+                        }}
+                      >
+                        {d}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </ListItem>
             {this.state.isDtwOpen === true ? (
               <ListItem>{this.getPickerComponent("DTW")}</ListItem>
             ) : null}
-            <ListItem button key="k2">
-              {this.getListItemIcon("WD")}
-              <ListItemText primary="Well Depth" />
-
-              <div className="picker-turkey">
-                <div
-                  onClick={() => this.pickerVisvibilityMethod("WD")}
-                  style={{
-                    backgroundColor: this.state.colors["WD"],
-                    height: "20px",
-                    width: "20px",
-                  }}
-                ></div>
-              </div>
-            </ListItem>
-            {this.state.isWdOpen === true ? (
-              <ListItem>{this.getPickerComponent("WD")}</ListItem>
-            ) : null}
-            <ListItem button key="k3">
-              {this.getListItemIcon("WH")}
-              <ListItemText primary="Well Head" />
-
-              <div className="picker-turkey">
-                <div
-                  onClick={() => this.pickerVisvibilityMethod("WH")}
-                  style={{
-                    backgroundColor: this.state.colors["WH"],
-                    height: "20px",
-                    width: "20px",
-                  }}
-                ></div>
-              </div>
-            </ListItem>
-            {this.state.isWhOpen === true ? (
-              <ListItem>{this.getPickerComponent("WH")}</ListItem>
-            ) : null}
-            <ListItem button key="k4">
-              {this.getListItemIcon("SPC")}
-              <ListItemText primary="Specific Capacity" />
-              <div className="picker-turkey">
-                <div
-                  onClick={() => this.pickerVisvibilityMethod("SPC")}
-                  style={{
-                    backgroundColor: this.state.colors["SPC"],
-                    height: "20px",
-                    width: "20px",
-                  }}
-                ></div>
-              </div>
-            </ListItem>
-            {this.state.isSpcOpen === true ? (
-              <ListItem>{this.getPickerComponent("SPC")}</ListItem>
-            ) : null}
-            <ListItem button key="k5">
-              {this.getListItemIcon("DD")}
-              <ListItemText primary="DD" />
-
-              <div className="picker-turkey">
-                <div
-                  onClick={() => this.pickerVisvibilityMethod("DD")}
-                  style={{
-                    backgroundColor: this.state.colors["DD"],
-                    height: "20px",
-                    width: "20px",
-                  }}
-                ></div>
-              </div>
-            </ListItem>
-            {this.state.isDdOpen === true ? (
-              <ListItem>{this.getPickerComponent("DD")}</ListItem>
-            ) : null}
-            <ListItem button key="k6">
-              {this.getListItemIcon("PP")}
-              <ListItemText primary="pump" />
-
-              <div className="picker-turkey">
-                <div
-                  onClick={() => this.pickerVisvibilityMethod("PP")}
-                  style={{
-                    backgroundColor: this.state.colors["PP"],
-                    height: "20px",
-                    width: "20px",
-                  }}
-                ></div>
-              </div>
-            </ListItem>
-            {this.state.isPumpOpen === true ? (
-              <ListItem>{this.getPickerComponent("PP")}</ListItem>
-            ) : null}
-            ;
           </List>
         </div>
       </Hidden>

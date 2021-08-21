@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "Borehole MEDSAL code": "BTD_W08",
+    "X": 4152248.49,
+    "Y": 1531664.034,
+    "Longitude": 8.124005581,
+    "Lattitude": 36.83574561,
+    "z": 12.2,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 8.8
+  },
+  {
+    "id": 2,
+    "Borehole MEDSAL code": "BTD_W15",
+    "X": 4160133.051,
+    "Y": 1531686.736,
+    "Longitude": 8.211627188,
+    "Lattitude": 36.83765871,
+    "z": 40,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 31.9
+  },
+  {
+    "id": 3,
+    "Borehole MEDSAL code": "BTD_W18",
+    "X": 4150711.474,
+    "Y": 1531549.121,
+    "Longitude": 8.106952033,
+    "Lattitude": 36.83435941,
+    "z": 12.5,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 8.2
+  },
+  {
+    "id": 4,
+    "Borehole MEDSAL code": "BTD_W20",
+    "X": 4160713.213,
+    "Y": 1531342.438,
+    "Longitude": 8.218154051,
+    "Lattitude": 36.83465308,
+    "z": 41.5,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 31.3
+  },
+  {
+    "id": 5,
+    "Borehole MEDSAL code": "BTD_W21",
+    "X": 4149210.399,
+    "Y": 1532472.107,
+    "Longitude": 8.090043484,
+    "Lattitude": 36.84240724,
+    "z": 12.7,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 7.3
+  },
+  {
+    "id": 6,
+    "Borehole MEDSAL code": "BTD_W23",
+    "X": 4155183.054,
+    "Y": 1536953.337,
+    "Longitude": 8.155363276,
+    "Lattitude": 36.88444193,
+    "z": 36.4,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 29.5
+  },
+  {
+    "id": 7,
+    "Borehole MEDSAL code": "BTD_W24",
+    "X": 4153847.134,
+    "Y": 1536949.708,
+    "Longitude": 8.140507128,
+    "Lattitude": 36.88411659,
+    "z": 34.5,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 29.4
+  },
+  {
+    "id": 8,
+    "Borehole MEDSAL code": "BTD_W28",
+    "X": 4161183.383,
+    "Y": 1531144.605,
+    "Longitude": 8.223424527,
+    "Lattitude": 36.83295457,
+    "z": 44.3,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 31.3
+  },
+  {
+    "id": 9,
+    "Borehole MEDSAL code": "BTD_W34",
+    "X": 4158747.391,
+    "Y": 1531415.449,
+    "Longitude": 8.196289998,
+    "Lattitude": 36.83489999,
+    "z": 27.2,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 17.2
+  },
+  {
+    "id": 10,
+    "Borehole MEDSAL code": "BTD_W44",
+    "X": 4153700.662,
+    "Y": 1532245.387,
+    "Longitude": 8.140005203,
+    "Lattitude": 36.84134762,
+    "z": 11.2,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 11.2
+  },
+  {
+    "id": 11,
+    "Borehole MEDSAL code": "BTD_W70",
+    "X": 4146547.686,
+    "Y": 1532650.746,
+    "Longitude": 8.060404507,
+    "Lattitude": 36.84342455,
+    "z": 10,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 8
+  },
+  {
+    "id": 12,
+    "Borehole MEDSAL code": "BTD_W71",
+    "X": 4145645.905,
+    "Y": 1532518.721,
+    "Longitude": 8.050414771,
+    "Lattitude": 36.84201797,
+    "z": 14,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 13
+  },
+  {
+    "id": 13,
+    "Borehole MEDSAL code": "BTD_W72",
+    "X": 4142453.66,
+    "Y": 1531905.865,
+    "Longitude": 8.015092064,
+    "Lattitude": 36.83570847,
+    "z": 13,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 9.5
+  },
+  {
+    "id": 14,
+    "Borehole MEDSAL code": "BTD_W73",
+    "X": 4141474.411,
+    "Y": 1531381.505,
+    "Longitude": 8.004344122,
+    "Lattitude": 36.83071465,
+    "z": 15,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 9.5
+  },
+  {
+    "id": 15,
+    "Borehole MEDSAL code": "BTD_W74",
+    "X": 4138787.404,
+    "Y": 1532729.25,
+    "Longitude": 7.974133951,
+    "Lattitude": 36.84231971,
+    "z": 13,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 9
+  },
+  {
+    "id": 16,
+    "Borehole MEDSAL code": "BTD_W76",
+    "X": 4136829.986,
+    "Y": 1533071.35,
+    "Longitude": 7.952288869,
+    "Lattitude": 36.84495636,
+    "z": 4,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 0.5
+  },
+  {
+    "id": 17,
+    "Borehole MEDSAL code": "BTD_W79",
+    "X": 4151411.677,
+    "Y": 1531485.102,
+    "Longitude": 8.114749094,
+    "Lattitude": 36.8339341,
+    "z": 18,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 16
+  },
+  {
+    "id": 18,
+    "Borehole MEDSAL code": "BTD_W80",
+    "X": 4161619.858,
+    "Y": 1531225.297,
+    "Longitude": 8.228256804,
+    "Lattitude": 36.83377917,
+    "z": 38,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 34
+  },
+  {
+    "id": 19,
+    "Borehole MEDSAL code": "BTD_W81",
+    "X": 4163955.818,
+    "Y": 1530150.379,
+    "Longitude": 8.254458851,
+    "Lattitude": 36.82449861,
+    "z": 52,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 45
+  },
+  {
+    "id": 20,
+    "Borehole MEDSAL code": "BTD_W82",
+    "X": 4152865.846,
+    "Y": 1535147.045,
+    "Longitude": 8.130028362,
+    "Lattitude": 36.86752424,
+    "z": 37,
+    "Dry_2017": "9/1/2017",
+    "PiezometricL": 23
+  }
+]

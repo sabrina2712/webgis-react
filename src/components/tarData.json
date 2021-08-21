@@ -1,0 +1,1259 @@
+{
+    "properties": [
+        "Pumping_m3",
+        "Drawdown_m",
+        "Lattitude",
+        "Well_depth",
+        "Topo",
+        "DTW",
+        "Wellhead",
+        "Specific_capacity",
+        "Yass"
+    ],
+    "data": [
+        {
+            "id": "881",
+            "Pumping_m3": "0.012",
+            "Drawdown_m": 0,
+            "Longitude": "34.711024575248452",
+            "Lattitude": " 36.843052089224599 "
+        },
+        {
+            "id": "81",
+            "Pumping_m3": "0.0025",
+            "Drawdown_m": "2.0",
+            "Longitude": "34.715521552964027",
+            "Lattitude": " 36.846060874070346"
+        },
+        {
+            "id": "89",
+            "Pumping_m3": " 0.0053",
+            "Drawdown_m": "1.06",
+            "Longitude": "34.732046367846195",
+            "Lattitude": "  36.846289894417346"
+        },
+        {
+            "id": "90",
+            "Pumping_m3": "0.01",
+            "Drawdown_m": "2.0",
+            "Longitude": " 34.732046367846195",
+            "Lattitude": "  36.846289894417346"
+        },
+        {
+            "id": "91",
+            "Pumping_m3": "0.015",
+            "Drawdown_m": "3.03",
+            "Longitude": " 34.732046367846195",
+            "Lattitude": " 36.846289894417346"
+        },
+        {
+            "id": "92",
+            "Pumping_m3": "0.0191",
+            "Drawdown_m": "3.95",
+            "Longitude": "34.732046367846195",
+            "Lattitude": "36.846289894417346"
+        },
+        {
+            "id": "93",
+            "Pumping_m3": "0.0058",
+            "Drawdown_m": "0.47",
+            "Longitude": " 34.911882799122971",
+            "Lattitude": "36.877611842311673"
+        },
+        {
+            "id": "94",
+            "Pumping_m3": "0.0118",
+            "Drawdown_m": "3.15",
+            "Longitude": "34.911882799122971",
+            "Lattitude": " 36.877611842311673"
+        },
+        {
+            "id": "95",
+            "Pumping_m3": "0.0173",
+            "Drawdown_m": " 4.46",
+            "Longitude": " 34.911882799122971",
+            "Lattitude": "36.877611842311673"
+        },
+        {
+            "id": "96",
+            "Pumping_m3": "0.0245",
+            "Drawdown_m": "5.5",
+            "Longitude": " 34.911882799122971",
+            "Lattitude": "36.877611842311673"
+        },
+        {
+            "id": "97",
+            "Pumping_m3": " 0.0036",
+            "Drawdown_m": "6.57",
+            "Longitude": " 34.924041759258088",
+            "Lattitude": " 36.839037304779012"
+        },
+        {
+            "id": "98",
+            "Pumping_m3": "0.0053",
+            "Drawdown_m": " 8.0",
+            "Longitude": "34.92404175925808",
+            "Lattitude": " 36.839037304779012"
+        },
+        {
+            "id": "99",
+            "Pumping_m3": "0.0081",
+            "Drawdown_m": "14.15",
+            "Longitude": " 34.924041759258088",
+            "Lattitude": " 36.839037304779012"
+        },
+        {
+            "id": "100",
+            "Pumping_m3": "0.011",
+            "Drawdown_m": "16.77",
+            "Longitude": " 34.924041759258088",
+            "Lattitude": "  36.839037304779012 "
+        },
+        {
+            "id": "101",
+            "Pumping_m3": " 0.0406",
+            "Drawdown_m": " 0.0",
+            "Longitude": " 34.853041355201398",
+            "Lattitude": " 36.859661361049362 "
+        },
+        {
+            "id": "102",
+            "Pumping_m3": "0.0116",
+            "Drawdown_m": "1.35",
+            "Longitude": " 34.754737042228342",
+            "Lattitude": " 36.822855480347123 "
+        },
+        {
+            "id": "103",
+            "Pumping_m3": "0.0151",
+            "Drawdown_m": "2.17",
+            "Longitude": "34.754737042228342",
+            "Lattitude": " 36.822855480347123 "
+        },
+        {
+            "id": "104",
+            "Pumping_m3": "0.0191",
+            "Drawdown_m": " 3.08",
+            "Longitude": " 34.754737042228342",
+            "Lattitude": "  36.822855480347123"
+        },
+        {
+            "id": "105",
+            "Pumping_m3": " 0.0231",
+            "Drawdown_m": "4.19",
+            "Longitude": " 34.754737042228342",
+            "Lattitude": "  36.822855480347123"
+        },
+        {
+            "id": "106",
+            "Pumping_m3": "0.0017",
+            "Drawdown_m": "27.8",
+            "Longitude": " 34.782208057827525",
+            "Lattitude": "  36.851001372597409 "
+        },
+        {
+            "id": "107",
+            "Pumping_m3": "0.019",
+            "Drawdown_m": "17.7",
+            "Longitude": " 34.802899276835952",
+            "Lattitude": "36.817979579709551"
+        },
+        {
+            "id": "108",
+            "Pumping_m3": "0.02",
+            "Drawdown_m": "8.14",
+            "Longitude": " 34.822647147233411",
+            "Lattitude": " 36.850351970452692"
+        },
+        {
+            "id": "109",
+            "Pumping_m3": "0.0235",
+            "Drawdown_m": "2.05",
+            "Longitude": " 34.879598031322985",
+            "Lattitude": "36.874584815729506"
+        },
+        {
+            "id": "109",
+            "Pumping_m3": "0.004",
+            "Drawdown_m": "26.74",
+            "Longitude": " 34.823493188419278",
+            "Lattitude": "36.880759026204018"
+        },
+        {
+            "id": "110",
+            "Pumping_m3": " 0.06",
+            "Drawdown_m": "12.05",
+            "Longitude": "34.709109240975607",
+            "Lattitude": "36.826026023906159"
+        },
+        {
+            "id": "111",
+            "Pumping_m3": "0.02",
+            "Drawdown_m": "16.4",
+            "Longitude": " 34.709446254194219",
+            "Lattitude": "36.819504374586664"
+        },
+        {
+            "id": "112",
+            "Pumping_m3": " 0.06",
+            "Drawdown_m": " 7.85",
+            "Longitude": "34.711603043968488",
+            "Lattitude": "36.821708703573741"
+        },
+        {
+            "id": "113",
+            "Pumping_m3": "0.06",
+            "Drawdown_m": " 3.05",
+            "Longitude": "34.711116238884031",
+            "Lattitude": "36.824014168711216"
+        },
+        {
+            "id": "114",
+            "Pumping_m3": "0.06",
+            "Drawdown_m": "11.33",
+            "Longitude": "34.706326731316921",
+            "Lattitude": "36.827454085849993"
+        },
+        {
+            "id": "115",
+            "Pumping_m3": "0.06",
+            "Drawdown_m": "11.46",
+            "Longitude": "34.746510735666661",
+            "Lattitude": "36.829889985935999"
+        },
+        {
+            "id": "116",
+            "Pumping_m3": " 0.06",
+            "Drawdown_m": "12.28",
+            "Longitude": " 34.753495662005562",
+            "Lattitude": "36.82888579994966 "
+        },
+        {
+            "id": "117",
+            "Pumping_m3": "0.036",
+            "Drawdown_m": "11.32",
+            "Longitude": "34.855449602533113",
+            "Lattitude": "36.814043334496347"
+        },
+        {
+            "id": "118",
+            "Pumping_m3": " 0.036",
+            "Drawdown_m": " 8.68",
+            "Longitude": "34.855013611363894",
+            "Lattitude": "36.809913001055236 "
+        },
+        {
+            "id": "119",
+            "Pumping_m3": " 0.045",
+            "Drawdown_m": "19.14",
+            "Longitude": "34.753203003597555",
+            "Lattitude": " 36.828836035921142 "
+        },
+        {
+            "id": "120",
+            "Pumping_m3": "0.04",
+            "Drawdown_m": "13.54",
+            "Longitude": "34.73980224367164",
+            "Lattitude": "36.819839148089464 "
+        },
+        {
+            "id": "121",
+            "Pumping_m3": " 0.08",
+            "Drawdown_m": " 1.54",
+            "Longitude": "34.888076068730143",
+            "Lattitude": "36.909971461725014"
+        },
+        {
+            "id": "122",
+            "Pumping_m3": " 0.0035",
+            "Drawdown_m": "43.22",
+            "Longitude": "34.752850497817342",
+            "Lattitude": "36.862019815461771"
+        },
+        {
+            "id": "123",
+            "Pumping_m3": "0.03937",
+            "Drawdown_m": "3.61",
+            "Longitude": "34.741150792523094",
+            "Lattitude": " 36.8283912564467 "
+        },
+        {
+            "id": "124",
+            "Pumping_m3": " 0.03",
+            "Drawdown_m": "11.0",
+            "Longitude": "34.770283249961196",
+            "Lattitude": "36.864014733127391 "
+        },
+        {
+            "id": "125",
+            "Pumping_m3": "0.007",
+            "Drawdown_m": " 0.9",
+            "Longitude": "34.928939225521837",
+            "Lattitude": "36.822851262256663"
+        },
+        {
+            "id": "126",
+            "Pumping_m3": " 0.001",
+            "Drawdown_m": "31.3",
+            "Longitude": " 34.781986519230074",
+            "Lattitude": "36.872853192599457"
+        },
+        {
+            "id": "1",
+            "Longitude": "34.734762",
+            "Lattitude": "36.834349",
+            "Well_depth": "21.6",
+            "Topo": "9.98",
+            "DTW": "9.65",
+            "Wellhead": "0.12",
+            "Specific_capacity": "6.0",
+            "Yass": "0.21"
+        },
+        {
+            "id": "2",
+            "Longitude": "34.725714",
+            "Lattitude": "36.842573",
+            "Well_depth": "41.25",
+            "Topo": "15.2",
+            "DTW": "13.44",
+            "Wellhead": "0.64",
+            "Specific_capacity": "1.3",
+            "Yass": "1.12"
+        },
+        {
+            "id": "3",
+            "Longitude": "34.740242",
+            "Lattitude": "36.827447",
+            "Well_depth": "9.5",
+            "Topo": "7.05",
+            "DTW": "4.57",
+            "Wellhead": "0.45",
+            "Specific_capacity": "5.0",
+            "Yass": "2.03"
+        },
+        {
+            "id": "4",
+            "Longitude": "34.74799",
+            "Lattitude": "36.822926",
+            "Well_depth": "29.75",
+            "Topo": "3.9",
+            "DTW": "4.52",
+            "Wellhead": "0.38",
+            "Specific_capacity": "5.0",
+            "Yass": "-1"
+        },
+        {
+            "id": "5",
+            "Longitude": "34.748048",
+            "Lattitude": "36.813899",
+            "Well_depth": "22.5",
+            "Topo": "0.53",
+            "DTW": "4.05",
+            "Wellhead": "0.63",
+            "Specific_capacity": "5.0",
+            "Yass": "-4.15"
+        },
+        {
+            "id": "6",
+            "Longitude": "34.763558",
+            "Lattitude": "36.815257",
+            "Well_depth": "8.85",
+            "Topo": "2.67",
+            "DTW": "4.2",
+            "Wellhead": "0.75",
+            "Specific_capacity": "4.8",
+            "Yass": "-2.28"
+        },
+        {
+            "id": "7",
+            "Longitude": "34.767219",
+            "Lattitude": "36.814286",
+            "Well_depth": "5.47",
+            "Topo": "2.55",
+            "DTW": "3.14",
+            "Wellhead": "0.26",
+            "Specific_capacity": "12.3",
+            "Yass": "-0.85"
+        },
+        {
+            "id": "8",
+            "Longitude": "34.765907",
+            "Lattitude": "36.818254",
+            "Well_depth": "22.8",
+            "Topo": "2.5",
+            "DTW": "4.57",
+            "Wellhead": "0.05",
+            "Specific_capacity": "3.7",
+            "Yass": "-2.12"
+        },
+        {
+            "id": "9",
+            "Longitude": "34.788061",
+            "Lattitude": "36.824269",
+            "Well_depth": "155",
+            "Topo": "4.06",
+            "DTW": "4.18",
+            "Wellhead": "0",
+            "Specific_capacity": "3.9",
+            "Yass": "-0.12"
+        },
+        {
+            "id": "10",
+            "Longitude": "34.753068",
+            "Lattitude": "36.832159",
+            "Well_depth": "15.43",
+            "Topo": "5.61",
+            "DTW": "6.09",
+            "Wellhead": "0.49",
+            "Specific_capacity": "4.5",
+            "Yass": "-0.97"
+        },
+        {
+            "id": "11",
+            "Longitude": "34.740272",
+            "Lattitude": "36.818121",
+            "Well_depth": "15.1",
+            "Topo": "3.2",
+            "DTW": "4.2",
+            "Wellhead": "0",
+            "Specific_capacity": "0.5",
+            "Yass": "-1"
+        },
+        {
+            "id": "12",
+            "Longitude": "34.743705",
+            "Lattitude": "36.816748",
+            "Well_depth": "15",
+            "Topo": "2.11",
+            "DTW": "4.05",
+            "Wellhead": "0",
+            "Specific_capacity": "0.7",
+            "Yass": "-1.94"
+        },
+        {
+            "id": "13",
+            "Longitude": "34.734558",
+            "Lattitude": "36.820443",
+            "Well_depth": "15.3",
+            "Topo": "5.09",
+            "DTW": "4.32",
+            "Wellhead": "0",
+            "Specific_capacity": "0.6",
+            "Yass": "0.77"
+        },
+        {
+            "id": "14",
+            "Longitude": "34.731799",
+            "Lattitude": "36.820122",
+            "Well_depth": "15.3",
+            "Topo": "4.91",
+            "DTW": "4.35",
+            "Wellhead": "0",
+            "Specific_capacity": "0.7",
+            "Yass": "0.56"
+        },
+        {
+            "id": "15",
+            "Longitude": "34.743961",
+            "Lattitude": "36.843003",
+            "Well_depth": "34.3",
+            "Topo": "10.43",
+            "DTW": "9.64",
+            "Wellhead": "0.35",
+            "Specific_capacity": "20.3",
+            "Yass": "0.44"
+        },
+        {
+            "id": "16",
+            "Longitude": "34.757087",
+            "Lattitude": "36.847737",
+            "Well_depth": "20.46",
+            "Topo": "9.09",
+            "DTW": "6.73",
+            "Wellhead": "0.67",
+            "Specific_capacity": "8.6",
+            "Yass": "1.69"
+        },
+        {
+            "id": "17",
+            "Longitude": "34.761725",
+            "Lattitude": "36.856729",
+            "Well_depth": "9.76",
+            "Topo": "14.35",
+            "DTW": "9.3",
+            "Wellhead": "0.18",
+            "Specific_capacity": "7.0",
+            "Yass": "4.87"
+        },
+        {
+            "id": "18",
+            "Longitude": "34.785769",
+            "Lattitude": "36.84641",
+            "Well_depth": "44.2",
+            "Topo": "6.65",
+            "DTW": "8.75",
+            "Wellhead": "0.81",
+            "Specific_capacity": "6.2",
+            "Yass": "-2.91"
+        },
+        {
+            "id": "19",
+            "Longitude": "34.789014",
+            "Lattitude": "36.842553",
+            "Well_depth": "80.35",
+            "Topo": "5.42",
+            "DTW": "4.34",
+            "Wellhead": "0",
+            "Specific_capacity": "5.5",
+            "Yass": "1.08"
+        },
+        {
+            "id": "20",
+            "Longitude": "34.7956",
+            "Lattitude": "36.841872",
+            "Well_depth": "52",
+            "Topo": "5.16",
+            "DTW": "3.12",
+            "Wellhead": "0",
+            "Specific_capacity": "0.1",
+            "Yass": "2.04"
+        },
+        {
+            "id": "21",
+            "Longitude": "34.804005",
+            "Lattitude": "36.837408",
+            "Well_depth": "21.45",
+            "Topo": "5",
+            "DTW": "10.18",
+            "Wellhead": "0.23",
+            "Specific_capacity": "2.5",
+            "Yass": "-5.41"
+        },
+        {
+            "id": "22",
+            "Longitude": "34.817044",
+            "Lattitude": "36.805443",
+            "Well_depth": "82.13",
+            "Topo": "3.13",
+            "DTW": "6.24",
+            "Wellhead": "0.93",
+            "Specific_capacity": "11.5",
+            "Yass": "-4.04"
+        },
+        {
+            "id": "23",
+            "Longitude": "34.807867",
+            "Lattitude": "36.807663",
+            "Well_depth": "130.45",
+            "Topo": "3.46",
+            "DTW": "7.15",
+            "Wellhead": "0.19",
+            "Specific_capacity": "0.1",
+            "Yass": "-3.89"
+        },
+        {
+            "id": "24",
+            "Longitude": "34.796328",
+            "Lattitude": "36.811134",
+            "Well_depth": "122.76",
+            "Topo": "3.66",
+            "DTW": "7.59",
+            "Wellhead": "0.23",
+            "Specific_capacity": "5.0",
+            "Yass": "-4.16"
+        },
+        {
+            "id": "25",
+            "Longitude": "34.790177",
+            "Lattitude": "36.809641",
+            "Well_depth": "18.3",
+            "Topo": "1.05",
+            "DTW": "5.05",
+            "Wellhead": "0.58",
+            "Specific_capacity": "1.2",
+            "Yass": "-4.58"
+        },
+        {
+            "id": "26",
+            "Longitude": "34.809422",
+            "Lattitude": "36.861607",
+            "Well_depth": "27.05",
+            "Topo": "12.63",
+            "DTW": "3.54",
+            "Wellhead": "0.38",
+            "Specific_capacity": "7.6",
+            "Yass": "8.71"
+        },
+        {
+            "id": "27",
+            "Longitude": "34.797412",
+            "Lattitude": "36.862609",
+            "Well_depth": "31.4",
+            "Topo": "15.08",
+            "DTW": "3.8",
+            "Wellhead": "0.03",
+            "Specific_capacity": "19.7",
+            "Yass": "11.25"
+        },
+        {
+            "id": "28",
+            "Longitude": "34.81982",
+            "Lattitude": "36.805557",
+            "Well_depth": "4.39",
+            "Topo": "4.68",
+            "DTW": "1.21",
+            "Wellhead": "0",
+            "Specific_capacity": "5.3",
+            "Yass": "3.47"
+        },
+        {
+            "id": "29",
+            "Longitude": "34.815711",
+            "Lattitude": "36.813517",
+            "Well_depth": "2.5",
+            "Topo": "5",
+            "DTW": "1.52",
+            "Wellhead": "0",
+            "Specific_capacity": "5.2",
+            "Yass": "3.48"
+        },
+        {
+            "id": "30",
+            "Longitude": "34.8163",
+            "Lattitude": "36.797607",
+            "Well_depth": "14.2",
+            "Topo": "0.5",
+            "DTW": "0.84",
+            "Wellhead": "0.22",
+            "Specific_capacity": "4.9",
+            "Yass": "-0.56"
+        },
+        {
+            "id": "31",
+            "Longitude": "34.834259",
+            "Lattitude": "36.813515",
+            "Well_depth": "4.75",
+            "Topo": "3.34",
+            "DTW": "3.58",
+            "Wellhead": "0",
+            "Specific_capacity": "3.2",
+            "Yass": "-0.24"
+        },
+        {
+            "id": "32",
+            "Longitude": "34.836967",
+            "Lattitude": "36.82405",
+            "Well_depth": "42.7",
+            "Topo": "2.5",
+            "DTW": "4.07",
+            "Wellhead": "0.01",
+            "Specific_capacity": "4.1",
+            "Yass": "-1.58"
+        },
+        {
+            "id": "33",
+            "Longitude": "34.847156",
+            "Lattitude": "36.806404",
+            "Well_depth": "4.56",
+            "Topo": "2.66",
+            "DTW": "3.68",
+            "Wellhead": "0",
+            "Specific_capacity": "2.4",
+            "Yass": "-1.03"
+        },
+        {
+            "id": "34",
+            "Longitude": "34.859865",
+            "Lattitude": "36.80254",
+            "Well_depth": "37.24",
+            "Topo": "2.5",
+            "DTW": "5.02",
+            "Wellhead": "0.05",
+            "Specific_capacity": "3.0",
+            "Yass": "-2.57"
+        },
+        {
+            "id": "35",
+            "Longitude": "34.857898",
+            "Lattitude": "36.806413",
+            "Well_depth": "41.8",
+            "Topo": "2.5",
+            "DTW": "5.25",
+            "Wellhead": "0.18",
+            "Specific_capacity": "51.9",
+            "Yass": "-2.93"
+        },
+        {
+            "id": "36",
+            "Longitude": "34.848315",
+            "Lattitude": "36.799899",
+            "Well_depth": "65.1",
+            "Topo": "5.01",
+            "DTW": "4.22",
+            "Wellhead": "0",
+            "Specific_capacity": "0.1",
+            "Yass": "0.79"
+        },
+        {
+            "id": "37",
+            "Longitude": "34.863637",
+            "Lattitude": "36.797157",
+            "Well_depth": "17.48",
+            "Topo": "5.15",
+            "DTW": "6.04",
+            "Wellhead": "0.32",
+            "Specific_capacity": "10.9",
+            "Yass": "-1.21"
+        },
+        {
+            "id": "38",
+            "Longitude": "34.89081",
+            "Lattitude": "36.78961",
+            "Well_depth": "45.9",
+            "Topo": "2.49",
+            "DTW": "5.37",
+            "Wellhead": "0.15",
+            "Specific_capacity": "2.7",
+            "Yass": "-3.03"
+        },
+        {
+            "id": "39",
+            "Longitude": "34.87092",
+            "Lattitude": "36.79732",
+            "Well_depth": "13.26",
+            "Topo": "4.87",
+            "DTW": "6.54",
+            "Wellhead": "1.74",
+            "Specific_capacity": "7.8",
+            "Yass": "-3.41"
+        },
+        {
+            "id": "40",
+            "Longitude": "34.8805",
+            "Lattitude": "36.81273",
+            "Well_depth": "37.15",
+            "Topo": "2.5",
+            "DTW": "7.2",
+            "Wellhead": "0.56",
+            "Specific_capacity": "0.7",
+            "Yass": "-5.26"
+        },
+        {
+            "id": "41",
+            "Longitude": "34.87736",
+            "Lattitude": "36.82547",
+            "Well_depth": "28",
+            "Topo": "2.5",
+            "DTW": "5.75",
+            "Wellhead": "1.48",
+            "Specific_capacity": "0.0",
+            "Yass": "-4.73"
+        },
+        {
+            "id": "42",
+            "Longitude": "34.82927",
+            "Lattitude": "36.85674",
+            "Well_depth": "35.55",
+            "Topo": "9.34",
+            "DTW": "5.65",
+            "Wellhead": "0.54",
+            "Specific_capacity": "0.8",
+            "Yass": "3.15"
+        },
+        {
+            "id": "43",
+            "Longitude": "34.83378",
+            "Lattitude": "36.84868",
+            "Well_depth": "38.2",
+            "Topo": "5.29",
+            "DTW": "4.41",
+            "Wellhead": "1.13",
+            "Specific_capacity": "3.0",
+            "Yass": "-0.25"
+        },
+        {
+            "id": "44",
+            "Longitude": "34.83635",
+            "Lattitude": "36.84654",
+            "Well_depth": "23.5",
+            "Topo": "4.42",
+            "DTW": "3.32",
+            "Wellhead": "0.16",
+            "Specific_capacity": "2.7",
+            "Yass": "0.94"
+        },
+        {
+            "id": "45",
+            "Longitude": "34.82042",
+            "Lattitude": "36.82779",
+            "Well_depth": "31.9",
+            "Topo": "4.62",
+            "DTW": "8.79",
+            "Wellhead": "0.71",
+            "Specific_capacity": "1.5",
+            "Yass": "-4.88"
+        },
+        {
+            "id": "46",
+            "Longitude": "34.82702",
+            "Lattitude": "36.81062",
+            "Well_depth": "134",
+            "Topo": "4.35",
+            "DTW": "2.79",
+            "Wellhead": "0.01",
+            "Specific_capacity": "0.5",
+            "Yass": "1.55"
+        },
+        {
+            "id": "47",
+            "Longitude": "34.8255",
+            "Lattitude": "36.8172",
+            "Well_depth": "142",
+            "Topo": "2.96",
+            "DTW": "3.8",
+            "Wellhead": "0.63",
+            "Specific_capacity": "0.9",
+            "Yass": "-1.47"
+        },
+        {
+            "id": "48",
+            "Longitude": "34.85201",
+            "Lattitude": "36.83243",
+            "Well_depth": "30",
+            "Topo": "3.04",
+            "DTW": "3.07",
+            "Wellhead": "0.72",
+            "Specific_capacity": "4.0",
+            "Yass": "-0.76"
+        },
+        {
+            "id": "49",
+            "Longitude": "34.87783",
+            "Lattitude": "36.83211",
+            "Well_depth": "24.4",
+            "Topo": "3.12",
+            "DTW": "6.95",
+            "Wellhead": "3.05",
+            "Specific_capacity": "6.0",
+            "Yass": "-6.88"
+        },
+        {
+            "id": "50",
+            "Longitude": "34.8742",
+            "Lattitude": "36.81611",
+            "Well_depth": "34.7",
+            "Topo": "2.31",
+            "DTW": "3.64",
+            "Wellhead": "0.13",
+            "Specific_capacity": "0.8",
+            "Yass": "-1.46"
+        },
+        {
+            "id": "51",
+            "Longitude": "34.8629297",
+            "Lattitude": "36.8190882",
+            "Well_depth": "11.3",
+            "Topo": "2.29",
+            "DTW": "5.76",
+            "Wellhead": "1.61",
+            "Specific_capacity": "7.0",
+            "Yass": "-5.08"
+        },
+        {
+            "id": "52",
+            "Longitude": "34.8531",
+            "Lattitude": "36.87538",
+            "Well_depth": "4.5",
+            "Specific_capacity": "0.0",
+            "Topo": "7",
+            "DTW": "3.84",
+            "Wellhead": "0",
+            "Yass": "3.16"
+        },
+        {
+            "id": "53",
+            "Longitude": "34.848707",
+            "Lattitude": "36.851615",
+            "Well_depth": "32.9",
+            "Topo": "5.94",
+            "DTW": "3.25",
+            "Wellhead": "0.01",
+            "Specific_capacity": "7.8",
+            "Yass": "2.68"
+        },
+        {
+            "id": "54",
+            "Longitude": "34.857173",
+            "Lattitude": "36.851315",
+            "Well_depth": "27.05",
+            "Topo": "5.27",
+            "DTW": "3.74",
+            "Wellhead": "0.15",
+            "Specific_capacity": "8.60",
+            "Yass": "1.38"
+        },
+        {
+            "id": "55",
+            "Longitude": "34.856258",
+            "Lattitude": "36.843762",
+            "Well_depth": "24.15",
+            "Topo": "4.9",
+            "DTW": "3.32",
+            "Wellhead": "0.39",
+            "Specific_capacity": "0.6",
+            "Yass": "1.19"
+        },
+        {
+            "id": "56",
+            "Longitude": "34.86708",
+            "Lattitude": "36.841407",
+            "Well_depth": "28",
+            "Topo": "4.38",
+            "DTW": "2.75",
+            "Wellhead": "0",
+            "Specific_capacity": "57.0",
+            "Yass": "1.63"
+        },
+        {
+            "id": "57",
+            "Longitude": "34.867062",
+            "Lattitude": "36.834219",
+            "Well_depth": "30.25",
+            "Topo": "3.44",
+            "DTW": "3.96",
+            "Wellhead": "1.15",
+            "Specific_capacity": "´14.0",
+            "Yass": "-1.67"
+        },
+        {
+            "id": "58",
+            "Longitude": "34.886709",
+            "Lattitude": "36.846351",
+            "Well_depth": "27.45",
+            "Topo": "4.58",
+            "DTW": "2.2",
+            "Wellhead": "0.41",
+            "Specific_capacity": "0.76",
+            "Yass": "1.97"
+        },
+        {
+            "id": "59",
+            "Longitude": "34.913986",
+            "Lattitude": "36.828597",
+            "Well_depth": "34.2",
+            "Topo": "2.56",
+            "DTW": "3.15",
+            "Wellhead": "0.53",
+            "Specific_capacity": "0.76",
+            "Yass": "-1.12"
+        },
+        {
+            "id": "60",
+            "Longitude": "34.917049",
+            "Lattitude": "36.815138",
+            "Well_depth": "64.55",
+            "Topo": "2.5",
+            "DTW": "1.86",
+            "Wellhead": "0.02",
+            "Specific_capacity": "3.7",
+            "Yass": "0.62"
+        },
+        {
+            "id": "61",
+            "Longitude": "34.922357",
+            "Lattitude": "36.814128",
+            "Well_depth": "65.5",
+            "Topo": "2.41",
+            "DTW": "1.77",
+            "Wellhead": "0.17",
+            "Specific_capacity": "9.0",
+            "Yass": "0.47"
+        },
+        {
+            "id": "62",
+            "Longitude": "34.906123",
+            "Lattitude": "36.817248",
+            "Well_depth": "61",
+            "Topo": "2.5",
+            "DTW": "4.45",
+            "Wellhead": "1.45",
+            "Specific_capacity": "0.6",
+            "Yass": "-3.4"
+        },
+        {
+            "id": "63",
+            "Longitude": "34.913495",
+            "Lattitude": "36.806788",
+            "Well_depth": "68.4",
+            "Topo": "2.12",
+            "DTW": "5.32",
+            "Wellhead": "2.55",
+            "Specific_capacity": "5.66",
+            "Yass": "-5.75"
+        },
+        {
+            "id": "64",
+            "Longitude": "34.902941",
+            "Lattitude": "36.819652",
+            "Well_depth": "3.5",
+            "Topo": "2.34",
+            "DTW": "2.1",
+            "Wellhead": "0",
+            "Specific_capacity": "5.0",
+            "Yass": "0.24"
+        },
+        {
+            "id": "65",
+            "Longitude": "34.893133",
+            "Lattitude": "36.816278",
+            "Well_depth": "2.8",
+            "Topo": "2.42",
+            "DTW": "1.61",
+            "Wellhead": "0",
+            "Specific_capacity": "0.6",
+            "Yass": "0.81"
+        },
+        {
+            "id": "66",
+            "Longitude": "34.908539",
+            "Lattitude": "36.81351",
+            "Well_depth": "62.5",
+            "Topo": "2.29",
+            "DTW": "1.55",
+            "Wellhead": "0.24",
+            "Specific_capacity": "03.7",
+            "Yass": "0.5"
+        },
+        {
+            "id": "67",
+            "Longitude": "34.919969",
+            "Lattitude": "36.810635",
+            "Well_depth": "66.75",
+            "Topo": "2.5",
+            "DTW": "2.05",
+            "Wellhead": "0.24",
+            "Specific_capacity": "4.0",
+            "Yass": "0.21"
+        },
+        {
+            "id": "68",
+            "Longitude": "34.921129",
+            "Lattitude": "36.804774",
+            "Well_depth": "102.44",
+            "Topo": "2.25",
+            "DTW": "3.05",
+            "Wellhead": "1.38",
+            "Specific_capacity": "7.12",
+            "Yass": "-2.19"
+        },
+        {
+            "id": "69",
+            "Longitude": "34.921403",
+            "Lattitude": "36.796909",
+            "Well_depth": "32.45",
+            "Topo": "2.34",
+            "DTW": "4.04",
+            "Wellhead": "0.02",
+            "Specific_capacity": "0.9",
+            "Yass": "-1.72"
+        },
+        {
+            "id": "70",
+            "Longitude": "34.929242",
+            "Lattitude": "36.805189",
+            "Well_depth": "0",
+            "Topo": "2.18",
+            "DTW": "2.87",
+            "Wellhead": "0.09",
+            "Specific_capacity": "12.7",
+            "Yass": "-0.78"
+        },
+        {
+            "id": "71",
+            "Longitude": "34.901839",
+            "Lattitude": "36.849053",
+            "Well_depth": "30.75",
+            "Topo": "4.57",
+            "DTW": "1.92",
+            "Wellhead": "1.38",
+            "Specific_capacity": "6.2",
+            "Yass": "1.27"
+        },
+        {
+            "id": "72",
+            "Longitude": "34.851023",
+            "Lattitude": "36.847879",
+            "Well_depth": "3.2",
+            "Topo": "4.95",
+            "DTW": "2.6",
+            "Wellhead": "0.05",
+            "Specific_capacity": "0.5",
+            "Yass": "2.3"
+        },
+        {
+            "id": "73",
+            "Longitude": "34.849001",
+            "Lattitude": "36.84211",
+            "Well_depth": "2.5",
+            "Topo": "4.61",
+            "DTW": "2.01",
+            "Wellhead": "0.17",
+            "Specific_capacity": "4.0",
+            "Yass": "2.43"
+        },
+        {
+            "id": "74",
+            "Longitude": "34.909166",
+            "Lattitude": "36.847128",
+            "Well_depth": "2.2",
+            "Topo": "4.5",
+            "DTW": "1.39",
+            "Wellhead": "0.59",
+            "Specific_capacity": "7.8",
+            "Yass": "2.52"
+        },
+        {
+            "id": "75",
+            "Longitude": "34.902955",
+            "Lattitude": "36.845546",
+            "Well_depth": "24.77",
+            "Topo": "4.26",
+            "DTW": "1.2",
+            "Wellhead": "0.02",
+            "Specific_capacity": "2.5",
+            "Yass": "3.04"
+        },
+        {
+            "id": "76",
+            "Longitude": "34.908178",
+            "Lattitude": "36.849498",
+            "Well_depth": "25.5",
+            "Topo": "4.74",
+            "DTW": "2.07",
+            "Wellhead": "0.06",
+            "Specific_capacity": "4.1",
+            "Yass": "2.61"
+        },
+        {
+            "id": "77",
+            "Longitude": "34.905957",
+            "Lattitude": "36.852728",
+            "Well_depth": "14.22",
+            "Topo": "4.35",
+            "DTW": "1.9",
+            "Wellhead": "0.05",
+            "Specific_capacity": "3.0",
+            "Yass": "2.4"
+        },
+        {
+            "id": "78",
+            "Longitude": "34.908037",
+            "Lattitude": "36.858537",
+            "Well_depth": "4.77",
+            "Topo": "4.56",
+            "DTW": "1.99",
+            "Wellhead": "0.42",
+            "Specific_capacity": "9.2",
+            "Yass": "2.15"
+        },
+        {
+            "id": "79",
+            "Longitude": "34.929331",
+            "Lattitude": "36.864919",
+            "Well_depth": "1.81",
+            "Topo": "4.92",
+            "DTW": "0.75",
+            "Wellhead": "0.05",
+            "Specific_capacity": "0.2",
+            "Yass": "4.12"
+        },
+        {
+            "id": "80",
+            "Longitude": "34.938299",
+            "Lattitude": "36.855441",
+            "Well_depth": "1.65",
+            "Topo": "4.39",
+            "DTW": "0.81",
+            "Wellhead": "0.05",
+            "Specific_capacity": "0.5",
+            "Yass": "3.53"
+        },
+        {
+            "id": "81",
+            "Longitude": "34.938527",
+            "Lattitude": "36.843752",
+            "Well_depth": "1.93",
+            "Topo": "4.03",
+            "DTW": "1.55",
+            "Wellhead": "0.1",
+            "Specific_capacity": "2.0",
+            "Yass": "2.38"
+        },
+        {
+            "id": "82",
+            "Longitude": "34.927934",
+            "Lattitude": "36.846783",
+            "Well_depth": "2.21",
+            "Topo": "4.66",
+            "DTW": "1.43",
+            "Wellhead": "0.24",
+            "Specific_capacity": "0.1",
+            "Yass": "2.99"
+        },
+        {
+            "id": "83",
+            "Longitude": "34.909351",
+            "Lattitude": "36.881888",
+            "Well_depth": "12.02",
+            "Topo": "10.35",
+            "DTW": "3.92",
+            "Wellhead": "0.14",
+            "Specific_capacity": "2.6",
+            "Yass": "6.29"
+        },
+        {
+            "id": "84",
+            "Longitude": "34.904959",
+            "Lattitude": "36.901",
+            "Well_depth": "9.1",
+            "Topo": "14.71",
+            "DTW": "8.5",
+            "Wellhead": "0.56",
+            "Specific_capacity": "6.1",
+            "Yass": "5.65"
+        },
+        {
+            "id": "85",
+            "Longitude": "34.889486",
+            "Lattitude": "36.897548",
+            "Well_depth": "24.5",
+            "Topo": "13.09",
+            "DTW": "8.74",
+            "Wellhead": "0.22",
+            "Specific_capacity": "2.4",
+            "Yass": "4.13"
+        },
+        {
+            "id": "86",
+            "Longitude": "34.841236",
+            "Lattitude": "36.884686",
+            "Well_depth": "29.77",
+            "Topo": "16.43",
+            "DTW": "8.57",
+            "Wellhead": "0.27",
+            "Specific_capacity": "1.3",
+            "Yass": "7.59"
+        },
+        {
+            "id": "87",
+            "Longitude": "34.858699",
+            "Lattitude": "36.888366",
+            "Well_depth": "27.2",
+            "Topo": "9.58",
+            "DTW": "9.21",
+            "Wellhead": "0.59",
+            "Specific_capacity": "0.25",
+            "Yass": "-0.22"
+        }
+    ]
+}

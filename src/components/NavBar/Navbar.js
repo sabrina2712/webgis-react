@@ -131,13 +131,12 @@ class Navbar extends React.Component {
       <>
         <AppBar position="static" style={{ background: "#2E3B55" }}>
           <Toolbar>
-            <Typography variant="h6">WebGIS Demo</Typography>
-
             <FadeMenu
               map={this.state.map}
               toggleLocation={this.props.toggleLocation}
               selectedLocation={this.props.selectedLocation}
               goLocation={this.props.goLocation}
+              toggleDrawer={this.props.toggleDrawer}
             />
           </Toolbar>
         </AppBar>

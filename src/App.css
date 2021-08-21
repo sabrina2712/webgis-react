@@ -8,13 +8,13 @@
 
 #legend {
   margin-top: 100px;
-  width: 100px;
+  width: 150px;
   position: absolute;
   background: rgba(184, 245, 181, 0.5);
 
   z-index: 1000;
   right: 5px;
-  top: 65px;
+  top: 150px;
   border-radius: 8px;
   padding: 8px;
   color: black;
@@ -65,7 +65,7 @@
 }
 
 .topnav {
-  background-color: #2E3B55;;
+  background-color: #2e3b55;
   overflow: hidden;
 }
 
@@ -91,18 +91,17 @@
   color: white;
 }
 #feature-content {
-  width: 200px;
+  width: 300px;
   position: absolute;
   background: #868686c9;
   z-index: 1000;
-  right: 35px;
+  right: 30px;
   top: 135px;
   border-radius: 16px;
   padding: 8px;
   color: white;
 }
-#feature-content-down{
-
+#feature-content-down {
   position: absolute;
   background: #868686c9;
   z-index: 1000;
@@ -110,10 +109,8 @@
   border-radius: 16px;
   color: white;
   height: 200px;
-
 }
-.myDrawerDown{
-
+.myDrawerDown {
   display: flex;
   flex-wrap: wrap;
 }
@@ -165,9 +162,12 @@
   border: 1px solid rgb(148, 145, 145);
 
   z-index: 100;
-  font-size: 0.6em;
-  color: black;
+  font-size: 1em;
+  color: white;
   font-weight: bold;
-  background-color: gray;
+  background-color: rgb(24, 59, 94);
   opacity: 0.8;
+}
+.picker-turkey {
+  display: flex;
 }
